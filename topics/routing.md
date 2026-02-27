@@ -1,0 +1,46 @@
+---
+title: Routing
+---
+[Back to index](../readme.md#table-of-contents)
+
+# Routing
+- [Routing - symfony.com](https://symfony.com/doc/8.0/routing.html)
+
+## Routing component and FrameworkBundle
+- [Routing Component - github.com](https://github.com/symfony/routing)
+- [FrameworkBundle - github.com](https://github.com/symfony/framework-bundle)
+- [Routing (Framework usage) - symfony.com](https://symfony.com/doc/8.0/routing.html)
+- [Routing Overview (Attributes, formats, debug) - symfony.com](https://symfony.com/doc/current/routing.html) (compatible with 8.0)
+
+## Configuration (YAML and PHP attributes)
+- [Creating Routes - symfony.com](https://symfony.com/doc/8.0/routing.html#creating-routes)
+
+## Restrict URL parameters
+- [Parameters Validation - symfony.com](https://symfony.com/doc/8.0/routing.html#parameters-validation)
+
+## Set default values to URL parameters
+- [Optional Parameters - symfony.com](https://symfony.com/doc/8.0/routing.html#optional-parameters)
+
+## URLs generation
+- [Generating URLs - symfony.com](https://symfony.com/doc/8.0/routing.html#generating-urls)
+
+## Trigger redirects
+- [Redirecting to URLs and Routes Directly from a Route - symfony.com](https://symfony.com/doc/8.0/routing.html#redirecting-to-urls-and-routes-directly-from-a-route)
+
+## Special internal routing attributes
+- [Special Parameters - symfony.com](https://symfony.com/doc/8.0/routing.html#special-parameters)
+
+## Domain name matching
+- [Sub-Domain Routing - symfony.com](https://symfony.com/doc/8.0/routing.html#sub-domain-routing)
+
+## Conditional request matching
+- [Matching Expressions - symfony.com](https://symfony.com/doc/8.0/routing.html#matching-expressions)
+
+## HTTP methods matching
+- [Matching HTTP Methods - symfony.com](https://symfony.com/doc/8.0/routing.html#matching-http-methods)
+
+## User's locale guessing
+- [How to Work with the User's Locale - symfony.com](https://symfony.com/doc/8.0/translation/locale.html)
+
+## Router debugging
+- [Debugging Routes - symfony.com](https://symfony.com/doc/8.0/routing.html#debugging-routes)
