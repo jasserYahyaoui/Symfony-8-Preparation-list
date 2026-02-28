@@ -18,6 +18,16 @@ If you have information to add, PR\'s are welcome! For more information refer to
 ## Older certifications
 The master branch contains information for the **8.0** certification. For earlier versions, please see the other branches.
 
+
+## Expert preparation toolkit (FR)
+
+For a more pedagogical and execution-focused preparation path, see:
+
+- [Roadmap: stratégie certification Symfony 8 expert](roadmaps/strategie-certification-symfony-8-expert.md)
+- [Flashcards decks](flashcards/README.md)
+- [Mini-projects backlog](mini-projects/README.md)
+- [Revision resources](resources/revision-links.md)
+
 ## Table of Contents
 
 -  [PHP](/topics/php.md)
