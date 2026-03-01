@@ -17,6 +17,15 @@ title: Messenger
 - [Messages & Handlers - symfony.com](https://symfony.com/doc/8.0/messenger.html#creating-a-message-handler)
 - [Multiple Buses & Routing - symfony.com](https://symfony.com/doc/8.0/messenger.html#multiple-buses)
 
+## Routing messages
+- [Routing Messages to a Transport - symfony.com](https://symfony.com/doc/8.0/messenger.html#routing-messages-to-a-transport)
+- [Sending to Multiple Transports - symfony.com](https://symfony.com/doc/8.0/messenger.html#sending-to-multiple-transports)
+
+## Stamps and Envelopes
+- [Envelopes and Stamps - symfony.com](https://symfony.com/doc/8.0/messenger.html#adding-metadata-to-messages-envelopes)
+- [Built-in Stamps - symfony.com](https://symfony.com/doc/8.0/messenger.html#built-in-stamps)
+- [Creating a Custom Stamp - symfony.com](https://symfony.com/doc/8.0/messenger.html#adding-metadata-to-messages-envelopes)
+
 ## Workers
 - [Consuming Messages (Running the Worker) - symfony.com](https://symfony.com/doc/8.0/messenger.html#consuming-messages-running-the-worker)
 - [Worker Lifecycle - symfony.com](https://symfony.com/doc/8.0/messenger.html#how-the-worker-operates)

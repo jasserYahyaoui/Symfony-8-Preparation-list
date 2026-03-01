@@ -25,6 +25,10 @@ title: Data Validation
 ## Group sequence
 - [How to Sequentially Apply Validation Groups - symfony.com](https://symfony.com/doc/8.0/validation/sequence_provider.html)
 
+## Validation messages
+- [Validation - Translation of constraint messages - symfony.com](https://symfony.com/doc/8.0/validation.html#translating-constraint-messages)
+- [Constraint messages reference - symfony.com](https://symfony.com/doc/8.0/reference/constraints.html) (each built-in constraint lists its configurable `message` option)
+
 ## Custom callback validators
 - [Callback Constraint - symfony.com](https://symfony.com/doc/8.0/reference/constraints/Callback.html)
 

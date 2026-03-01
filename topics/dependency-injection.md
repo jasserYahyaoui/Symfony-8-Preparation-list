@@ -39,6 +39,27 @@ title: Dependency Injection
 
 ## Services autowiring
 - [Defining Services Dependencies Automatically (Autowiring) Version >= 3.3 - symfony.com](https://symfony.com/doc/8.0/service_container/autowiring.html)
+- [Autowiring Types - symfony.com](https://symfony.com/doc/8.0/service_container/autowiring.html#autowiring-other-methods)
+- [Troubleshooting Autowiring - symfony.com](https://symfony.com/doc/8.0/service_container/autowiring.html#troubleshooting-autowiring)
+
+## Expressions in configuration
+- [How to Inject Values Based on Complex Expressions - symfony.com](https://symfony.com/doc/8.0/service_container/expression_language.html)
+- [The ExpressionLanguage Component - symfony.com](https://symfony.com/doc/8.0/components/expression_language.html)
+
+## Advanced Autowiring Attributes
+- [AutowireInline - symfony.com](https://symfony.com/doc/8.0/service_container/autowiring.html#autowire-inline) : Permet d'injecter un service défini "à la volée".
+- `#[AutoconfigurePackage]` : Facilite la configuration automatique des bundles tiers.
+
+### AutowireInline Example
+```php
+public function __construct(
+    #[AutowireInline(class: AppLogger::class, arguments: ['%kernel.debug%'])]
+    private LoggerInterface $logger,
+) {}
+```
+
+## Synthetic services
+- [How to Create a Synthetic Service - symfony.com](https://symfony.com/doc/8.0/testing/service_testing.html#synthetic-services)
 
 ## Service locators
 - [Service Subscribers & Locators - symfony.com](https://symfony.com/doc/8.0/service_container/service_subscribers_locators.html)

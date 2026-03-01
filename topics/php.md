@@ -20,6 +20,12 @@ title: PHP
 ## Object Oriented Programming
 - [Classes and Objects - php.net](https://www.php.net/manual/en/language.oop5.php)
 
+## Namespaces
+- [Namespaces - php.net](https://www.php.net/manual/en/language.namespaces.php)
+- [Declaring Namespaces - php.net](https://www.php.net/manual/en/language.namespaces.definition.php)
+- [Using Namespaces: Aliasing/Importing - php.net](https://www.php.net/manual/en/language.namespaces.importing.php)
+- [PHP Namespaces in 120 Seconds - symfonycasts.com](https://symfonycasts.com/screencast/php-namespaces-in-120-seconds)
+
 ## Attributes
 - [Attributes - php.net](https://www.php.net/manual/en/language.attributes.php)
 - [Attributes Overview - php.net](https://www.php.net/manual/en/language.attributes.overview.php)
@@ -47,3 +53,18 @@ title: PHP
 - **PHP 8.3**: typed class constants + readonly deep-cloning; **PHP 8.4**: property hooks + asymmetric visibility.
 - [Attributes] : Heavily used in Symfony 8 for Routing, DI, and Validation.
 - **Enums**: focus on PHP enums (pure vs backed) and type-safety concepts.
+
+## PHP 8.4 Specifics
+- [Property Hooks](https://www.php.net/manual/en/language.oop5.property-hooks.php) : Getters/Setters natifs.
+- [Asymmetric Visibility](https://www.php.net/manual/en/language.oop5.visibility.php#language.oop5.visibility-asymmetric) : `public private(set) string $name;`
+- [New Array Functions](https://www.php.net/manual/en/ref.array.php) : `array_find()`, `array_find_key()`, `array_any()`, `array_all()`.
+
+### Syntax Example (Property Hooks)
+```php
+class User {
+    public private(set) string $username {
+        set => strtolower($value);
+        get => ucfirst($this->username);
+    }
+}
+```

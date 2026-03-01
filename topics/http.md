@@ -38,7 +38,4 @@ See [HTTP Caching](./http-caching.md)
 - [Accept-Language - MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Accept-Language)
 - [New in Symfony 5.4: Language Negotiation](https://symfony.com/blog/new-in-symfony-5-4-language-negotiation)
 
-## Symfony HttpClient component
-The HttpClient component is the preferred way to make outgoing HTTP requests in Symfony applications.
-
-- [HttpClient - symfony.com](https://symfony.com/doc/8.0/http_client.html)
+> **[OUT OF SCOPE]** The HttpClient component is **not** listed in the Symfony 8.0 certification exam syllabus. It has been archived in [`deprecations/httpclient-component.md`](../deprecations/httpclient-component.md).

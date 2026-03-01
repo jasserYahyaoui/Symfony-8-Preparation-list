@@ -13,9 +13,18 @@ title: Security
 ## Authentication
 - [Authentication - symfony.com](https://symfony.com/doc/8.0/security.html#authentication)
 - [How to Build a Traditional Login Form - symfony.com](https://symfony.com/doc/8.0/security/form_login_setup.html)
-- [How to Load Security Users from the Database (the Entity Provider) - symfony.com](https://symfony.com/doc/8.0/security/entity_provider.html) (Exam scope: focus on the provider concept; Doctrine/database specifics are out of scope.)
+- [User Providers - symfony.com](https://symfony.com/doc/8.0/security/user_providers.html) (Exam scope: focus on the provider concept; Doctrine/database specifics are out of scope.)
 - [How to Impersonate a User - symfony.com](https://symfony.com/doc/8.0/security/impersonating_user.html)
 - [How to Authenticate Users with API Keys - symfony.com](https://symfony.com/doc/8.0/security/api_key_authentication.html)
+
+## Stateless CSRF Protection
+- [Stateless CSRF Protection - symfony.com](https://symfony.com/doc/8.0/security/csrf.html#stateless-csrf-protection)
+- Allows CSRF protection without using PHP sessions, ideal for stateless APIs.
+- Configuration: `framework.csrf_protection.stateless_token_ids` or via `logout` / `firewall` settings.
+
+## Remember Me
+- [How to Add "Remember Me" Login Functionality - symfony.com](https://symfony.com/doc/8.0/security/remember_me.html)
+- [RememberMeBadge - symfony.com](https://symfony.com/doc/8.0/security/remember_me.html#using-the-rememberme-badge)
 
 ## Authorization
 - [Denying Access, Roles and other Authorization - symfony.com](https://symfony.com/doc/8.0/security.html#denying-access-roles-and-other-authorization)

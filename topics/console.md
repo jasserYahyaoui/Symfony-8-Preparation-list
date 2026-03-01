@@ -26,10 +26,22 @@ title: Console
 -  [How to Make Commands Lazily Loaded - symfony.com](https://symfony.com/doc/8.0/console/lazy_commands.html)
 -  [Prevent Running the Same Console Command Multiple Times - symfony.com](https://symfony.com/doc/8.0/console/lockable_trait.html) (Note: depends on the Lock component, which is out of scope)
 
-## Options and arguments (using PHP attributes)
--  [Console Input (Arguments & Options) - symfony.com](https://symfony.com/doc/current/console/input.html) (examples with #[AsCommand]/#[Argument]/#[Option], compatible with Symfony 8.0)
--  [Console Input (Arguments & Options) - symfony.com](https://symfony.com/doc/8.0/console/input.html)
--  [Understanding how Console Arguments and Options Are Handled - symfony.com](https://symfony.com/doc/8.0/components/console/console_arguments.html)
+## Declarative Input Configuration (Attributes)
+- [Defining Arguments and Options with Attributes - symfony.com](https://symfony.com/doc/8.0/console/input.html#using-php-attributes)
+- `#[Argument]`: Declares a property as a command argument.
+- `#[Option]`: Declares a property as a command option.
+
+### Example
+```php
+#[AsCommand(name: 'app:user:promote')]
+class PromoteUserCommand extends Command {
+    #[Argument(description: 'User email')]
+    private string $email;
+
+    #[Option(shortcut: 'r', description: 'Role to add')]
+    private string $role = 'ROLE_ADMIN';
+}
+```
 
 ## Input and Output objects
 -  [Console Input (Arguments & Options) - symfony.com](https://symfony.com/doc/8.0/console/input.html)

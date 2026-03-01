@@ -50,6 +50,20 @@ title: Controllers
 - [How to Render a Template directly from a route - symfony.com](https://symfony.com/doc/8.0/templates.html#rendering-a-template-directly-from-a-route)
 - [How to Redirect to Urls and Routes directly from a route - symfony.com](https://symfony.com/doc/8.0/routing.html#redirecting-to-urls-and-routes-directly-from-a-route)
 
+## Modern Request Data Mapping
+- [Mapping Request Data - symfony.com](https://symfony.com/doc/8.0/controller.html#mapping-request-data)
+- `#[MapQueryParameter]` : Extrait et caste un paramètre de la query string.
+- `#[MapQueryString]` : Extrait et caste les paramètres de la query string dans un objet.
+- `#[MapRequestPayload]` : Désérialise le corps de la requête (JSON/XML) en objet DTO.
+
+### Example
+```php
+public function list(
+    #[MapQueryParameter] int $page = 1,
+    #[MapRequestPayload] UserDTO $data
+): Response { ... }
+```
+
 ## Argument value resolvers
 - [Action Value Resolvers - symfony.com](https://symfony.com/doc/current/controller/value_resolver.html) (compatible with 8.0)
 - [Extending Action Argument Resolving - symfony.com](https://symfony.com/doc/8.0/controller/value_resolver.html)

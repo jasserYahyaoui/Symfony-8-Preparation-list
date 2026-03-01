@@ -48,11 +48,21 @@ title: Templating with Twig
 - [String Interpolation - twig.symfony.com](https://twig.symfony.com/doc/3.x/templates.html#string-interpolation)
 
 ## Assets management
-- [Managing CSS and Javascript - symfony.com](https://symfony.com/doc/8.0/frontend.html)
+> **[PARTIALLY OUT OF SCOPE]** Advanced asset management tools (AssetMapper, Webpack Encore) are **excluded** from the Symfony 8.0 exam. The official exam scope is limited to the basic `asset()` Twig function provided by the `AssetComponent`.
+- [The Asset Component - symfony.com](https://symfony.com/doc/8.0/components/asset.html)
+- [Linking to CSS/JavaScript/Images from Twig - symfony.com](https://symfony.com/doc/8.0/templates.html#linking-to-css-javascript-images-from-twig)
+
+## Macros
+- [Macros - twig.symfony.com](https://twig.symfony.com/doc/3.x/tags/macro.html)
+
+## Custom extensions (filters, functions, tests, operators)
+- [How to Write a custom Twig Extension - symfony.com](https://symfony.com/doc/8.0/templating/twig_extension.html)
+- [Extending Twig - twig.symfony.com](https://twig.symfony.com/doc/3.x/advanced.html)
 
 ## Debugging variables
 - [The Dump Twig Utilities - symfony.com](https://symfony.com/doc/8.0/templates.html#the-dump-twig-utilities)
 
 ## Symfony 8.0 notes
-- [Twig syntax up to 3.22 version] : The exam covers Twig up to version 3.22.
-- [Assets management] : The exam focuses on basic helpers like `asset()`. Advanced asset tools (AssetMapper, Webpack Encore) are not explicitly listed in the exam scope.
+- **Twig syntax up to 3.22 version**: The exam covers Twig up to version 3.22.
+- **Assets management**: Only the basic `asset()` function is in scope. AssetMapper and Webpack Encore are **explicitly excluded** from the Symfony 8.0 certification.
+- **Translations**: Basic `{% trans %}` tag and `trans()` filter are in scope as part of Twig templating. Full Translation component / bridge configuration is archived in [`deprecations/translation-bridge.md`](../deprecations/translation-bridge.md).

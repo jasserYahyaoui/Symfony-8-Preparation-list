@@ -15,7 +15,7 @@ title: Automated Tests
 
 ## Functional tests with PHPUnit
 -  [Functional tests - symfony.com](https://symfony.com/doc/8.0/testing.html#functional-tests)
--  [Configuring a Database for Tests - symfony.com](https://symfony.com/doc/8.0/testing.html#configuring-a-database-for-tests)
+> **[NOTE]** "Configuring a Database for Tests" (Doctrine fixtures, etc.) is **excluded** from this exam scope.
 -  [Fixtures - phpunit.readthedocs.io](https://phpunit.readthedocs.io/en/9.6/fixtures.html)
 -  [WebTestCase abstract class - github.com](https://github.com/symfony/symfony/blob/8.0/src/Symfony/Bundle/FrameworkBundle/Test/WebTestCase.php)
 
@@ -42,6 +42,10 @@ title: Automated Tests
 
 ## Request and response objects introspection
 -  [Accessing Internal Objects - symfony.com](https://symfony.com/doc/8.0/testing.html#accessing-internal-objects)
+
+## PHPUnit assertions
+-  [Assertions - phpunit.readthedocs.io](https://phpunit.readthedocs.io/en/9.6/assertions.html)
+-  [BrowserKit Assertions - symfony.com](https://symfony.com/doc/8.0/testing.html#testing-the-response)
 
 ## Handling legacy deprecated code
 While the PHPUnit Bridge component itself is out of scope, the exam covers the handling of deprecated code, notably via the `SYMFONY_DEPRECATIONS_HELPER` environment variable.

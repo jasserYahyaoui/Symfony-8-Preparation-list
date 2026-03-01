@@ -44,9 +44,9 @@ title: Miscellaneous
 
 ## Internationalization and localization
 -  [Internationalization - symfony.com](https://symfony.com/doc/8.0/best_practices.html#internationalization)
--  [Translations - symfony.com](https://symfony.com/doc/8.0/translation.html)
 -  [Localizing an Application - symfony.com](https://symfony.com/doc/current/the-fast-track/en/28-intl.html) (compatible with 8.0)
 -  [The Intl Component - symfony.com](https://symfony.com/doc/8.0/components/intl.html)
+> **[NOTE]** The Translation bridge (third-party integrations) is **excluded** from the exam. Basic `{% trans %}` / `|trans` Twig usage is covered in [templating-with-twig.md](templating-with-twig.md). Full Translation component details are archived in [`deprecations/translation-bridge.md`](../deprecations/translation-bridge.md).
 -  Note: Intl component utilities to access ICU data are not included in the exam.
 
 ## HTTP Caching (reverse proxies, expiration, validation)
@@ -56,7 +56,8 @@ title: Miscellaneous
 -  Note: **ESI (Edge Side Includes) is NOT included in the exam.**
 -  See also: [http-caching.md](http-caching.md)
 
-## Components: Cache, Clock, EventDispatcher, Filesystem, Finder, Event, Mailer, Mime, Process, PropertyAccess, Runtime, Serializer
+## Components: Cache, Clock, EventDispatcher, Filesystem, Finder, Process, PropertyAccess, Runtime, Serializer
+> **[OUT OF SCOPE]** Mailer, Mime (third-party bridges) have been archived in [`deprecations/mailer-mime-components.md`](../deprecations/mailer-mime-components.md). The Translation bridge is archived in [`deprecations/translation-bridge.md`](../deprecations/translation-bridge.md).
 -  [The Cache Component - symfony.com](https://symfony.com/doc/8.0/components/cache.html)
 -  [Cache Invalidation - symfony.com](https://symfony.com/doc/8.0/components/cache/cache_invalidation.html)
 -  [The Clock Component - symfony.com](https://symfony.com/doc/8.0/components/clock.html)
@@ -64,8 +65,6 @@ title: Miscellaneous
 -  [The EventDispatcher (and Events) - symfony.com](https://symfony.com/doc/8.0/event_dispatcher.html) (compatible with 8.0)
 -  [The Filesystem Component - symfony.com](https://symfony.com/doc/8.0/components/filesystem.html)
 -  [The Finder Component - symfony.com](https://symfony.com/doc/8.0/components/finder.html)
--  [Sending Emails with Mailer - symfony.com](https://symfony.com/doc/8.0/mailer.html)
--  [The Mime Component - symfony.com](https://symfony.com/doc/8.0/components/mime.html)
 -  [The Process Component - symfony.com](https://symfony.com/doc/8.0/components/process.html)
 -  [The PropertyAccess Component - symfony.com](https://symfony.com/doc/8.0/components/property_access.html)
 -  [The Runtime Component - symfony.com](https://symfony.com/doc/8.0/components/runtime.html)
@@ -73,7 +72,6 @@ title: Miscellaneous
 -  [How to Use the Serializer - symfony.com](https://symfony.com/doc/8.0/serializer.html)
 
 ## Symfony 8.0 notes
-- TypeInfo is not in the official exam list (explicit example of out-of-scope components).
 - [HTTP Caching] : ESI is explicitly excluded from the Symfony 8 certification.
 - [Messenger] : Moved to its own top-level topic.
 - [Lock] : Removed from the official exam topics.
