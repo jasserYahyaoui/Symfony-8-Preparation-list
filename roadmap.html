@@ -1,0 +1,1114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Symfony 8.0 Certification Roadmap</title>
+    <meta name="description" content="A visual learning roadmap for the Symfony 8.0 Certification Exam — 15 topics organized in optimal pedagogical order across 13 weeks.">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0f0f1a;
+            --bg-secondary: #1a1a2e;
+            --bg-card: #16213e;
+            --bg-card-hover: #1a2744;
+            --border-subtle: rgba(255,255,255,0.06);
+            --text-primary: #e8e8f0;
+            --text-secondary: #a0a0b8;
+            --text-muted: #6c6c88;
+
+            /* Tier colors */
+            --tier1: #3b82f6;
+            --tier1-bg: rgba(59,130,246,0.08);
+            --tier1-glow: rgba(59,130,246,0.3);
+            --tier2: #10b981;
+            --tier2-bg: rgba(16,185,129,0.08);
+            --tier2-glow: rgba(16,185,129,0.3);
+            --tier3: #f59e0b;
+            --tier3-bg: rgba(245,158,11,0.08);
+            --tier3-glow: rgba(245,158,11,0.3);
+            --tier4: #8b5cf6;
+            --tier4-bg: rgba(139,92,246,0.08);
+            --tier4-glow: rgba(139,92,246,0.3);
+            --tier5: #ef4444;
+            --tier5-bg: rgba(239,68,68,0.08);
+            --tier5-glow: rgba(239,68,68,0.3);
+
+            --gold: #fbbf24;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Animated background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background:
+                radial-gradient(ellipse 80% 50% at 50% -20%, rgba(59,130,246,0.12), transparent),
+                radial-gradient(ellipse 60% 40% at 80% 50%, rgba(139,92,246,0.08), transparent),
+                radial-gradient(ellipse 60% 40% at 20% 80%, rgba(16,185,129,0.06), transparent);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 24px 80px;
+        }
+
+        /* ── Header ── */
+        .header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .header__badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(251,191,36,0.1);
+            border: 1px solid rgba(251,191,36,0.25);
+            border-radius: 100px;
+            padding: 8px 20px;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--gold);
+            letter-spacing: 0.5px;
+            margin-bottom: 24px;
+        }
+
+        .header h1 {
+            font-size: clamp(2rem, 5vw, 3.2rem);
+            font-weight: 900;
+            line-height: 1.15;
+            margin-bottom: 16px;
+            background: linear-gradient(135deg, #fff 0%, #a0a0f0 50%, #8b5cf6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header p {
+            font-size: 17px;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto 28px;
+            line-height: 1.6;
+        }
+
+        .header__stats {
+            display: flex;
+            justify-content: center;
+            gap: 32px;
+            flex-wrap: wrap;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat__value {
+            font-size: 28px;
+            font-weight: 800;
+            color: #fff;
+        }
+
+        .stat__label {
+            font-size: 12px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 4px;
+        }
+
+        /* ── Legend ── */
+        .legend {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-bottom: 48px;
+            padding: 16px 24px;
+            background: var(--bg-secondary);
+            border-radius: 16px;
+            border: 1px solid var(--border-subtle);
+        }
+
+        .legend__item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+
+        .legend__dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        /* ── Timeline ── */
+        .timeline {
+            position: relative;
+        }
+
+        .timeline__line {
+            position: absolute;
+            left: 28px;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(
+                to bottom,
+                var(--tier1),
+                var(--tier2) 30%,
+                var(--tier3) 50%,
+                var(--tier4) 70%,
+                var(--tier5) 85%,
+                var(--gold) 100%
+            );
+            border-radius: 4px;
+            opacity: 0.3;
+        }
+
+        /* ── Tier Group ── */
+        .tier-group {
+            margin-bottom: 48px;
+        }
+
+        .tier-group__header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 24px;
+            padding-left: 64px;
+        }
+
+        .tier-group__label {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            padding: 4px 14px;
+            border-radius: 6px;
+        }
+
+        .tier-group__weeks {
+            font-size: 12px;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        /* ── Node ── */
+        .node {
+            position: relative;
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            margin-bottom: 20px;
+            cursor: pointer;
+        }
+
+        .node__marker {
+            position: relative;
+            z-index: 2;
+            flex-shrink: 0;
+            width: 56px;
+            height: 56px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            font-weight: 800;
+            color: #fff;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .node:hover .node__marker {
+            transform: scale(1.1);
+        }
+
+        .node__card {
+            flex: 1;
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 16px;
+            padding: 20px 24px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .node:hover .node__card {
+            background: var(--bg-card-hover);
+            transform: translateX(4px);
+        }
+
+        .node__title {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .node__week-badge {
+            font-size: 11px;
+            font-weight: 600;
+            padding: 2px 10px;
+            border-radius: 100px;
+            color: rgba(255,255,255,0.7);
+        }
+
+        .node__desc {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.55;
+            margin-bottom: 12px;
+        }
+
+        .node__subtopics {
+            display: none;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 10px;
+        }
+
+        .node__subtopics.open {
+            display: flex;
+        }
+
+        .subtopic-tag {
+            font-size: 11px;
+            padding: 4px 10px;
+            border-radius: 6px;
+            background: rgba(255,255,255,0.05);
+            color: var(--text-secondary);
+            border: 1px solid rgba(255,255,255,0.06);
+            white-space: nowrap;
+        }
+
+        .node__files {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+
+        .file-pill {
+            font-size: 11px;
+            font-weight: 500;
+            padding: 3px 10px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .file-pill--topic { background: rgba(59,130,246,0.12); color: #93c5fd; }
+        .file-pill--flash { background: rgba(16,185,129,0.12); color: #86efac; }
+        .file-pill--quiz  { background: rgba(245,158,11,0.12); color: #fcd34d; }
+        .file-pill--proj  { background: rgba(239,68,68,0.12); color: #fca5a5; }
+
+        .node__toggle {
+            font-size: 12px;
+            color: var(--text-muted);
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            margin-top: 8px;
+            user-select: none;
+            transition: color 0.2s;
+        }
+
+        .node__toggle:hover {
+            color: var(--text-secondary);
+        }
+
+        .node__toggle .arrow {
+            transition: transform 0.3s;
+            display: inline-block;
+        }
+
+        .node__toggle.open .arrow {
+            transform: rotate(90deg);
+        }
+
+        /* Tier-specific colors */
+        .tier1 .node__marker { background: linear-gradient(135deg, #2563eb, #3b82f6); box-shadow: 0 4px 20px var(--tier1-glow); }
+        .tier1 .node__card { border-left: 3px solid var(--tier1); }
+        .tier1 .node__week-badge { background: var(--tier1-bg); border: 1px solid rgba(59,130,246,0.2); }
+        .tier1 .tier-group__label { background: var(--tier1-bg); color: var(--tier1); border: 1px solid rgba(59,130,246,0.2); }
+
+        .tier2 .node__marker { background: linear-gradient(135deg, #059669, #10b981); box-shadow: 0 4px 20px var(--tier2-glow); }
+        .tier2 .node__card { border-left: 3px solid var(--tier2); }
+        .tier2 .node__week-badge { background: var(--tier2-bg); border: 1px solid rgba(16,185,129,0.2); }
+        .tier2 .tier-group__label { background: var(--tier2-bg); color: var(--tier2); border: 1px solid rgba(16,185,129,0.2); }
+
+        .tier3 .node__marker { background: linear-gradient(135deg, #d97706, #f59e0b); box-shadow: 0 4px 20px var(--tier3-glow); }
+        .tier3 .node__card { border-left: 3px solid var(--tier3); }
+        .tier3 .node__week-badge { background: var(--tier3-bg); border: 1px solid rgba(245,158,11,0.2); }
+        .tier3 .tier-group__label { background: var(--tier3-bg); color: var(--tier3); border: 1px solid rgba(245,158,11,0.2); }
+
+        .tier4 .node__marker { background: linear-gradient(135deg, #7c3aed, #8b5cf6); box-shadow: 0 4px 20px var(--tier4-glow); }
+        .tier4 .node__card { border-left: 3px solid var(--tier4); }
+        .tier4 .node__week-badge { background: var(--tier4-bg); border: 1px solid rgba(139,92,246,0.2); }
+        .tier4 .tier-group__label { background: var(--tier4-bg); color: var(--tier4); border: 1px solid rgba(139,92,246,0.2); }
+
+        .tier5 .node__marker { background: linear-gradient(135deg, #dc2626, #ef4444); box-shadow: 0 4px 20px var(--tier5-glow); }
+        .tier5 .node__card { border-left: 3px solid var(--tier5); }
+        .tier5 .node__week-badge { background: var(--tier5-bg); border: 1px solid rgba(239,68,68,0.2); }
+        .tier5 .tier-group__label { background: var(--tier5-bg); color: var(--tier5); border: 1px solid rgba(239,68,68,0.2); }
+
+        /* ── Exam Node ── */
+        .exam-node {
+            position: relative;
+            text-align: center;
+            margin-top: 48px;
+            padding-left: 0;
+        }
+
+        .exam-node__card {
+            display: inline-block;
+            background: linear-gradient(135deg, rgba(251,191,36,0.15), rgba(245,158,11,0.08));
+            border: 2px solid rgba(251,191,36,0.4);
+            border-radius: 20px;
+            padding: 32px 48px;
+            text-align: center;
+            animation: pulse-gold 3s ease-in-out infinite;
+        }
+
+        @keyframes pulse-gold {
+            0%, 100% { box-shadow: 0 0 20px rgba(251,191,36,0.15); }
+            50% { box-shadow: 0 0 40px rgba(251,191,36,0.3); }
+        }
+
+        .exam-node__icon {
+            font-size: 48px;
+            margin-bottom: 12px;
+        }
+
+        .exam-node__title {
+            font-size: 22px;
+            font-weight: 800;
+            color: var(--gold);
+            margin-bottom: 4px;
+        }
+
+        .exam-node__sub {
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+
+        /* ── Progress tracker ── */
+        .progress-bar {
+            position: fixed;
+            top: 0; left: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--tier1), var(--tier2), var(--tier3), var(--tier4), var(--tier5), var(--gold));
+            z-index: 100;
+            transition: width 0.1s;
+            width: 0%;
+        }
+
+        /* ── Animations ── */
+        .node, .tier-group__header, .exam-node {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .node.visible, .tier-group__header.visible, .exam-node.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ── Footer ── */
+        .footer {
+            text-align: center;
+            margin-top: 64px;
+            padding-top: 32px;
+            border-top: 1px solid var(--border-subtle);
+            color: var(--text-muted);
+            font-size: 13px;
+        }
+
+        .footer a {
+            color: var(--tier4);
+            text-decoration: none;
+        }
+
+        /* ── Responsive ── */
+        @media (max-width: 640px) {
+            .container { padding: 24px 16px 60px; }
+            .header__stats { gap: 20px; }
+            .timeline__line { left: 20px; }
+            .node__marker { width: 40px; height: 40px; font-size: 15px; border-radius: 12px; }
+            .node__card { padding: 16px; }
+            .node__title { font-size: 15px; }
+            .tier-group__header { padding-left: 48px; }
+            .legend { gap: 12px; padding: 12px 16px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="progress-bar" id="progressBar"></div>
+
+<div class="container">
+
+    <!-- Header -->
+    <header class="header">
+        <div class="header__badge">🎓 CERTIFICATION ROADMAP</div>
+        <h1>Symfony 8.0<br>Certification Path</h1>
+        <p>A structured, pedagogically-ordered learning roadmap covering all 15 exam topics — from PHP fundamentals to advanced Symfony internals.</p>
+        <div class="header__stats">
+            <div class="stat">
+                <div class="stat__value">15</div>
+                <div class="stat__label">Topics</div>
+            </div>
+            <div class="stat">
+                <div class="stat__value">13</div>
+                <div class="stat__label">Weeks</div>
+            </div>
+            <div class="stat">
+                <div class="stat__value">182h</div>
+                <div class="stat__label">Recommended</div>
+            </div>
+            <div class="stat">
+                <div class="stat__value">15</div>
+                <div class="stat__label">Topic Sandboxes</div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Legend -->
+    <div class="legend">
+        <div class="legend__item"><div class="legend__dot" style="background:var(--tier1)"></div>Foundations</div>
+        <div class="legend__item"><div class="legend__dot" style="background:var(--tier2)"></div>Symfony Core</div>
+        <div class="legend__item"><div class="legend__dot" style="background:var(--tier3)"></div>Presentation & Data</div>
+        <div class="legend__item"><div class="legend__dot" style="background:var(--tier4)"></div>Architecture & Security</div>
+        <div class="legend__item"><div class="legend__dot" style="background:var(--tier5)"></div>Advanced</div>
+    </div>
+
+    <!-- Timeline -->
+    <div class="timeline">
+        <div class="timeline__line"></div>
+
+        <!-- ═══ TIER 1: Foundations ═══ -->
+        <div class="tier-group tier1">
+            <div class="tier-group__header">
+                <span class="tier-group__label">TIER 1 — FOUNDATIONS</span>
+                <span class="tier-group__weeks">Weeks 1–2</span>
+            </div>
+
+            <div class="node tier1" data-index="1">
+                <div class="node__marker">1</div>
+                <div class="node__card">
+                    <div class="node__title">
+                        PHP 8.4
+                        <span class="node__week-badge">Week 1</span>
+                    </div>
+                    <div class="node__desc">Master PHP language fundamentals up to 8.4: OOP, namespaces, attributes, interfaces, closures, abstract classes, traits, enums, property hooks, and asymmetric visibility.</div>
+                    <div class="node__files">
+                        <span class="file-pill file-pill--topic">📄 topics/php.md</span>
+                        <span class="file-pill file-pill--flash">🃏 flashcards/php.md</span>
+                        <span class="file-pill file-pill--quiz">❓ quizz/php.md</span>
+                        <span class="file-pill file-pill--proj">🟢 tutorial/php</span>
+                        <span class="file-pill file-pill--proj">🔴 challenge/php</span>
+                    </div>
+                    <div class="node__toggle" onclick="toggleSubtopics(this)"><span class="arrow">▶</span> Subtopics</div>
+                    <div class="node__subtopics">
+                        <span class="subtopic-tag">PHP API up to 8.4</span>
+                        <span class="subtopic-tag">OOP</span>
+                        <span class="subtopic-tag">Namespaces</span>
+                        <span class="subtopic-tag">Attributes</span>
+                        <span class="subtopic-tag">Interfaces</span>
+                        <span class="subtopic-tag">Closures</span>
+                        <span class="subtopic-tag">Abstract Classes</span>
+                        <span class="subtopic-tag">Exception Handling</span>
+                        <span class="subtopic-tag">Traits</span>
+                        <span class="subtopic-tag">Enums</span>
+                        <span class="subtopic-tag">Property Hooks (8.4)</span>
+                        <span class="subtopic-tag">Asymmetric Visibility (8.4)</span>
+                        <span class="subtopic-tag">array_find/array_all (8.4)</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="node tier1" data-index="2">
+                <div class="node__marker">2</div>
+                <div class="node__card">
+                    <div class="node__title">
+                        HTTP
+                        <span class="node__week-badge">Week 2</span>
+                    </div>
+                    <div class="node__desc">Understand the HTTP protocol thoroughly: RFC 9110, status codes, request/response anatomy, methods (GET, POST, PUT, DELETE, PATCH…), cookies, caching headers, and content negotiation.</div>
+                    <div class="node__files">
+                        <span class="file-pill file-pill--topic">📄 topics/http.md</span>
+                        <span class="file-pill file-pill--flash">🃏 flashcards/http.md</span>
+                        <span class="file-pill file-pill--quiz">❓ quizz/http.md</span>
+                        <span class="file-pill file-pill--proj">🟢 tutorial/http</span>
+                        <span class="file-pill file-pill--proj">🔴 challenge/http</span>
+                    </div>
+                    <div class="node__toggle" onclick="toggleSubtopics(this)"><span class="arrow">▶</span> Subtopics</div>
+                    <div class="node__subtopics">
+                        <span class="subtopic-tag">RFC 9110</span>
+                        <span class="subtopic-tag">Status Codes</span>
+                        <span class="subtopic-tag">HTTP Request</span>
+                        <span class="subtopic-tag">HTTP Response</span>
+                        <span class="subtopic-tag">HTTP Methods</span>
+                        <span class="subtopic-tag">Cookies</span>
+                        <span class="subtopic-tag">Caching</span>
+                        <span class="subtopic-tag">Content Negotiation</span>
+                        <span class="subtopic-tag">Language Detection</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══ TIER 2: Symfony Core ═══ -->
+        <div class="tier-group tier2">
+            <div class="tier-group__header">
+                <span class="tier-group__label">TIER 2 — SYMFONY CORE</span>
+                <span class="tier-group__weeks">Weeks 3–5</span>
+            </div>
+
+            <div class="node tier2" data-index="3">
+                <div class="node__marker">3</div>
+                <div class="node__card">
+                    <div class="node__title">
+                        Symfony Architecture
+                        <span class="node__week-badge">Week 3</span>
+                    </div>
+                    <div class="node__desc">The skeleton of Symfony: HttpFoundation component, Symfony Flex, code organization, request handling lifecycle, kernel events (EventDispatcher), PSR interoperability, and the backward compatibility promise.</div>
+                    <div class="node__files">
+                        <span class="file-pill file-pill--topic">📄 topics/symfony-architecture.md</span>
+                        <span class="file-pill file-pill--flash">🃏 flashcards/symfony-architecture.md</span>
+                        <span class="file-pill file-pill--quiz">❓ quizz/symfony-architecture.md</span>
+                        <span class="file-pill file-pill--proj">🟢 tutorial/symfony-architecture</span>
+                        <span class="file-pill file-pill--proj">🔴 challenge/symfony-architecture</span>
+                    </div>
+                    <div class="node__toggle" onclick="toggleSubtopics(this)"><span class="arrow">▶</span> Subtopics</div>
+                    <div class="node__subtopics">
+                        <span class="subtopic-tag">HttpFoundation</span>
+                        <span class="subtopic-tag">Symfony Flex</span>
+                        <span class="subtopic-tag">License</span>
+                        <span class="subtopic-tag">Components & Bridges</span>
+                        <span class="subtopic-tag">Code Organization</span>
+                        <span class="subtopic-tag">Request Handling</span>
+                        <span class="subtopic-tag">Exception Handling</span>
+                        <span class="subtopic-tag">Event Dispatcher</span>
+                        <span class="subtopic-tag">Best Practices</span>
+                        <span class="subtopic-tag">BC Promise</span>
+                        <span class="subtopic-tag">Deprecations</span>
+                        <span class="subtopic-tag">Framework Overloading</span>
+                        <span class="subtopic-tag">Release Management</span>
+                        <span class="subtopic-tag">PSRs</span>
+                        <span class="subtopic-tag">Naming Conventions</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="node tier2" data-index="4">
+                <div class="node__marker">4</div>
+                <div class="node__card">
+                    <div class="node__title">
+                        Routing
+                        <span class="node__week-badge">Week 4</span>
+                    </div>
+                    <div class="node__desc">How URLs map to controller actions: route configuration (YAML + PHP attributes), URL parameter restrictions, URL generation, redirects, domain matching, conditional matching, and locale guessing.</div>
+                    <div class="node__files">
+                        <span class="file-pill file-pill--topic">📄 topics/routing.md</span>
+                        <span class="file-pill file-pill--flash">🃏 flashcards/routing.md</span>
+                        <span class="file-pill file-pill--quiz">❓ quizz/routing.md</span>
+                        <span class="file-pill file-pill--proj">🟢 tutorial/routing</span>
+                        <span class="file-pill file-pill--proj">🔴 challenge/routing</span>
+                    </div>
+                    <div class="node__toggle" onclick="toggleSubtopics(this)"><span class="arrow">▶</span> Subtopics</div>
+                    <div class="node__subtopics">
+                        <span class="subtopic-tag">Routing Component</span>
+                        <span class="subtopic-tag">YAML Config</span>
+                        <span class="subtopic-tag">PHP Attributes</span>
+                        <span class="subtopic-tag">URL Parameters</span>
+                        <span class="subtopic-tag">Default Values</span>
+                        <span class="subtopic-tag">URL Generation</span>
+                        <span class="subtopic-tag">Redirects</span>
+                        <span class="subtopic-tag">Special Attributes</span>
+                        <span class="subtopic-tag">Domain Matching</span>
+                        <span class="subtopic-tag">Conditional Matching</span>
+                        <span class="subtopic-tag">HTTP Methods</span>
+                        <span class="subtopic-tag">Locale Guessing</span>
+                        <span class="subtopic-tag">Router Debugging</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="node tier2" data-index="5">
+                <div class="node__marker">5</div>
+                <div class="node__card">
+                    <div class="node__title">
+                        Controllers
+                        <span class="node__week-badge">Week 5</span>
+                    </div>
+                    <div class="node__desc">The heart of request processing: AbstractController, request/response objects, cookies, sessions, flash messages, HTTP & internal redirects, file upload, argument value resolvers, and the new MapQueryParameter/MapRequestPayload attributes.</div>
+                    <div class="node__files">
+                        <span class="file-pill file-pill--topic">📄 topics/controllers.md</span>
+                        <span class="file-pill file-pill--flash">🃏 flashcards/controllers.md</span>
+                        <span class="file-pill file-pill--quiz">❓ quizz/controllers.md</span>
+                        <span class="file-pill file-pill--proj">🟢 tutorial/controllers</span>
+                        <span class="file-pill file-pill--proj">🔴 challenge/controllers</span>
+                    </div>
+                    <div class="node__toggle" onclick="toggleSubtopics(this)"><span class="arrow">▶</span> Subtopics</div>
+                    <div class="node__subtopics">
+                        <span class="subtopic-tag">HttpKernel</span>
+                        <span class="subtopic-tag">Naming Conventions</span>
+                        <span class="subtopic-tag">AbstractController</span>
+                        <span class="subtopic-tag">Request Object</span>
+                        <span class="subtopic-tag">Response Object</span>
+                        <span class="subtopic-tag">Cookies</span>
+                        <span class="subtopic-tag">Sessions</span>
+                        <span class="subtopic-tag">Flash Messages</span>
+                        <span class="subtopic-tag">HTTP Redirects</span>
+                        <span class="subtopic-tag">Internal Redirects</span>
+                        <span class="subtopic-tag">404 Pages</span>
+                        <span class="subtopic-tag">File Upload</span>
+                        <span class="subtopic-tag">#[MapQueryParameter]</span>
+                        <span class="subtopic-tag">#[MapRequestPayload]</span>
+                        <span class="subtopic-tag">Argument Resolvers</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══ TIER 3: Presentation & Data ═══ -->
+        <div class="tier-group tier3">
+            <div class="tier-group__header">
+                <span class="tier-group__label">TIER 3 — PRESENTATION & DATA</span>
+                <span class="tier-group__weeks">Weeks 6–8</span>
+            </div>
+
+            <div class="node tier3" data-index="6">
+                <div class="node__marker">6</div>
+                <div class="node__card">
+                    <div class="node__title">
+                        Templating with Twig
+                        <span class="node__week-badge">Week 6</span>
+                    </div>
+                    <div class="node__desc">The presentation layer: Twig 3.22 syntax, auto escaping, template inheritance, global variables (app), filters & functions, template includes, loops, URL generation, controller rendering, translations, macros, and custom extensions.</div>
+                    <div class="node__files">
+                        <span class="file-pill file-pill--topic">📄 topics/templating-with-twig.md</span>
+                        <span class="file-pill file-pill--flash">🃏 flashcards/templating-with-twig.md</span>
+                        <span class="file-pill file-pill--quiz">❓ quizz/templating-with-twig.md</span>
+                        <span class="file-pill file-pill--proj">🟢 tutorial/templating-with-twig</span>
+                        <span class="file-pill file-pill--proj">🔴 challenge/templating-with-twig</span>
+                    </div>
+                    <div class="node__toggle" onclick="toggleSubtopics(this)"><span class="arrow">▶</span> Subtopics</div>
+                    <div class="node__subtopics">
+                        <span class="subtopic-tag">TwigBundle</span>
+                        <span class="subtopic-tag">Twig 3.22 Syntax</span>
+                        <span class="subtopic-tag">Auto Escaping</span>
+                        <span class="subtopic-tag">Template Inheritance</span>
+                        <span class="subtopic-tag">Global Variables</span>
+                        <span class="subtopic-tag">Filters & Functions</span>
+                        <span class="subtopic-tag">Includes</span>
+                        <span class="subtopic-tag">Loops & Conditions</span>
+                        <span class="subtopic-tag">URL Generation</span>
+                        <span class="subtopic-tag">Controller Rendering</span>
+                        <span class="subtopic-tag">Translations</span>
+                        <span class="subtopic-tag">String Interpolation</span>
+                        <span class="subtopic-tag">Assets (asset())</span>
+                        <span class="subtopic-tag">Macros</span>
+                        <span class="subtopic-tag">Custom Extensions</span>
+                        <span class="subtopic-tag">Debugging</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="node tier3" data-index="7">
+                <div class="node__marker">7</div>
+                <div class="node__card">
+                    <div class="node__title">
+                        Forms
+                        <span class="node__week-badge">Week 7</span>
+                    </div>
+                    <div class="node__desc">Symfony's powerful Form component: creation, handling, built-in & custom types, rendering with Twig, form theming, CSRF protection, file uploads, data transformers, form events, type extensions, and the OptionsResolver component.</div>
+                    <div class="node__files">
+                        <span class="file-pill file-pill--topic">📄 topics/forms.md</span>
+                        <span class="file-pill file-pill--flash">🃏 flashcards/forms.md</span>
+                        <span class="file-pill file-pill--quiz">❓ quizz/forms.md</span>
+                        <span class="file-pill file-pill--proj">🟢 tutorial/forms</span>
+                        <span class="file-pill file-pill--proj">🔴 challenge/forms</span>
+                    </div>
+                    <div class="node__toggle" onclick="toggleSubtopics(this)"><span class="arrow">▶</span> Subtopics</div>
+                    <div class="node__subtopics">
+                        <span class="subtopic-tag">Form Component</span>
+                        <span class="subtopic-tag">Creation</span>
+                        <span class="subtopic-tag">Handling</span>
+                        <span class="subtopic-tag">Built-in Types</span>
+                        <span class="subtopic-tag">Custom Types</span>
+                        <span class="subtopic-tag">Twig Rendering</span>
+                        <span class="subtopic-tag">Theming</span>
+                        <span class="subtopic-tag">CSRF Protection</span>
+                        <span class="subtopic-tag">File Upload</span>
+                        <span class="subtopic-tag">Data Transformers</span>
+                        <span class="subtopic-tag">Form Events</span>
+                        <span class="subtopic-tag">Type Extensions</span>
+                        <span class="subtopic-tag">OptionsResolver</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="node tier3" data-index="8">
+                <div class="node__marker">8</div>
+                <div class="node__card">
+                    <div class="node__title">
+                        Data Validation
+                        <span class="node__week-badge">Week 8</span>
+                    </div>
+                    <div class="node__desc">Ensuring data integrity: the Validator component, PHP object validation with attributes, built-in constraints, validation scopes, validation groups, group sequences, custom callback validators, and the violations builder.</div>
+                    <div class="node__files">
+                        <span class="file-pill file-pill--topic">📄 topics/data-validation.md</span>
+                        <span class="file-pill file-pill--flash">🃏 flashcards/data-validation.md</span>
+                        <span class="file-pill file-pill--quiz">❓ quizz/data-validation.md</span>
+                        <span class="file-pill file-pill--proj">🟢 tutorial/data-validation</span>
+                        <span class="file-pill file-pill--proj">🔴 challenge/data-validation</span>
+                    </div>
+                    <div class="node__toggle" onclick="toggleSubtopics(this)"><span class="arrow">▶</span> Subtopics</div>
+                    <div class="node__subtopics">
+                        <span class="subtopic-tag">Validator Component</span>
+                        <span class="subtopic-tag">Object Validation</span>
+                        <span class="subtopic-tag">Built-in Constraints</span>
+                        <span class="subtopic-tag">Validation Scopes</span>
+                        <span class="subtopic-tag">Validation Groups</span>
+                        <span class="subtopic-tag">Group Sequence</span>
+                        <span class="subtopic-tag">Messages</span>
+                        <span class="subtopic-tag">Callback Validators</span>
+                        <span class="subtopic-tag">Violations Builder</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══ TIER 4: Architecture & Security ═══ -->
+        <div class="tier-group tier4">
+            <div class="tier-group__header">
+                <span class="tier-group__label">TIER 4 — ARCHITECTURE & SECURITY</span>
+                <span class="tier-group__weeks">Weeks 9–11</span>
+            </div>
+
+            <div class="node tier4" data-index="9">
+                <div class="node__marker">9</div>
+                <div class="node__card">
+                    <div class="node__title">
+                        Dependency Injection
+                        <span class="node__week-badge">Week 9</span>
+                    </div>
+                    <div class="node__desc">Symfony's backbone: the DI container, autowiring, service registration (YAML + attributes), service decoration, tags, compiler passes, factories, semantic config, service locators, AutowireInline, and expressions.</div>
+                    <div class="node__files">
+                        <span class="file-pill file-pill--topic">📄 topics/dependency-injection.md</span>
+                        <span class="file-pill file-pill--flash">🃏 flashcards/dependency-injection.md</span>
+                        <span class="file-pill file-pill--quiz">❓ quizz/dependency-injection.md</span>
+                        <span class="file-pill file-pill--proj">🟢 tutorial/dependency-injection</span>
+                        <span class="file-pill file-pill--proj">🔴 challenge/dependency-injection</span>
+                    </div>
+                    <div class="node__toggle" onclick="toggleSubtopics(this)"><span class="arrow">▶</span> Subtopics</div>
+                    <div class="node__subtopics">
+                        <span class="subtopic-tag">DI Component</span>
+                        <span class="subtopic-tag">Service Container</span>
+                        <span class="subtopic-tag">Built-in Services</span>
+                        <span class="subtopic-tag">Config Parameters</span>
+                        <span class="subtopic-tag">YAML Registration</span>
+                        <span class="subtopic-tag">Attribute Registration</span>
+                        <span class="subtopic-tag">Decoration</span>
+                        <span class="subtopic-tag">Tags</span>
+                        <span class="subtopic-tag">Semantic Config</span>
+                        <span class="subtopic-tag">Factories</span>
+                        <span class="subtopic-tag">Compiler Passes</span>
+                        <span class="subtopic-tag">Autowiring</span>
+                        <span class="subtopic-tag">AutowireInline</span>
+                        <span class="subtopic-tag">Expressions</span>
+                        <span class="subtopic-tag">Synthetic Services</span>
+                        <span class="subtopic-tag">Service Locators</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="node tier4" data-index="10">
+                <div class="node__marker">10</div>
+                <div class="node__card">
+                    <div class="node__title">
+                        Security
+                        <span class="node__week-badge">Week 10</span>
+                    </div>
+                    <div class="node__desc">Protecting your application: Security Core + CSRF + PasswordHasher components, authentication, remember me, authorization, firewalls, user providers, roles, access control rules, authenticators/passports/badges, and voters.</div>
+                    <div class="node__files">
+                        <span class="file-pill file-pill--topic">📄 topics/security.md</span>
+                        <span class="file-pill file-pill--flash">🃏 flashcards/security.md</span>
+                        <span class="file-pill file-pill--quiz">❓ quizz/security.md</span>
+                        <span class="file-pill file-pill--proj">🟢 tutorial/security</span>
+                        <span class="file-pill file-pill--proj">🔴 challenge/security</span>
+                    </div>
+                    <div class="node__toggle" onclick="toggleSubtopics(this)"><span class="arrow">▶</span> Subtopics</div>
+                    <div class="node__subtopics">
+                        <span class="subtopic-tag">Security Core</span>
+                        <span class="subtopic-tag">CSRF</span>
+                        <span class="subtopic-tag">PasswordHasher</span>
+                        <span class="subtopic-tag">Authentication</span>
+                        <span class="subtopic-tag">Stateless CSRF</span>
+                        <span class="subtopic-tag">Remember Me</span>
+                        <span class="subtopic-tag">Authorization</span>
+                        <span class="subtopic-tag">Firewalls</span>
+                        <span class="subtopic-tag">User Providers</span>
+                        <span class="subtopic-tag">Password Hashers</span>
+                        <span class="subtopic-tag">Roles</span>
+                        <span class="subtopic-tag">Access Control</span>
+                        <span class="subtopic-tag">Authenticators</span>
+                        <span class="subtopic-tag">Passports & Badges</span>
+                        <span class="subtopic-tag">Voters</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="node tier4" data-index="11">
+                <div class="node__marker">11</div>
+                <div class="node__card">
+                    <div class="node__title">
+                        HTTP Caching
+                        <span class="node__week-badge">Week 11</span>
+                    </div>
+                    <div class="node__desc">Optimize performance with caching: HttpCache component, browser/proxy/reverse-proxy caches, expiration (Expires, Cache-Control), validation (ETag, Last-Modified), client-side and server-side (gateway) caching strategies.</div>
+                    <div class="node__files">
+                        <span class="file-pill file-pill--topic">📄 topics/http-caching.md</span>
+                        <span class="file-pill file-pill--flash">🃏 flashcards/http-caching.md</span>
+                        <span class="file-pill file-pill--quiz">❓ quizz/http-caching.md</span>
+                        <span class="file-pill file-pill--proj">🟢 tutorial/http-caching</span>
+                        <span class="file-pill file-pill--proj">🔴 challenge/http-caching</span>
+                    </div>
+                    <div class="node__toggle" onclick="toggleSubtopics(this)"><span class="arrow">▶</span> Subtopics</div>
+                    <div class="node__subtopics">
+                        <span class="subtopic-tag">HttpCache Component</span>
+                        <span class="subtopic-tag">Browser Cache</span>
+                        <span class="subtopic-tag">Proxy Cache</span>
+                        <span class="subtopic-tag">Reverse Proxy</span>
+                        <span class="subtopic-tag">Expires Header</span>
+                        <span class="subtopic-tag">Cache-Control</span>
+                        <span class="subtopic-tag">ETag</span>
+                        <span class="subtopic-tag">Last-Modified</span>
+                        <span class="subtopic-tag">Gateway Caching</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══ TIER 5: Advanced ═══ -->
+        <div class="tier-group tier5">
+            <div class="tier-group__header">
+                <span class="tier-group__label">TIER 5 — ADVANCED & CROSS-CUTTING</span>
+                <span class="tier-group__weeks">Weeks 11–13</span>
+            </div>
+
+            <div class="node tier5" data-index="12">
+                <div class="node__marker">12</div>
+                <div class="node__card">
+                    <div class="node__title">
+                        Messenger
+                        <span class="node__week-badge">Week 11</span>
+                    </div>
+                    <div class="node__desc">Async message handling: the Messenger component, transports, messages & handlers, routing, stamps & envelopes, workers & their lifecycle, retry strategies, failure transport, middleware, and Messenger events.</div>
+                    <div class="node__files">
+                        <span class="file-pill file-pill--topic">📄 topics/messenger.md</span>
+                        <span class="file-pill file-pill--flash">🃏 flashcards/messenger.md</span>
+                        <span class="file-pill file-pill--quiz">❓ quizz/messenger.md</span>
+                        <span class="file-pill file-pill--proj">🟢 tutorial/messenger</span>
+                        <span class="file-pill file-pill--proj">🔴 challenge/messenger</span>
+                    </div>
+                    <div class="node__toggle" onclick="toggleSubtopics(this)"><span class="arrow">▶</span> Subtopics</div>
+                    <div class="node__subtopics">
+                        <span class="subtopic-tag">Messenger Component</span>
+                        <span class="subtopic-tag">Transports</span>
+                        <span class="subtopic-tag">Messages & Handlers</span>
+                        <span class="subtopic-tag">Routing Messages</span>
+                        <span class="subtopic-tag">Stamps</span>
+                        <span class="subtopic-tag">Envelopes</span>
+                        <span class="subtopic-tag">Workers</span>
+                        <span class="subtopic-tag">Retries & Failures</span>
+                        <span class="subtopic-tag">Middleware</span>
+                        <span class="subtopic-tag">Events</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="node tier5" data-index="13">
+                <div class="node__marker">13</div>
+                <div class="node__card">
+                    <div class="node__title">
+                        Console
+                        <span class="node__week-badge">Week 12</span>
+                    </div>
+                    <div class="node__desc">CLI application building: the Console component, built-in commands, custom commands, declarative input config (#[Argument], #[Option]), input/output styling, helpers (Table, ProgressBar, Question), console events, and verbosity levels.</div>
+                    <div class="node__files">
+                        <span class="file-pill file-pill--topic">📄 topics/console.md</span>
+                        <span class="file-pill file-pill--flash">🃏 flashcards/console.md</span>
+                        <span class="file-pill file-pill--quiz">❓ quizz/console.md</span>
+                        <span class="file-pill file-pill--proj">🟢 tutorial/console</span>
+                        <span class="file-pill file-pill--proj">🔴 challenge/console</span>
+                    </div>
+                    <div class="node__toggle" onclick="toggleSubtopics(this)"><span class="arrow">▶</span> Subtopics</div>
+                    <div class="node__subtopics">
+                        <span class="subtopic-tag">Console Component</span>
+                        <span class="subtopic-tag">Built-in Commands</span>
+                        <span class="subtopic-tag">Custom Commands</span>
+                        <span class="subtopic-tag">#[AsCommand]</span>
+                        <span class="subtopic-tag">#[Argument]</span>
+                        <span class="subtopic-tag">#[Option]</span>
+                        <span class="subtopic-tag">Input/Output</span>
+                        <span class="subtopic-tag">SymfonyStyle</span>
+                        <span class="subtopic-tag">Helpers</span>
+                        <span class="subtopic-tag">Console Events</span>
+                        <span class="subtopic-tag">Verbosity Levels</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="node tier5" data-index="14">
+                <div class="node__marker">14</div>
+                <div class="node__card">
+                    <div class="node__title">
+                        Automated Tests
+                        <span class="node__week-badge">Week 12</span>
+                    </div>
+                    <div class="node__desc">Testing your Symfony application: unit tests with PHPUnit, functional tests with WebTestCase, the Client object (KernelBrowser), the Crawler (DomCrawler + CssSelector), Profiler in tests, framework object access, and assertions.</div>
+                    <div class="node__files">
+                        <span class="file-pill file-pill--topic">📄 topics/automated-tests.md</span>
+                        <span class="file-pill file-pill--flash">🃏 flashcards/automated-tests.md</span>
+                        <span class="file-pill file-pill--quiz">❓ quizz/automated-tests.md</span>
+                        <span class="file-pill file-pill--proj">🟢 tutorial/automated-tests</span>
+                        <span class="file-pill file-pill--proj">🔴 challenge/automated-tests</span>
+                    </div>
+                    <div class="node__toggle" onclick="toggleSubtopics(this)"><span class="arrow">▶</span> Subtopics</div>
+                    <div class="node__subtopics">
+                        <span class="subtopic-tag">Unit Tests</span>
+                        <span class="subtopic-tag">Functional Tests</span>
+                        <span class="subtopic-tag">WebTestCase</span>
+                        <span class="subtopic-tag">Client (KernelBrowser)</span>
+                        <span class="subtopic-tag">Crawler</span>
+                        <span class="subtopic-tag">CssSelector</span>
+                        <span class="subtopic-tag">DomCrawler</span>
+                        <span class="subtopic-tag">Profiler in Tests</span>
+                        <span class="subtopic-tag">Service Access</span>
+                        <span class="subtopic-tag">Client Config</span>
+                        <span class="subtopic-tag">PHPUnit Assertions</span>
+                        <span class="subtopic-tag">Deprecated Code</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="node tier5" data-index="15">
+                <div class="node__marker">15</div>
+                <div class="node__card">
+                    <div class="node__title">
+                        Miscellaneous
+                        <span class="node__week-badge">Weeks 12–13</span>
+                    </div>
+                    <div class="node__desc">Everything else: configuration (DotEnv, ExpressionLanguage), error handling, code debugging, deployment best practices, Web Profiler & Data Collectors, i18n, and additional components (Cache, Clock, EventDispatcher, Filesystem, Finder, Process, PropertyAccess, Runtime, Serializer).</div>
+                    <div class="node__files">
+                        <span class="file-pill file-pill--topic">📄 topics/miscellaneous.md</span>
+                        <span class="file-pill file-pill--flash">🃏 flashcards/miscellaneous.md</span>
+                        <span class="file-pill file-pill--quiz">❓ quizz/miscellaneous.md</span>
+                        <span class="file-pill file-pill--proj">🟢 tutorial/miscellaneous</span>
+                        <span class="file-pill file-pill--proj">🔴 challenge/miscellaneous</span>
+                    </div>
+                    <div class="node__toggle" onclick="toggleSubtopics(this)"><span class="arrow">▶</span> Subtopics</div>
+                    <div class="node__subtopics">
+                        <span class="subtopic-tag">Configuration</span>
+                        <span class="subtopic-tag">DotEnv</span>
+                        <span class="subtopic-tag">ExpressionLanguage</span>
+                        <span class="subtopic-tag">Error Handling</span>
+                        <span class="subtopic-tag">Code Debugging</span>
+                        <span class="subtopic-tag">Deployment</span>
+                        <span class="subtopic-tag">Web Profiler</span>
+                        <span class="subtopic-tag">Data Collectors</span>
+                        <span class="subtopic-tag">i18n</span>
+                        <span class="subtopic-tag">Cache Component</span>
+                        <span class="subtopic-tag">Clock Component</span>
+                        <span class="subtopic-tag">EventDispatcher</span>
+                        <span class="subtopic-tag">Filesystem</span>
+                        <span class="subtopic-tag">Finder</span>
+                        <span class="subtopic-tag">Process</span>
+                        <span class="subtopic-tag">PropertyAccess</span>
+                        <span class="subtopic-tag">Runtime</span>
+                        <span class="subtopic-tag">Serializer</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══ EXAM NODE ═══ -->
+        <div class="exam-node">
+            <div class="exam-node__card">
+                <div class="exam-node__icon">🎓</div>
+                <div class="exam-node__title">Symfony 8.0 Certification Exam</div>
+                <div class="exam-node__sub">75 questions · 75 minutes · You've got this!</div>
+            </div>
+        </div>
+
+    </div><!-- /timeline -->
+
+</div><!-- /container -->
+
+<footer class="footer">
+    <p>Symfony 8.0 Certification Roadmap · Built from the <a href="https://github.com/ThomasBerends/symfony-certification-preparation-list" target="_blank">Symfony Certification Preparation List</a></p>
+    <p style="margin-top: 6px; font-size: 11px;">Generated on 2026-03-01</p>
+</footer>
+
+<script>
+    // ── Scroll progress bar ──
+    window.addEventListener('scroll', () => {
+        const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+        const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const scrollPercent = (scrollTop / scrollHeight) * 100;
+        document.getElementById('progressBar').style.width = scrollPercent + '%';
+    });
+
+    // ── Scroll-reveal animation ──
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry, i) => {
+            if (entry.isIntersecting) {
+                setTimeout(() => {
+                    entry.target.classList.add('visible');
+                }, i * 80);
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.node, .tier-group__header, .exam-node').forEach(el => {
+        observer.observe(el);
+    });
+
+    // ── Toggle subtopics ──
+    function toggleSubtopics(btn) {
+        const subtopics = btn.nextElementSibling;
+        btn.classList.toggle('open');
+        subtopics.classList.toggle('open');
+    }
+</script>
+
+</body>
+</html>

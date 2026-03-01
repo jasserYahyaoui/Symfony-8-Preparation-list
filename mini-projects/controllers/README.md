@@ -1,0 +1,43 @@
+# Controllers - Mini-Projects
+
+## Sub-Topics Index
+
+- **HttpKernel component and FrameworkBundle**
+  - [Full Tutorial](./full-tutorial/httpkernel-component-and-frameworkbundle.md)
+  - [Guided Challenge](./guided-challenge/httpkernel-component-and-frameworkbundle.md)
+- **The base AbstractController class**
+  - [Full Tutorial](./full-tutorial/the-base-abstractcontroller-class.md)
+  - [Guided Challenge](./guided-challenge/the-base-abstractcontroller-class.md)
+- **The request**
+  - [Full Tutorial](./full-tutorial/the-request.md)
+  - [Guided Challenge](./guided-challenge/the-request.md)
+- **The response**
+  - [Full Tutorial](./full-tutorial/the-response.md)
+  - [Guided Challenge](./guided-challenge/the-response.md)
+- **The cookies**
+  - [Full Tutorial](./full-tutorial/the-cookies.md)
+  - [Guided Challenge](./guided-challenge/the-cookies.md)
+- **The session**
+  - [Full Tutorial](./full-tutorial/the-session.md)
+  - [Guided Challenge](./guided-challenge/the-session.md)
+- **The flash messages**
+  - [Full Tutorial](./full-tutorial/the-flash-messages.md)
+  - [Guided Challenge](./guided-challenge/the-flash-messages.md)
+- **HTTP redirects**
+  - [Full Tutorial](./full-tutorial/http-redirects.md)
+  - [Guided Challenge](./guided-challenge/http-redirects.md)
+- **Internal redirects**
+  - [Full Tutorial](./full-tutorial/internal-redirects.md)
+  - [Guided Challenge](./guided-challenge/internal-redirects.md)
+- **Generate 404 pages**
+  - [Full Tutorial](./full-tutorial/generate-404-pages.md)
+  - [Guided Challenge](./guided-challenge/generate-404-pages.md)
+- **File upload**
+  - [Full Tutorial](./full-tutorial/file-upload.md)
+  - [Guided Challenge](./guided-challenge/file-upload.md)
+- **Modern Request Data Mapping**
+  - [Full Tutorial](./full-tutorial/modern-request-data-mapping.md)
+  - [Guided Challenge](./guided-challenge/modern-request-data-mapping.md)
+- **Argument value resolvers**
+  - [Full Tutorial](./full-tutorial/argument-value-resolvers.md)
+  - [Guided Challenge](./guided-challenge/argument-value-resolvers.md)

@@ -1,0 +1,952 @@
+# Quiz : HTTP (Symfony 8.0 Certification)
+> Exam-grade mock test — 30+ questions per sub-heading. True/False, Single answer, Multiple choice only.
+
+---
+
+### HTTP Specification (RFC 9110)
+
+**Question 1:** HTTP is a stateful protocol that remembers information between requests.
+**Type:** True / False
+- [ ] A) True
+- [ ] B) False
+
+**Correct Answer(s):** B
+**Explanation:** HTTP is **stateless** — each request is independent. State is maintained via cookies, sessions, or tokens.
+
+---
+
+**Question 2:** Which layer of the OSI model does HTTP operate at?
+**Type:** Single answer
+- [ ] A) Transport layer (Layer 4)
+- [ ] B) Network layer (Layer 3)
+- [ ] C) Application layer (Layer 7)
+- [ ] D) Session layer (Layer 5)
+
+**Correct Answer(s):** C
+**Explanation:** HTTP is an Application-layer protocol (Layer 7), built on top of TCP (Layer 4).
+
+---
+
+**Question 3:** Which of the following are key improvements of HTTP/2 over HTTP/1.1? (Select all)
+**Type:** Multiple choice
+- [ ] A) Binary framing
+- [ ] B) Request multiplexing
+- [ ] C) Header compression (HPACK)
+- [ ] D) Uses UDP instead of TCP
+- [ ] E) Server push
+
+**Correct Answer(s):** A, B, C, E
+**Explanation:** HTTP/2 uses binary framing, multiplexing, HPACK compression, and server push. It still uses TCP; HTTP/3 uses UDP (via QUIC).
+
+---
+
+**Question 4:** HTTP/3 uses QUIC, which operates on top of:
+**Type:** Single answer
+- [ ] A) TCP
+- [ ] B) UDP
+- [ ] C) TLS
+- [ ] D) WebSocket
+
+**Correct Answer(s):** B
+**Explanation:** HTTP/3 uses QUIC, which is built on UDP for lower latency and better connection migration.
+
+---
+
+**Question 5:** An idempotent HTTP method produces the same result when called multiple times with the same parameters.
+**Type:** True / False
+- [ ] A) True
+- [ ] B) False
+
+**Correct Answer(s):** A
+**Explanation:** Idempotent methods (GET, HEAD, PUT, DELETE, OPTIONS) produce the same server state regardless of repetition.
+
+---
+
+**Question 6:** Which of the following HTTP methods are idempotent? (Select all)
+**Type:** Multiple choice
+- [ ] A) GET
+- [ ] B) POST
+- [ ] C) PUT
+- [ ] D) DELETE
+- [ ] E) PATCH
+- [ ] F) HEAD
+
+**Correct Answer(s):** A, C, D, F
+**Explanation:** GET, HEAD, PUT, DELETE, OPTIONS are idempotent. POST and PATCH are NOT idempotent.
+
+---
+
+**Question 7:** Which HTTP methods are considered "safe"? (Select all)
+**Type:** Multiple choice
+- [ ] A) GET
+- [ ] B) HEAD
+- [ ] C) POST
+- [ ] D) OPTIONS
+- [ ] E) DELETE
+
+**Correct Answer(s):** A, B, D
+**Explanation:** Safe methods do not modify server state: GET, HEAD, OPTIONS. POST and DELETE modify state.
+
+---
+
+**Question 8:** The `Host` header is mandatory in HTTP/1.1 requests.
+**Type:** True / False
+- [ ] A) True
+- [ ] B) False
+
+**Correct Answer(s):** A
+**Explanation:** HTTP/1.1 requires the `Host` header to support virtual hosting (multiple domains on one IP).
+
+---
+
+**Question 9:** HTTP/1.1 allows persistent connections by default (`Connection: keep-alive`).
+**Type:** True / False
+- [ ] A) True
+- [ ] B) False
+
+**Correct Answer(s):** A
+**Explanation:** HTTP/1.1 connections are persistent by default. HTTP/1.0 connections close after each request unless `Connection: keep-alive` is set explicitly.
+
+---
+
+**Question 10:** An HTTP request consists of three parts. Which are they?
+**Type:** Single answer
+- [ ] A) Method, URL, Body
+- [ ] B) Request line, Headers, Body
+- [ ] C) Scheme, Host, Path
+- [ ] D) Status line, Headers, Payload
+
+**Correct Answer(s):** B
+**Explanation:** An HTTP request has: Request line (`METHOD /path HTTP/1.1`), Headers, and optionally a Body.
+
+---
+
+**Question 11:** The `Transfer-Encoding: chunked` header means:
+**Type:** Single answer
+- [ ] A) The data is compressed
+- [ ] B) The body is sent in chunks, allowing streaming without knowing the full size upfront
+- [ ] C) The body is base64-encoded
+- [ ] D) The connection will be closed after this response
+
+**Correct Answer(s):** B
+**Explanation:** Chunked transfer encoding allows sending data incrementally without a `Content-Length` header.
+
+---
+
+**Question 12:** The `RFC 9110` standard supersedes which earlier RFC for HTTP semantics?
+**Type:** Single answer
+- [ ] A) RFC 2616
+- [ ] B) RFC 7230
+- [ ] C) RFC 7231
+- [ ] D) Both B and C
+
+**Correct Answer(s):** D
+**Explanation:** RFC 9110 consolidates and supersedes RFC 7230–7235, which themselves replaced RFC 2616.
+
+---
+
+### Status codes
+
+**Question 13:** A `200 OK` response indicates:
+**Type:** Single answer
+- [ ] A) The resource was created
+- [ ] B) The request succeeded and the response body contains the result
+- [ ] C) The request was redirected
+- [ ] D) No content to return
+
+**Correct Answer(s):** B
+**Explanation:** `200` is the standard success code with a body. `201` = created, `204` = no content, `3xx` = redirect.
+
+---
+
+**Question 14:** What does `201 Created` indicate and what header should accompany it?
+**Type:** Single answer
+- [ ] A) Resource found; `Content-Type` header
+- [ ] B) Resource created; `Location` header pointing to the new resource
+- [ ] C) Resource updated; `ETag` header
+- [ ] D) Resource deleted; no additional header
+
+**Correct Answer(s):** B
+**Explanation:** `201 Created` means a new resource was created. The `Location` header should contain the URL of the new resource.
+
+---
+
+**Question 15:** What status code means "the server understood the request, successfully processed it, but has no content to return"?
+**Type:** Single answer
+- [ ] A) 200
+- [ ] B) 202
+- [ ] C) 204
+- [ ] D) 206
+
+**Correct Answer(s):** C
+**Explanation:** `204 No Content` — success, no body. Common for DELETE operations or form submissions without a redirect body.
+
+---
+
+**Question 16:** What is the difference between `301 Moved Permanently` and `302 Found`?
+**Type:** Single answer
+- [ ] A) `301` is temporary; `302` is permanent
+- [ ] B) `301` is permanent; `302` is temporary
+- [ ] C) Both are permanent
+- [ ] D) Both are temporary
+
+**Correct Answer(s):** B
+**Explanation:** `301` = permanent redirect (browsers cache it). `302` = temporary redirect (reuse the original URL in the future).
+
+---
+
+**Question 17:** A server returns `304 Not Modified`. What does this mean?
+**Type:** Single answer
+- [ ] A) The resource could not be found
+- [ ] B) The resource hasn't changed since the last request — use the cached version
+- [ ] C) The request was malformed
+- [ ] D) The server is overloaded
+
+**Correct Answer(s):** B
+**Explanation:** `304` is returned after a conditional request (with `If-None-Match` or `If-Modified-Since`) when the content hasn't changed.
+
+---
+
+**Question 18:** Match the status code to its meaning. `400` means:
+**Type:** Single answer
+- [ ] A) Unauthorized
+- [ ] B) Forbidden
+- [ ] C) Bad Request — malformed syntax
+- [ ] D) Not Found
+
+**Correct Answer(s):** C
+**Explanation:** `400 Bad Request` = the server cannot process the request due to malformed syntax.
+
+---
+
+**Question 19:** What is the precise difference between `401 Unauthorized` and `403 Forbidden`?
+**Type:** Single answer
+- [ ] A) `401` = not logged in; `403` = logged in but lacks permission
+- [ ] B) `401` = wrong password; `403` = no account
+- [ ] C) They are the same
+- [ ] D) `401` = permission denied; `403` = not logged in
+
+**Correct Answer(s):** A
+**Explanation:** `401` = authentication required (include `WWW-Authenticate` header). `403` = authenticated but not authorized. Logging in may fix `401` but not `403`.
+
+---
+
+**Question 20:** `404 Not Found` means:
+**Type:** Single answer
+- [ ] A) The server is down
+- [ ] B) The requested resource does not exist on the server
+- [ ] C) The user is not authorized
+- [ ] D) The request timed out
+
+**Correct Answer(s):** B
+**Explanation:** `404` = the resource cannot be found. The server is active but the URL doesn't map to any resource.
+
+---
+
+**Question 21:** What does `405 Method Not Allowed` mean?
+**Type:** Single answer
+- [ ] A) The HTTP method is not recognized
+- [ ] B) The HTTP method is recognized but not supported for this resource (e.g., POST on a read-only endpoint)
+- [ ] C) The request body is too large
+- [ ] D) The Accept header doesn't match
+
+**Correct Answer(s):** B
+**Explanation:** The server knows the method but the resource doesn't support it. The response includes an `Allow` header listing valid methods.
+
+---
+
+**Question 22:** `422 Unprocessable Entity` means:
+**Type:** Single answer
+- [ ] A) The request syntax is malformed
+- [ ] B) The request is well-formed but contains semantic errors (e.g., validation failures)
+- [ ] C) The server is overloaded
+- [ ] D) The content type is unsupported
+
+**Correct Answer(s):** B
+**Explanation:** `422` = syntactically valid request but semantically invalid (e.g., validation errors in a JSON payload). `400` = bad syntax.
+
+---
+
+**Question 23:** `429 Too Many Requests` is used for:
+**Type:** Single answer
+- [ ] A) Server overload
+- [ ] B) Rate limiting — the client has sent too many requests in a given time period
+- [ ] C) The payload is too large
+- [ ] D) The server is in maintenance
+
+**Correct Answer(s):** B
+**Explanation:** `429` signals rate limiting. Often accompanied by `Retry-After` header.
+
+---
+
+**Question 24:** `500 Internal Server Error` means:
+**Type:** Single answer
+- [ ] A) The client made a mistake
+- [ ] B) The server encountered an unexpected error
+- [ ] C) The URL doesn't exist
+- [ ] D) The service is temporarily unavailable
+
+**Correct Answer(s):** B
+**Explanation:** `500` = generic server-side error. `503` = temporarily unavailable. `502` = bad gateway.
+
+---
+
+**Question 25:** What is `503 Service Unavailable` used for?
+**Type:** Single answer
+- [ ] A) The URL is incorrect
+- [ ] B) The server is temporarily down for maintenance or overloaded
+- [ ] C) The authentication failed
+- [ ] D) The request body is too large
+
+**Correct Answer(s):** B
+**Explanation:** `503` = temporary unavailability. Often includes `Retry-After`.
+
+---
+
+**Question 26:** Which status codes indicate a redirect? (Select all)
+**Type:** Multiple choice
+- [ ] A) 200
+- [ ] B) 301
+- [ ] C) 302
+- [ ] D) 304
+- [ ] E) 307
+- [ ] F) 308
+
+**Correct Answer(s):** B, C, E, F
+**Explanation:** 3xx codes: `301` permanent, `302` temporary, `307` temporary (preserve method), `308` permanent (preserve method). `304` is NOT a redirect.
+
+---
+
+**Question 27:** `307 Temporary Redirect` vs `302 Found`: what is the key difference?
+**Type:** Single answer
+- [ ] A) `307` preserves the HTTP method; `302` may change POST to GET
+- [ ] B) They are identical
+- [ ] C) `302` preserves the method; `307` does not
+- [ ] D) `307` is permanent; `302` is temporary
+
+**Correct Answer(s):** A
+**Explanation:** `307` guarantees the method and body are NOT changed. With `302`, browsers historically changed POST to GET.
+
+---
+
+**Question 28:** In Symfony, what constant would you use for a `404` status code?
+**Type:** Single answer
+- [ ] A) `Response::STATUS_NOT_FOUND`
+- [ ] B) `Response::HTTP_NOT_FOUND`
+- [ ] C) `HttpException::NOT_FOUND`
+- [ ] D) `StatusCode::NOT_FOUND`
+
+**Correct Answer(s):** B
+**Explanation:** Symfony uses `Response::HTTP_*` constants: `HTTP_NOT_FOUND`, `HTTP_OK`, `HTTP_CREATED`, etc.
+
+---
+
+**Question 29:** The `1xx` family of status codes indicates:
+**Type:** Single answer
+- [ ] A) Success
+- [ ] B) Redirect
+- [ ] C) Informational — the request is being processed
+- [ ] D) Client error
+
+**Correct Answer(s):** C
+**Explanation:** 1xx = informational. Example: `100 Continue`, `101 Switching Protocols`.
+
+---
+
+**Question 30:** What does `202 Accepted` indicate?
+**Type:** Single answer
+- [ ] A) The request has been accepted for processing but is not yet completed
+- [ ] B) The resource was created
+- [ ] C) The cache is valid
+- [ ] D) The request is malformed
+
+**Correct Answer(s):** A
+**Explanation:** `202` = the server has accepted the request for asynchronous processing. It does not guarantee the outcome.
+
+---
+
+**Question 31:** `406 Not Acceptable` is returned when:
+**Type:** Single answer
+- [ ] A) The server cannot generate a response matching the client's `Accept` header
+- [ ] B) The method is not allowed
+- [ ] C) The request body is too large
+- [ ] D) Rate limiting is in effect
+
+**Correct Answer(s):** A
+**Explanation:** `406` means content negotiation failed — the server cannot produce a response in a format the client accepts.
+
+---
+
+**Question 32:** `415 Unsupported Media Type` means:
+**Type:** Single answer
+- [ ] A) The Accept header is wrong
+- [ ] B) The `Content-Type` of the request body is not supported by the server
+- [ ] C) The response cannot be gzipped
+- [ ] D) The file is too large
+
+**Correct Answer(s):** B
+**Explanation:** `415` = the server refuses the request because the `Content-Type` is not supported (e.g., sending XML to an endpoint that only accepts JSON).
+
+---
+
+### HTTP request
+
+**Question 33:** What are the three structural parts of an HTTP request?
+**Type:** Single answer
+- [ ] A) Body, Footer, Trailer
+- [ ] B) Request line, Headers, Body
+- [ ] C) Method, Path, Protocol
+- [ ] D) URL, Query String, Fragment
+
+**Correct Answer(s):** B
+**Explanation:** An HTTP request = Request line (`METHOD /path HTTP/version`), Headers, and optionally a Body.
+
+---
+
+**Question 34:** In Symfony, `$request->query` corresponds to which PHP superglobal?
+**Type:** Single answer
+- [ ] A) `$_POST`
+- [ ] B) `$_GET`
+- [ ] C) `$_SERVER`
+- [ ] D) `$_FILES`
+
+**Correct Answer(s):** B
+**Explanation:** `$request->query` = ParameterBag wrapping `$_GET`. `request` = `$_POST`, `files` = `$_FILES`.
+
+---
+
+**Question 35:** What does `$request->getContent()` return?
+**Type:** Single answer
+- [ ] A) The decoded JSON object
+- [ ] B) The raw request body as a string
+- [ ] C) The POST parameters as an array
+- [ ] D) The query string
+
+**Correct Answer(s):** B
+**Explanation:** `getContent()` returns the raw body (e.g., raw JSON string). You must call `json_decode()` yourself.
+
+---
+
+**Question 36:** `$request->attributes` contains:
+**Type:** Single answer
+- [ ] A) POST parameters
+- [ ] B) Query string parameters
+- [ ] C) Route parameters and other internal Symfony data
+- [ ] D) HTTP headers
+
+**Correct Answer(s):** C
+**Explanation:** `attributes` bag stores route parameters (`_route`, `_controller`, custom route params) and other internal data. NOT user input.
+
+---
+
+**Question 37:** Why should you avoid `$request->get()` in Symfony and use specific bags instead?
+**Type:** Single answer
+- [ ] A) `get()` is deprecated
+- [ ] B) `get()` searches query, request, AND attributes — ambiguous source can cause security issues
+- [ ] C) `get()` is slower
+- [ ] D) `get()` always returns null
+
+**Correct Answer(s):** B
+**Explanation:** `$request->get()` checks all bags. Use `$request->query->get()`, `$request->request->get()`, etc., for explicit source.
+
+---
+
+**Question 38:** `$request->isXmlHttpRequest()` checks for:
+**Type:** Single answer
+- [ ] A) A JSON Content-Type
+- [ ] B) The `X-Requested-With: XMLHttpRequest` header
+- [ ] C) A WebSocket upgrade
+- [ ] D) The `Accept: application/xml` header
+
+**Correct Answer(s):** B
+**Explanation:** It checks for `X-Requested-With: XMLHttpRequest`, commonly set by jQuery and other AJAX libraries.
+
+---
+
+**Question 39:** What does `$request->getClientIp()` return when behind a reverse proxy without trusted proxies configured?
+**Type:** Single answer
+- [ ] A) The client's real IP
+- [ ] B) The proxy's IP (not the client's)
+- [ ] C) `null`
+- [ ] D) `127.0.0.1`
+
+**Correct Answer(s):** B
+**Explanation:** Without trusted proxies, `getClientIp()` returns the IP of the connection (the proxy). Configure `trusted_proxies` to read `X-Forwarded-For`.
+
+---
+
+**Question 40:** The `_method` hidden form field or `X-HTTP-Method-Override` header is used to simulate which HTTP methods from HTML forms?
+**Type:** Multiple choice
+- [ ] A) PUT
+- [ ] B) PATCH
+- [ ] C) DELETE
+- [ ] D) GET
+- [ ] E) OPTIONS
+
+**Correct Answer(s):** A, B, C
+**Explanation:** HTML forms only support GET and POST. `_method` or `X-HTTP-Method-Override` simulates PUT, PATCH, DELETE. GET and OPTIONS don't need it.
+
+---
+
+**Question 41:** Symfony's `http_method_override` must be set to `true` for `_method` to work.
+**Type:** True / False
+- [ ] A) True
+- [ ] B) False
+
+**Correct Answer(s):** A
+**Explanation:** In `framework.yaml`, `http_method_override: true` enables reading the `_method` field from POST requests.
+
+---
+
+**Question 42:** `$request->getMethod()` returns the HTTP method of the request. After `_method` override, it returns:
+**Type:** Single answer
+- [ ] A) Always `POST` (the actual method)
+- [ ] B) The overridden method (e.g., `PUT`, `DELETE`)
+- [ ] C) Always `GET`
+- [ ] D) `null`
+
+**Correct Answer(s):** B
+**Explanation:** When method override is enabled, `getMethod()` returns the overridden value (from `_method` field).
+
+---
+
+### HTTP response
+
+**Question 43:** What are the three structural parts of an HTTP response?
+**Type:** Single answer
+- [ ] A) Request line, Headers, Body
+- [ ] B) Status line, Headers, Body
+- [ ] C) Status code, Reason phrase, Content
+- [ ] D) Method, URL, Payload
+
+**Correct Answer(s):** B
+**Explanation:** An HTTP response = Status line (`HTTP/1.1 200 OK`), Headers, and Body.
+
+---
+
+**Question 44:** In Symfony, how do you set a response header?
+**Type:** Single answer
+- [ ] A) `$response->addHeader('X-Custom', 'value')`
+- [ ] B) `$response->headers->set('X-Custom', 'value')`
+- [ ] C) `$response->setHeader('X-Custom', 'value')`
+- [ ] D) `$response->header('X-Custom', 'value')`
+
+**Correct Answer(s):** B
+**Explanation:** Symfony uses the `ResponseHeaderBag`: `$response->headers->set('Name', 'Value')`.
+
+---
+
+**Question 45:** What Symfony class would you use to return a JSON response?
+**Type:** Single answer
+- [ ] A) `Response`
+- [ ] B) `JsonResponse`
+- [ ] C) `BinaryFileResponse`
+- [ ] D) `StreamedResponse`
+
+**Correct Answer(s):** B
+**Explanation:** `JsonResponse` auto-sets `Content-Type: application/json` and encodes the data.
+
+---
+
+**Question 46:** What Symfony class would you use to serve a file download?
+**Type:** Single answer
+- [ ] A) `Response`
+- [ ] B) `JsonResponse`
+- [ ] C) `BinaryFileResponse`
+- [ ] D) `RedirectResponse`
+
+**Correct Answer(s):** C
+**Explanation:** `BinaryFileResponse` serves files efficiently (including `X-Sendfile` support).
+
+---
+
+**Question 47:** `$response->setPublic()` sets which `Cache-Control` directive?
+**Type:** Single answer
+- [ ] A) `no-cache`
+- [ ] B) `private`
+- [ ] C) `public`
+- [ ] D) `no-store`
+
+**Correct Answer(s):** C
+**Explanation:** `setPublic()` → `Cache-Control: public`, allowing shared caches (CDN, reverse proxy) to cache the response.
+
+---
+
+**Question 48:** What does `$response->setPrivate()` do?
+**Type:** Single answer
+- [ ] A) Sets `Cache-Control: no-store`
+- [ ] B) Sets `Cache-Control: private` — only the browser can cache, not shared caches
+- [ ] C) Encrypts the response
+- [ ] D) Removes all caching headers
+
+**Correct Answer(s):** B
+**Explanation:** `setPrivate()` → `Cache-Control: private`, preventing shared caches from storing the response.
+
+---
+
+**Question 49:** The `Content-Type` header describes:
+**Type:** Single answer
+- [ ] A) What encoding the client wants
+- [ ] B) The MIME type of the body being sent
+- [ ] C) The accepted languages
+- [ ] D) The cache duration
+
+**Correct Answer(s):** B
+**Explanation:** `Content-Type` indicates the media type (MIME type) of the request or response body.
+
+---
+
+**Question 50:** `Response::HTTP_CREATED` has the numeric value:
+**Type:** Single answer
+- [ ] A) 200
+- [ ] B) 201
+- [ ] C) 202
+- [ ] D) 204
+
+**Correct Answer(s):** B
+**Explanation:** `HTTP_CREATED = 201`.
+
+---
+
+### HTTP methods
+
+**Question 51:** What is the semantic difference between `PUT` and `PATCH`?
+**Type:** Single answer
+- [ ] A) `PUT` partially updates; `PATCH` fully replaces
+- [ ] B) `PUT` fully replaces the resource; `PATCH` partially updates
+- [ ] C) Both are identical
+- [ ] D) `PUT` creates; `PATCH` deletes
+
+**Correct Answer(s):** B
+**Explanation:** `PUT` replaces the ENTIRE resource. `PATCH` applies a partial modification.
+
+---
+
+**Question 52:** `POST` is NOT idempotent. What does this mean in practice?
+**Type:** Single answer
+- [ ] A) Sending the same POST request twice creates two resources
+- [ ] B) Sending POST twice has no effect
+- [ ] C) POST is cacheable
+- [ ] D) POST cannot have a body
+
+**Correct Answer(s):** A
+**Explanation:** Non-idempotent = repeated calls may have different effects (e.g., creating duplicate orders).
+
+---
+
+**Question 53:** The `HEAD` method returns:
+**Type:** Single answer
+- [ ] A) The request body only
+- [ ] B) Headers only, no body (same headers as GET would return)
+- [ ] C) An error — HEAD is not a valid method
+- [ ] D) The full response including body
+
+**Correct Answer(s):** B
+**Explanation:** HEAD = identical to GET but with no response body. Used to check headers, Content-Length, existence.
+
+---
+
+**Question 54:** `OPTIONS` method is primarily used for:
+**Type:** Single answer
+- [ ] A) Deleting resources
+- [ ] B) Discovering which HTTP methods a server supports for a URL (CORS preflight)
+- [ ] C) Creating resources
+- [ ] D) Streaming data
+
+**Correct Answer(s):** B
+**Explanation:** OPTIONS returns the `Allow` header and is used for CORS preflight requests.
+
+---
+
+**Question 55:** A `DELETE` request is idempotent: deleting the same resource multiple times has the same effect.
+**Type:** True / False
+- [ ] A) True
+- [ ] B) False
+
+**Correct Answer(s):** A
+**Explanation:** Deleting a resource once or many times leaves the same state (resource is gone). The first call may return 200/204, subsequent ones may return 404.
+
+---
+
+**Question 56:** Which Symfony attribute restricts a route to specific HTTP methods?
+**Type:** Single answer
+- [ ] A) `#[Route('/path', methods: ['GET', 'POST'])]`
+- [ ] B) `#[Route('/path', httpMethod: 'GET')]`
+- [ ] C) `#[Route('/path', allow: ['GET'])]`
+- [ ] D) `#[Methods(['GET'])]`
+
+**Correct Answer(s):** A
+**Explanation:** The `methods:` parameter restricts the allowed HTTP methods for a route.
+
+---
+
+### Cookies
+
+**Question 57:** Which of the following are security attributes of HTTP cookies? (Select all)
+**Type:** Multiple choice
+- [ ] A) `HttpOnly`
+- [ ] B) `Secure`
+- [ ] C) `SameSite`
+- [ ] D) `Persistent`
+- [ ] E) `Domain`
+
+**Correct Answer(s):** A, B, C
+**Explanation:** `HttpOnly` (no JS access), `Secure` (HTTPS only), `SameSite` (CSRF protection) are security attributes. `Domain`/`Path` define scope, not security.
+
+---
+
+**Question 58:** `HttpOnly` on a cookie means:
+**Type:** Single answer
+- [ ] A) The cookie works only on HTTP, not HTTPS
+- [ ] B) JavaScript cannot access the cookie via `document.cookie`
+- [ ] C) The cookie is deleted on each page load
+- [ ] D) The cookie is encrypted
+
+**Correct Answer(s):** B
+**Explanation:** `HttpOnly` prevents client-side JavaScript from reading the cookie — XSS mitigation.
+
+---
+
+**Question 59:** `Secure` on a cookie means:
+**Type:** Single answer
+- [ ] A) The cookie is encrypted
+- [ ] B) The cookie is only sent over HTTPS connections
+- [ ] C) The cookie is HttpOnly
+- [ ] D) The cookie cannot be modified
+
+**Correct Answer(s):** B
+**Explanation:** `Secure` flag = the browser only sends the cookie over HTTPS, not HTTP.
+
+---
+
+**Question 60:** What is the difference between `SameSite=Strict` and `SameSite=Lax`?
+**Type:** Single answer
+- [ ] A) `Strict` never sends the cookie cross-site; `Lax` sends it on top-level navigations (safe methods)
+- [ ] B) They are identical
+- [ ] C) `Lax` is more restrictive than `Strict`
+- [ ] D) `Strict` allows all cross-site cookies
+
+**Correct Answer(s):** A
+**Explanation:** `Strict` = never sent cross-site (even clicking a link from another site). `Lax` = sent on top-level safe navigations (GET links).
+
+---
+
+**Question 61:** Can a cookie with `SameSite=None` be set without the `Secure` flag?
+**Type:** True / False
+- [ ] A) True
+- [ ] B) False
+
+**Correct Answer(s):** B
+**Explanation:** Modern browsers reject `SameSite=None` cookies without `Secure`. This is enforced by browsers.
+
+---
+
+**Question 62:** How do you create a cookie in Symfony?
+**Type:** Single answer
+- [ ] A) `$response->cookies->add('name', 'value')`
+- [ ] B) `$response->headers->setCookie(Cookie::create('name')->withValue('value'))`
+- [ ] C) `setcookie('name', 'value')`
+- [ ] D) `$request->cookies->set('name', 'value')`
+
+**Correct Answer(s):** B
+**Explanation:** Symfony uses `Cookie::create()` (fluent API) and `$response->headers->setCookie()`.
+
+---
+
+**Question 63:** To delete a cookie in Symfony, you use:
+**Type:** Single answer
+- [ ] A) `$response->headers->removeCookie('name')`
+- [ ] B) `$response->headers->clearCookie('name')`
+- [ ] C) `unset($response->cookies['name'])`
+- [ ] D) `$response->deleteCookie('name')`
+
+**Correct Answer(s):** B
+**Explanation:** `clearCookie('name', $path, $domain)` sets the cookie with a past expiry date, causing the browser to delete it.
+
+---
+
+**Question 64:** To read an incoming cookie in Symfony, you use:
+**Type:** Single answer
+- [ ] A) `$response->cookies->get('name')`
+- [ ] B) `$request->cookies->get('name')`
+- [ ] C) `$request->headers->get('Cookie')`
+- [ ] D) `$_COOKIE['name']`
+
+**Correct Answer(s):** B
+**Explanation:** Incoming cookies are on the request: `$request->cookies->get('name')`.
+
+---
+
+**Question 65:** A session cookie (no `Expires` or `Max-Age` set) is deleted when:
+**Type:** Single answer
+- [ ] A) After 30 minutes
+- [ ] B) When the browser is closed
+- [ ] C) After 24 hours
+- [ ] D) Never — it persists forever
+
+**Correct Answer(s):** B
+**Explanation:** Session cookies (without explicit expiry) are deleted when the browser session ends (user closes the browser).
+
+---
+
+### Content negotiation
+
+**Question 66:** Content negotiation allows the client and server to agree on:
+**Type:** Multiple choice
+- [ ] A) Response format (JSON, XML, HTML)
+- [ ] B) Response language
+- [ ] C) Response compression
+- [ ] D) Authentication method
+
+**Correct Answer(s):** A, B, C
+**Explanation:** `Accept` (format), `Accept-Language` (language), `Accept-Encoding` (compression). Authentication is separate.
+
+---
+
+**Question 67:** The `Accept` header specifies:
+**Type:** Single answer
+- [ ] A) The format of the request body
+- [ ] B) The formats the client can handle in the response
+- [ ] C) The server's preferred format
+- [ ] D) The cache TTL
+
+**Correct Answer(s):** B
+**Explanation:** `Accept: application/json, text/html` tells the server what the client can process.
+
+---
+
+**Question 68:** What does the quality factor `q` mean in `Accept: text/html;q=0.9, application/json;q=1.0`?
+**Type:** Single answer
+- [ ] A) `q=1.0` is the least preferred
+- [ ] B) `q=1.0` is the most preferred (higher = better)
+- [ ] C) `q` indicates the file size
+- [ ] D) `q` is always ignored by servers
+
+**Correct Answer(s):** B
+**Explanation:** Quality factor `q` ranges from 0.0 (not acceptable) to 1.0 (most preferred). Default is 1.0.
+
+---
+
+**Question 69:** A `q=0` for a media type means:
+**Type:** Single answer
+- [ ] A) The format is most preferred
+- [ ] B) The format is NOT acceptable and must NOT be returned
+- [ ] C) The format has average preference
+- [ ] D) The format's quality is unknown
+
+**Correct Answer(s):** B
+**Explanation:** `q=0` explicitly rejects that format.
+
+---
+
+**Question 70:** When the server cannot satisfy any of the client's `Accept` formats, it should return:
+**Type:** Single answer
+- [ ] A) `400 Bad Request`
+- [ ] B) `406 Not Acceptable`
+- [ ] C) `415 Unsupported Media Type`
+- [ ] D) `500 Internal Server Error`
+
+**Correct Answer(s):** B
+**Explanation:** `406 Not Acceptable` = the server cannot produce a response matching the `Accept` header.
+
+---
+
+**Question 71:** In Symfony, how can you use format-based content negotiation in a route?
+**Type:** Single answer
+- [ ] A) Use the `{_format}` route parameter
+- [ ] B) Use the `{_type}` parameter
+- [ ] C) Parse the `Accept` header manually
+- [ ] D) Use the `#[ContentType]` attribute
+
+**Correct Answer(s):** A
+**Explanation:** Symfony's `{_format}` parameter automatically sets `$request->getRequestFormat()` and can be used to return different response types.
+
+---
+
+**Question 72:** What does `$request->getRequestFormat()` return?
+**Type:** Single answer
+- [ ] A) The `Content-Type` of the request
+- [ ] B) The format extracted from the `{_format}` route parameter (e.g., `json`, `xml`, `html`)
+- [ ] C) The `Accept` header
+- [ ] D) The file extension of the URL
+
+**Correct Answer(s):** B
+**Explanation:** `getRequestFormat()` returns the value resolved from `{_format}` or defaults to `html`.
+
+---
+
+### Language detection
+
+**Question 73:** Which HTTP header does the client use to declare its preferred language?
+**Type:** Single answer
+- [ ] A) `Content-Language`
+- [ ] B) `Accept-Language`
+- [ ] C) `X-Language`
+- [ ] D) `Locale`
+
+**Correct Answer(s):** B
+**Explanation:** `Accept-Language: fr-FR, en;q=0.8` declares language preferences with quality factors.
+
+---
+
+**Question 74:** What is the priority order for locale detection in Symfony? (Highest to lowest)
+**Type:** Single answer
+- [ ] A) `Accept-Language` → session → route → default
+- [ ] B) Route `_locale` parameter → session → `Accept-Language` → `framework.default_locale`
+- [ ] C) `default_locale` → route → session
+- [ ] D) Session → route → default
+
+**Correct Answer(s):** B
+**Explanation:** Route `_locale` overrides session, which overrides `Accept-Language`, which overrides the config default.
+
+---
+
+**Question 75:** Symfony's `LocaleListener` subscribes to which kernel event?
+**Type:** Single answer
+- [ ] A) `kernel.response`
+- [ ] B) `kernel.request`
+- [ ] C) `kernel.controller`
+- [ ] D) `kernel.finish_request`
+
+**Correct Answer(s):** B
+**Explanation:** `LocaleListener` listens on `kernel.request` to set the locale early in the request lifecycle.
+
+---
+
+**Question 76:** To force a locale from a route, you use which route parameter?
+**Type:** Single answer
+- [ ] A) `{locale}`
+- [ ] B) `{_locale}`
+- [ ] C) `{lang}`
+- [ ] D) `{language}`
+
+**Correct Answer(s):** B
+**Explanation:** Symfony uses `{_locale}` (with leading underscore) as the special route parameter for locale.
+
+---
+
+**Question 77:** The `Accept-Language: fr-FR, fr;q=0.9, en;q=0.8` header means:
+**Type:** Single answer
+- [ ] A) English is the most preferred
+- [ ] B) French (France) is most preferred, then French generic, then English
+- [ ] C) All three are equally preferred
+- [ ] D) Only French (France) is acceptable
+
+**Correct Answer(s):** B
+**Explanation:** `fr-FR` (implicit q=1.0) > `fr` (q=0.9) > `en` (q=0.8).
+
+---
+
+**Question 78:** The `Content-Language` header on a response indicates:
+**Type:** Single answer
+- [ ] A) What language the client prefers
+- [ ] B) The language of the response content
+- [ ] C) The server's default locale
+- [ ] D) The URI path language
+
+**Correct Answer(s):** B
+**Explanation:** `Content-Language` describes the intended audience language of the enclosed content.
+
+---
+
+---
