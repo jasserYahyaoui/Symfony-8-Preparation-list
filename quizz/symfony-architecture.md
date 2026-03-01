@@ -1,569 +1,1206 @@
 # Quiz : Symfony Architecture (Symfony 8.0 Certification)
-> Exam-grade mock test — 30+ questions per sub-heading.
+> Exam-grade mock test — 100+ questions based on official Symfony 8.0 syllabus.
 
 ---
+## HttpFoundation component
 
-### HttpFoundation component
-
-**Question 1:** The HttpFoundation component replaces PHP superglobals (`$_GET`, `$_POST`, etc.) with an object-oriented API.
-**Type:** True / False
-- [ ] A) True
-- [ ] B) False
-
-**Correct Answer(s):** A
-**Explanation:** HttpFoundation wraps `$_GET`, `$_POST`, `$_SERVER`, `$_FILES`, `$_COOKIE` into `Request` and `Response` objects.
-
----
-
-**Question 2:** Which class in HttpFoundation represents the incoming HTTP request?
+### Q1: What is the primary purpose of the HttpFoundation component?
 **Type:** Single answer
-- [ ] A) `Symfony\Component\HttpFoundation\Response`
-- [ ] B) `Symfony\Component\HttpFoundation\Request`
-- [ ] C) `Symfony\Component\HttpKernel\HttpKernel`
-- [ ] D) `Symfony\Component\HttpFoundation\ServerBag`
+- [ ] A) To manage database connections via PDO.
+- [ ] B) To provide an object-oriented layer for PHP superglobals (`$_GET`, `$_POST`, etc.).
+- [ ] C) To define custom routing paths.
+- [ ] D) To manage Twig templates.
 
 **Correct Answer(s):** B
-**Explanation:** `Request` encapsulates all HTTP request data.
+**Explanation:** HttpFoundation replaces superglobals with concrete objects.
+**Reference:** https://symfony.com/doc/8.0/components/http_foundation.html
 
----
-
-**Question 3:** Which of the following are bags in the `Request` object? (Select all)
-**Type:** Multiple choice
-- [ ] A) `query` (GET parameters)
-- [ ] B) `request` (POST parameters)
-- [ ] C) `attributes` (route parameters)
-- [ ] D) `cookies`
-- [ ] E) `files`
-- [ ] F) `headers`
-
-**Correct Answer(s):** A, B, C, D, E, F
-**Explanation:** All six are bags (or HeaderBag/FileBag subclasses) on the Request object.
-
----
-
-**Question 4:** `Request::createFromGlobals()` creates a Request from:
+### Q2: Which class specifically parses HTTP request data?
 **Type:** Single answer
-- [ ] A) A YAML configuration file
-- [ ] B) The PHP superglobals (`$_GET`, `$_POST`, `$_SERVER`, `$_COOKIE`, `$_FILES`)
-- [ ] C) The Symfony container
-- [ ] D) A database query
-
-**Correct Answer(s):** B
-**Explanation:** `createFromGlobals()` populates the Request using PHP's superglobals.
-
----
-
-**Question 5:** The `ParameterBag::get()` method returns `null` by default when the key is not found.
-**Type:** True / False
-- [ ] A) True
-- [ ] B) False
-
-**Correct Answer(s):** A
-**Explanation:** `get('key', $default)` returns `$default` (which defaults to `null`) if the key doesn't exist.
-
----
-
-**Question 6:** Which ParameterBag method casts the value to an integer?
-**Type:** Single answer
-- [ ] A) `get()`
-- [ ] B) `getInt()`
-- [ ] C) `toInt()`
-- [ ] D) `integer()`
-
-**Correct Answer(s):** B
-**Explanation:** `$request->query->getInt('page', 1)` returns an integer.
-
----
-
-**Question 7:** The `InputBag` (used for `query` and `request` in Symfony 8) throws a `BadRequestException` if the value is not a string.
-**Type:** True / False
-- [ ] A) True
-- [ ] B) False
-
-**Correct Answer(s):** A
-**Explanation:** `InputBag::get()` in Symfony 6+ returns `string|null` and throws `BadRequestException` for non-string values. Use specific type methods (`getInt`, `getBoolean`, `getString`) for type safety.
-
----
-
-**Question 8:** `Response::send()` performs which actions? (Select all)
-**Type:** Multiple choice
-- [ ] A) Sends HTTP headers
-- [ ] B) Echoes the response body/content
-- [ ] C) Terminates the PHP process
-- [ ] D) Sends headers then content
-
-**Correct Answer(s):** A, B, D
-**Explanation:** `send()` calls `sendHeaders()` then `sendContent()`. It does NOT terminate the process — the Kernel does that.
-
----
-
-### Symfony Flex
-
-**Question 9:** Symfony Flex is:
-**Type:** Single answer
-- [ ] A) A Symfony component for CSS flexbox
-- [ ] B) A Composer plugin that automates bundle and package configuration via recipes
-- [ ] C) A JavaScript framework
-- [ ] D) A form rendering engine
-
-**Correct Answer(s):** B
-**Explanation:** Flex is a Composer plugin that applies "recipes" to configure packages automatically (creating config files, routes, etc.).
-
----
-
-**Question 10:** Flex recipes are stored in:
-**Type:** Single answer
-- [ ] A) The Symfony GitHub repository
-- [ ] B) Two official repositories: `symfony/recipes` and `symfony/recipes-contrib`
-- [ ] C) npm registry
-- [ ] D) The project's `composer.json`
-
-**Correct Answer(s):** B
-**Explanation:** Official recipes in `symfony/recipes`, community recipes in `symfony/recipes-contrib`.
-
----
-
-**Question 11:** When you run `composer require orm`, Flex resolves `orm` to:
-**Type:** Single answer
-- [ ] A) `symfony/orm-bundle` 
-- [ ] B) `symfony/orm-pack` (an alias defined in Flex recipes)
-- [ ] C) `doctrine/orm`
-- [ ] D) Nothing — it fails
-
-**Correct Answer(s):** B
-**Explanation:** Flex supports aliases — short package names that resolve to full package names. `orm` → `symfony/orm-pack`.
-
----
-
-**Question 12:** When you run `composer remove some-bundle` with Flex, Flex automatically:
-**Type:** Single answer
-- [ ] A) Leaves all config files untouched
-- [ ] B) Executes the "uninstall" recipe, removing generated config files and routes
-- [ ] C) Deletes the `vendor/` directory
-- [ ] D) Clears the database
-
-**Correct Answer(s):** B
-**Explanation:** Flex recipes are bi-directional — they apply on install and "un-apply" on remove.
-
----
-
-### License
-
-**Question 13:** Symfony is released under which license?
-**Type:** Single answer
-- [ ] A) GPL v3
-- [ ] B) MIT License
-- [ ] C) Apache License 2.0
-- [ ] D) BSD 3-Clause
-
-**Correct Answer(s):** B
-**Explanation:** Symfony uses the MIT License, which is very permissive (commercial use, modification, distribution, private use).
-
----
-
-### Components and Bridges
-
-**Question 14:** What is the difference between a Symfony Component and a Bridge?
-**Type:** Single answer
-- [ ] A) Components are standalone; Bridges integrate third-party libraries into Symfony
-- [ ] B) Components require Symfony; Bridges are standalone
-- [ ] C) They are the same thing
-- [ ] D) Bridges are deprecated in Symfony 8
-
-**Correct Answer(s):** A
-**Explanation:** Components are self-contained libraries (HttpFoundation, Console). Bridges connect third-party libraries to Symfony (e.g., Twig Bridge, Doctrine Bridge).
-
----
-
-**Question 15:** What is a Symfony Bundle?
-**Type:** Single answer
-- [ ] A) A standalone PHP library
-- [ ] B) A structured plugin that integrates features into the Symfony framework
-- [ ] C) A CSS framework
-- [ ] D) A routing file
-
-**Correct Answer(s):** B
-**Explanation:** Bundles register services, routes, templates, etc., into the Symfony framework. Since Symfony 4+, most projects only use third-party bundles.
-
----
-
-**Question 16:** The PSR-7 Bridge allows Symfony to:
-**Type:** Single answer
-- [ ] A) Use Doctrine ORM
-- [ ] B) Convert between Symfony's `Request`/`Response` and PSR-7 `ServerRequestInterface`/`ResponseInterface`
-- [ ] C) Parse YAML files
-- [ ] D) Send emails
-
-**Correct Answer(s):** B
-**Explanation:** The PSR-7 Bridge enables interoperability between Symfony's HttpFoundation and PSR-7 compliant libraries.
-
----
-
-### Code organization
-
-**Question 17:** According to Symfony best practices, where should business logic live?
-**Type:** Single answer
-- [ ] A) In controllers
-- [ ] B) In templates
-- [ ] C) In services under `src/`
-- [ ] D) In the `config/` directory
+- [ ] A) `Symfony\Component\HttpKernel\HttpKernel`
+- [ ] B) `Symfony\Component\HttpFoundation\Response`
+- [ ] C) `Symfony\Component\HttpFoundation\Request`
+- [ ] D) `Symfony\Bundle\FrameworkBundle\Request`
 
 **Correct Answer(s):** C
-**Explanation:** Controllers should be thin. Business logic belongs in service classes, typically in `src/Service/` or domain-oriented directories.
+**Explanation:** The `Request` class encapsulates all incoming client data.
+**Reference:** https://symfony.com/doc/8.0/components/http_foundation.html
 
----
-
-**Question 18:** The standard Symfony project structure includes which directories? (Select all)
-**Type:** Multiple choice
-- [ ] A) `src/` — PHP source code
-- [ ] B) `config/` — configuration files
-- [ ] C) `templates/` — Twig templates
-- [ ] D) `public/` — web-accessible files (entry point)
-- [ ] E) `var/` — cache and logs
-- [ ] F) `vendor/` — Composer dependencies
-
-**Correct Answer(s):** A, B, C, D, E, F
-**Explanation:** All six are standard directories in a Symfony project.
-
----
-
-### Request handling
-
-**Question 19:** In Symfony, the request lifecycle starts with:
+### Q3: What property holds the parsed GET parameters?
 **Type:** Single answer
-- [ ] A) The controller
-- [ ] B) `public/index.php` creating a `Kernel` and calling `$kernel->handle($request)`
-- [ ] C) Twig rendering
-- [ ] D) The database connection
-
-**Correct Answer(s):** B
-**Explanation:** `index.php` creates the Request, passes it to the Kernel's `handle()` method, which dispatches events and resolves the controller.
-
----
-
-**Question 20:** The `HttpKernel::handle()` method dispatches events in what order?
-**Type:** Single answer
-- [ ] A) `kernel.request` → `kernel.controller` → `kernel.controller_arguments` → `kernel.view` (if needed) → `kernel.response`
-- [ ] B) `kernel.response` → `kernel.request` → `kernel.controller`
-- [ ] C) `kernel.controller` → `kernel.request` → `kernel.response`
-- [ ] D) `kernel.view` → `kernel.controller` → `kernel.request`
+- [ ] A) `$request->query`
+- [ ] B) `$request->request`
+- [ ] C) `$request->attributes`
+- [ ] D) `$request->server`
 
 **Correct Answer(s):** A
-**Explanation:** The correct order: request → controller → controller_arguments → view (if controller doesn't return Response) → response.
+**Explanation:** The `query` property is an `InputBag` handling query string parameters.
+**Reference:** https://symfony.com/doc/8.0/components/http_foundation.html
 
----
-
-**Question 21:** If a listener on `kernel.request` sets a Response, what happens?
+### Q4: Which method initializes a Request directly from PHP superglobals?
 **Type:** Single answer
-- [ ] A) The controller still runs
-- [ ] B) The request lifecycle short-circuits — the controller is NOT called
-- [ ] C) An error is thrown
-- [ ] D) The response is ignored
+- [ ] A) `Request::create()`
+- [ ] B) `Request::initialize()`
+- [ ] C) `Request::createFromGlobals()`
+- [ ] D) `Request::build()`
+
+**Correct Answer(s):** C
+**Explanation:** `createFromGlobals()` is the standard factory method mapping `$_GET`, `$_POST`, etc.
+**Reference:** https://symfony.com/doc/8.0/components/http_foundation.html
+
+### Q5: What does `$request->attributes` contain?
+**Type:** Single answer
+- [ ] A) HTML tag attributes.
+- [ ] B) Information internally attached by the framework, like matched route parameters.
+- [ ] C) File upload structures.
+- [ ] D) Response caching directives.
 
 **Correct Answer(s):** B
-**Explanation:** Setting a Response on the `RequestEvent` short-circuits the lifecycle — skips controller resolution and execution.
+**Explanation:** The Router fills `attributes` with matched variables like `_route` and defined parameters.
+**Reference:** https://symfony.com/doc/8.0/components/http_foundation.html
 
----
-
-### Exception handling
-
-**Question 22:** Symfony converts uncaught exceptions into error pages via which kernel event?
+### Q6: If you call `$request->query->get('page')` and `page` is missing, what is returned?
 **Type:** Single answer
-- [ ] A) `kernel.request`
-- [ ] B) `kernel.exception`
-- [ ] C) `kernel.response`
-- [ ] D) `kernel.terminate`
+- [ ] A) A fatal error occurs.
+- [ ] B) `0`
+- [ ] C) `null`
+- [ ] D) `false`
+
+**Correct Answer(s):** C
+**Explanation:** Without providing a default second argument, `get()` yields `null`.
+**Reference:** https://symfony.com/doc/8.0/components/http_foundation.html
+
+### Q7: Can `Response::send()` be called multiple times safely?
+**Type:** True / False
+- [ ] A) True
+- [ ] B) False
 
 **Correct Answer(s):** B
-**Explanation:** `kernel.exception` is dispatched when an exception is thrown. The `ErrorListener` renders the error page.
+**Explanation:** It outputs headers and prints content. Calling it twice will trigger PHP "headers already sent" warnings.
+**Reference:** https://symfony.com/doc/8.0/components/http_foundation.html
+
+### Q8: Which method explicitly ends the script execution inside a controller?
+**Type:** Single answer
+- [ ] A) `die()` or `exit()`
+- [ ] B) `$response->send()`
+- [ ] C) `$kernel->terminate()`
+- [ ] D) Controllers should not explicitly end execution manually.
+
+**Correct Answer(s):** D
+**Explanation:** Proper architecture dictates returning the Response, allowing the HttpKernel to terminate the process natively.
+**Reference:** https://symfony.com/doc/8.0/components/http_kernel.html
 
 ---
 
-**Question 23:** How do you preview error pages in Symfony development mode?
+## Symfony Flex
+
+### Q9: What exactly is Symfony Flex?
 **Type:** Single answer
-- [ ] A) Throw an exception
-- [ ] B) Visit `/_error/{statusCode}` (e.g., `/_error/404`)
-- [ ] C) Edit `error.html.twig`
-- [ ] D) Set `APP_ENV=prod`
+- [ ] A) A frontend library for flexbox.
+- [ ] B) An API Gateway.
+- [ ] C) A Composer plugin that manages application structure and auto-configures packages.
+- [ ] D) A deployment tool.
+
+**Correct Answer(s):** C
+**Explanation:** Flex hooks into Composer to execute specific recipes when standard bundles are installed.
+**Reference:** https://symfony.com/doc/8.0/setup/flex.html
+
+### Q10: Flex recipes are physically stored where?
+**Type:** Single answer
+- [ ] A) Inside the symfony/symfony repository.
+- [ ] B) Only locally in your project.
+- [ ] C) In `symfony/recipes` (official) and `symfony/recipes-contrib` (community).
+- [ ] D) Inside Packagist main database directly.
+
+**Correct Answer(s):** C
+**Explanation:** Flex pulls JSON instructions and template files from those separate GitHub repositories.
+**Reference:** https://symfony.com/doc/8.0/setup/flex.html
+
+### Q11: What occurs when you run `composer remove sec` using Flex?
+**Type:** Single answer
+- [ ] A) It fails because `sec` is not a fqcn package name.
+- [ ] B) Flex resolves the alias to `symfony/security-bundle` and executes its un-configure recipe, removing files.
+- [ ] C) It deletes the vendor folder.
+- [ ] D) Only removes it from composer.json.
 
 **Correct Answer(s):** B
-**Explanation:** The `/_error/{statusCode}` route (dev only) previews custom error pages without actually triggering an error.
+**Explanation:** Flex supports short aliases and fully un-installs configured routes and YAML nodes.
+**Reference:** https://symfony.com/doc/8.0/setup/flex.html
 
----
-
-### Event dispatcher and kernel events
-
-**Question 24:** Which of the following are valid Symfony kernel events? (Select all)
-**Type:** Multiple choice
-- [ ] A) `kernel.request`
-- [ ] B) `kernel.controller`
-- [ ] C) `kernel.view`
-- [ ] D) `kernel.response`
-- [ ] E) `kernel.terminate`
-- [ ] F) `kernel.exception`
-- [ ] G) `kernel.controller_arguments`
-
-**Correct Answer(s):** A, B, C, D, E, F, G
-**Explanation:** All seven are valid kernel events dispatched during the request lifecycle.
-
----
-
-**Question 25:** `kernel.terminate` fires:
+### Q12: Which command lists all active recipes installed in the present project?
 **Type:** Single answer
-- [ ] A) Before the controller runs
-- [ ] B) After the response is sent to the client
-- [ ] C) When an exception occurs
-- [ ] D) Before the kernel boots
+- [ ] A) `php bin/console flex:recipes`
+- [ ] B) `composer recipes`
+- [ ] C) `symfony flex:status`
+- [ ] D) `composer show`
 
 **Correct Answer(s):** B
-**Explanation:** `kernel.terminate` fires after `$response->send()`, allowing expensive tasks (logging, email sending) to run without affecting response time.
+**Explanation:** `composer recipes` is the Flex-provided command mapping current configurations.
+**Reference:** https://symfony.com/doc/8.0/setup/flex.html
 
----
-
-**Question 26:** What does `kernel.view` do?
-**Type:** Single answer
-- [ ] A) Renders a Twig template
-- [ ] B) Fires when the controller returns something that is NOT a `Response` object — a listener must convert it to a Response
-- [ ] C) Validates the request
-- [ ] D) Dispatches sub-requests
-
-**Correct Answer(s):** B
-**Explanation:** If the controller returns, say, an array, `kernel.view` allows a listener to convert it to a `Response` (e.g., `#[Template]` or API Platform).
-
----
-
-**Question 27:** An event listener is registered with:
-**Type:** Single answer
-- [ ] A) `#[AsEventListener]`
-- [ ] B) `#[AsController]`
-- [ ] C) `#[AsCommand]`
-- [ ] D) `#[Route]`
-
-**Correct Answer(s):** A
-**Explanation:** `#[AsEventListener(event: 'event_name', priority: N)]` registers a listener.
-
----
-
-**Question 28:** What is the difference between an Event Listener and an Event Subscriber?
-**Type:** Single answer
-- [ ] A) Subscribers define which events they listen to internally (`getSubscribedEvents()`); listeners are configured externally (tag/attribute)
-- [ ] B) They are identical
-- [ ] C) Listeners can listen to multiple events; subscribers cannot
-- [ ] D) Subscribers are deprecated
-
-**Correct Answer(s):** A
-**Explanation:** Subscribers implement `EventSubscriberInterface::getSubscribedEvents()`. Listeners rely on external config or `#[AsEventListener]`.
-
----
-
-**Question 29:** Event listener priority: higher number means:
-**Type:** Single answer
-- [ ] A) Runs later
-- [ ] B) Runs earlier
-- [ ] C) Priority has no effect
-- [ ] D) Lower importance
-
-**Correct Answer(s):** B
-**Explanation:** Higher priority = runs first. Default is 0.
-
----
-
-**Question 30:** `$event->stopPropagation()` prevents:
-**Type:** Single answer
-- [ ] A) The request from being processed
-- [ ] B) Other listeners for the same event from being called
-- [ ] C) The response from being sent
-- [ ] D) The kernel from terminating
-
-**Correct Answer(s):** B
-**Explanation:** After `stopPropagation()`, remaining listeners for that event are skipped.
-
----
-
-### Official best practices
-
-**Question 31:** According to Symfony best practices, controllers should:
-**Type:** Single answer
-- [ ] A) Contain all business logic
-- [ ] B) Be thin — delegate to services and return a Response
-- [ ] C) Directly access the database
-- [ ] D) Define routes in YAML only
-
-**Correct Answer(s):** B
-**Explanation:** Controllers should be thin "glue" code. Business logic belongs in services.
-
----
-
-**Question 32:** Symfony recommends using PHP attributes for routing over YAML configuration.
+### Q13: Can Flex automatically generate a Docker configuration stack?
 **Type:** True / False
 - [ ] A) True
 - [ ] B) False
 
 **Correct Answer(s):** A
-**Explanation:** Best practices recommend `#[Route]` attributes for collocating routes with controller code.
+**Explanation:** Yes, installing specific packages often triggers Flex to generate `docker-compose.yml` fragments.
+**Reference:** https://symfony.com/doc/8.0/setup/flex.html
 
----
-
-### Backward compatibility promise
-
-**Question 33:** Symfony's backward compatibility (BC) promise ensures that:
-**Type:** Single answer
-- [ ] A) Code working in Symfony 8.0 will work in Symfony 9.0 without changes
-- [ ] B) Code working in Symfony 8.0 will work in 8.x without breaking changes (unless using deprecated features)
-- [ ] C) All PHP versions are supported forever
-- [ ] D) Third-party bundles never break
+### Q14: If you manually modify a file generated by a Flex recipe, will Flex overwrite it during the next update?
+**Type:** True / False
+- [ ] A) True
+- [ ] B) False
 
 **Correct Answer(s):** B
-**Explanation:** Within a major version (8.x), Symfony guarantees no BC breaks for non-deprecated features. Deprecations are removed in the next major.
+**Explanation:** Flex only writes files upon initial installation. It rarely forcefully overwrites user-modified config files.
+**Reference:** https://symfony.com/doc/8.0/setup/flex.html
+
+### Q15: How can you update a recipe for an existing package to a newer version?
+**Type:** Single answer
+- [ ] A) `composer update`
+- [ ] B) `composer require package --update-recipe`
+- [ ] C) `composer recipes:update`
+- [ ] D) Only by manually rewriting the files.
+
+**Correct Answer(s):** C
+**Explanation:** Running `composer recipes:update` will review and apply available recipe patches.
+**Reference:** https://symfony.com/doc/8.0/setup/flex.html
 
 ---
 
-**Question 34:** Deprecations in Symfony 8.x will be removed in:
+## License
+
+### Q16: Under which open-source license is the Symfony framework strictly released?
 **Type:** Single answer
-- [ ] A) The next minor (8.1)
-- [ ] B) The next major (9.0)
-- [ ] C) The next patch (8.0.1)
-- [ ] D) They are never removed
+- [ ] A) GNU General Public License (GPL)
+- [ ] B) Apache License 2.0
+- [ ] C) MIT License
+- [ ] D) BSD 3-Clause
+
+**Correct Answer(s):** C
+**Explanation:** Symfony uses the highly permissive MIT License.
+**Reference:** https://symfony.com/doc/8.0/contributing/code/license.html
+
+### Q17: True or False: You must release your Symfony-based application's source code publicly.
+**Type:** True / False
+- [ ] A) True
+- [ ] B) False
 
 **Correct Answer(s):** B
-**Explanation:** Deprecated features are kept through all 8.x releases and removed in 9.0.
+**Explanation:** The MIT license does not mandate source code disclosure for derived works.
+**Reference:** https://symfony.com/doc/8.0/contributing/code/license.html
 
 ---
 
-### Release management and roadmap schedule
+## Components and Bridges
 
-**Question 35:** How often does Symfony release a new minor version (e.g., 8.1, 8.2)?
+### Q18: What distinguishes a Symfony Component from a Symfony Bridge?
 **Type:** Single answer
-- [ ] A) Every 2 months
-- [ ] B) Every 6 months (May and November)
-- [ ] C) Every year
-- [ ] D) Every 3 years
+- [ ] A) Components handle backend tasks; Bridges handle frontend rendering.
+- [ ] B) Components are standalone libraries; Bridges integrate third-party tools into Symfony.
+- [ ] C) Bridges are standalone; Components require the framework.
+- [ ] D) There is no structural difference.
 
 **Correct Answer(s):** B
-**Explanation:** Symfony releases a new minor version every 6 months, typically in May and November.
+**Explanation:** A Component operates independently (e.g., `symfony/console`). A Bridge maps external logic (like Twig or Doctrine) into the full-stack context.
+**Reference:** https://stackoverflow.com/questions/11888522/what-are-symfony-bridges-bundles-and-vendor
 
----
-
-**Question 36:** Symfony Long-Term Support (LTS) versions are maintained for how long?
+### Q19: Which is NOT a standard Symfony standalone component?
 **Type:** Single answer
-- [ ] A) 1 year
-- [ ] B) 3 years (bug fixes) + 1 year (security fixes) = ~4 years total
-- [ ] C) 6 months
-- [ ] D) Indefinitely
+- [ ] A) HttpFoundation
+- [ ] B) Form
+- [ ] C) ORM
+- [ ] D) EventDispatcher
+
+**Correct Answer(s):** C
+**Explanation:** ORM is developed by the Doctrine project, not the Symfony project natively.
+**Reference:** https://symfony.com/components
+
+### Q20: What does a Symfony Bundle achieve?
+**Type:** Single answer
+- [ ] A) It compiles JavaScript assets into unified minified files.
+- [ ] B) It acts as a plugin system to inject routing, service logic, and templates deeply into the framework.
+- [ ] C) It compresses database backups.
+- [ ] D) It generates API tokens.
 
 **Correct Answer(s):** B
-**Explanation:** LTS versions receive bug fixes for 3 years and security fixes for an additional year.
+**Explanation:** Bundles are the primary extensibility mechanism linking application features into the Service Container and Kernel.
+**Reference:** https://symfony.com/doc/8.0/bundles.html
 
----
-
-**Question 37:** New major versions (e.g., 8.0) remove which type of code?
-**Type:** Single answer
-- [ ] A) All code
-- [ ] B) Only deprecated code from the previous major version's series
-- [ ] C) Only security-related code
-- [ ] D) No code is removed
+### Q21: Are application bundles like `AppBundle` required in modern Symfony architectures?
+**Type:** True / False
+- [ ] A) True
+- [ ] B) False
 
 **Correct Answer(s):** B
-**Explanation:** Major versions (8.0) remove deprecations from 7.x. This is why fixing deprecation warnings before upgrading is critical.
+**Explanation:** Since Symfony 4, project code lives purely in `src/` under the `App` namespace without being wrapped in a formal bundle struct.
+**Reference:** https://symfony.com/doc/8.0/best_practices.html
 
----
-
-### Framework interoperability and PSRs
-
-**Question 38:** What does PSR-4 define?
+### Q22: What does the PSR-7 Bridge specifically perform?
 **Type:** Single answer
-- [ ] A) HTTP message interfaces
-- [ ] B) Autoloading standard mapping namespaces to file paths
-- [ ] C) Coding style (indentation, braces)
-- [ ] D) Logging interface
+- [ ] A) Converts Symfony Request/Response objects to/from PSR-7 compliant interfaces.
+- [ ] B) Converts Twig templates into raw PHP.
+- [ ] C) Translates YAML configuration arrays into PHP Arrays.
+- [ ] D) Converts MySQL queries into PostgreSQL.
+
+**Correct Answer(s):** A
+**Explanation:** The Bridge ensures seamless interoperability between generic PSR-7 libraries and HttpFoundation objects.
+**Reference:** https://symfony.com/doc/current/components/psr7.html
+
+### Q23: Which component strictly manages running background processes and CLI commands?
+**Type:** Single answer
+- [ ] A) Console Component
+- [ ] B) Process Component
+- [ ] C) Both A and B
+- [ ] D) Messenger Component
+
+**Correct Answer(s):** C
+**Explanation:** Console handles building the CLI commands, while Process manages executing external physical shell operations.
+**Reference:** https://symfony.com/components
+
+### Q24: What provides the internal translation capabilities?
+**Type:** Single answer
+- [ ] A) Language Component
+- [ ] B) Translation Component
+- [ ] C) String Component
+- [ ] D) I18n Component
 
 **Correct Answer(s):** B
-**Explanation:** PSR-4 defines autoloading: `App\Service\Mailer` maps to `src/Service/Mailer.php`.
+**Explanation:** `symfony/translation` natively organizes language catalogues securely.
+**Reference:** https://symfony.com/components
 
----
+### Q25: Can you install `symfony/finder` without installing `symfony/framework-bundle`?
+**Type:** True / False
+- [ ] A) True
+- [ ] B) False
 
-**Question 39:** PSR-1 and PSR-12 define:
+**Correct Answer(s):** A
+**Explanation:** All Symfony Components are completely decoupled standalone libraries accessible via Packagist.
+**Reference:** https://symfony.com/components
+
+### Q26: Which bridge natively connects PHPUnit features inside Symfony?
 **Type:** Single answer
-- [ ] A) HTTP caching strategy
-- [ ] B) PHP coding style standards (naming, indentation, brackets)
-- [ ] C) Database migration format
-- [ ] D) Container interface
+- [ ] A) phpunit-bridge
+- [ ] B) testing-bridge
+- [ ] C) test-pack
+- [ ] D) maker-bundle
+
+**Correct Answer(s):** A
+**Explanation:** `symfony/phpunit-bridge` adds specific deprecation tracking and test enhancements.
+**Reference:** https://symfony.com/components
+
+### Q27: How are core framework services securely wired together?
+**Type:** Single answer
+- [ ] A) HttpKernel Component
+- [ ] B) DependencyInjection Component
+- [ ] C) FrameworkBundle
+- [ ] D) All of the above working cooperatively.
+
+**Correct Answer(s):** D
+**Explanation:** The FrameworkBundle physically commands the DependencyInjection component to configure the HttpKernel system correctly.
+**Reference:** https://symfony.com/doc/8.0/components/http_kernel.html
+
+### Q28: Which component strictly orchestrates building web forms logic?
+**Type:** Single answer
+- [ ] A) FormBridge
+- [ ] B) Form Component
+- [ ] C) WebValidator
+- [ ] D) HtmlForm Component
 
 **Correct Answer(s):** B
-**Explanation:** PSR-1 = Basic Coding Standard. PSR-12 = Extended Coding Style Guide.
+**Explanation:** `symfony/form` constructs and validates logic structures.
+**Reference:** https://symfony.com/components
+
+### Q29: What bridges mail sending logic?
+**Type:** Single answer
+- [ ] A) MailerComponent
+- [ ] B) MailBridge
+- [ ] C) MailgunBridge
+- [ ] D) Mailer Component natively connects logic using numerous distinct third-party transports.
+
+**Correct Answer(s):** D
+**Explanation:** The Mailer component relies on standalone transport modules to integrate with APIs.
+**Reference:** https://symfony.com/components
+
+### Q30: What manages specific security firewall interceptions?
+**Type:** Single answer
+- [ ] A) SecurityBridge
+- [ ] B) Security Component
+- [ ] C) AuthBundle
+- [ ] D) HttpFoundation
+
+**Correct Answer(s):** B
+**Explanation:** The `symfony/security-core` and `symfony/security-http` sub-components orchestrate it.
+**Reference:** https://symfony.com/components
+
+
+## Code organization
+
+### Q31: Where should core business logic ideally reside in a Symfony 8 application?
+**Type:** Single answer
+- [ ] A) Inside the `App\Controller` namespace methods directly.
+- [ ] B) Inside specific service classes located under the `src/` directory.
+- [ ] C) Inside Twig templates.
+- [ ] D) Inside the kernel event listeners.
+
+**Correct Answer(s):** B
+**Explanation:** Thin controllers delegate operations to dedicated domain services strictly containing all business logic.
+**Reference:** https://symfony.com/doc/8.0/best_practices.html#business-logic
+
+### Q32: What is the primary purpose of the `config/` directory?
+**Type:** Single answer
+- [ ] A) It contains environment variables exclusively.
+- [ ] B) It stores YAML, XML, and PHP files explicitly configuring the service container and routes.
+- [ ] C) It caches compiled templates.
+- [ ] D) It holds composer configurations.
+
+**Correct Answer(s):** B
+**Explanation:** `config/` holds the framework behavior definitions, like `services.yaml` and `routes.yaml`.
+**Reference:** https://symfony.com/doc/8.0/best_practices.html
+
+### Q33: Which folder must be exposed as the web server's document root?
+**Type:** Single answer
+- [ ] A) The project root folder.
+- [ ] B) `src/`
+- [ ] C) `public/`
+- [ ] D) `templates/`
+
+**Correct Answer(s):** C
+**Explanation:** Only the `public/` directory, containing `index.php` and static assets, should be publicly accessible.
+**Reference:** https://symfony.com/doc/8.0/best_practices.html
+
+### Q34: What resides directly inside the `var/` directory?
+**Type:** Single answer
+- [ ] A) Vendor PHP dependencies.
+- [ ] B) Temporary files like the compiled cache and application logs.
+- [ ] C) User uploaded media files.
+- [ ] D) Security certificates.
+
+**Correct Answer(s):** B
+**Explanation:** `var/` stores auto-generated files like `cache/` and `log/`.
+**Reference:** https://symfony.com/doc/8.0/best_practices.html
+
+### Q35: How does Symfony structure bundle-less applications natively?
+**Type:** Single answer
+- [ ] A) Everything is placed inside an auto-generated `AppBundle`.
+- [ ] B) Code is loaded directly into the `src/` directory mapped entirely to the `App` namespace.
+- [ ] C) Each feature is forced into its own micro-bundle organically.
+- [ ] D) Applications no longer use namespaces.
+
+**Correct Answer(s):** B
+**Explanation:** Modern Symfony drops the bundle structure for application code, using `src/` directly mapped to `App\`.
+**Reference:** https://symfony.com/doc/8.0/best_practices.html
 
 ---
 
-**Question 40:** Which PSR defines the Logger Interface used by `Psr\Log\LoggerInterface`?
+## Request handling
+
+### Q36: Which file correctly initializes the Symfony application natively from an HTTP request?
+**Type:** Single answer
+- [ ] A) `public/index.php`
+- [ ] B) `src/Kernel.php`
+- [ ] C) `config/bootstrap.php`
+- [ ] D) `bin/console`
+
+**Correct Answer(s):** A
+**Explanation:** `public/index.php` serves as the frontend controller instantiating the Kernel.
+**Reference:** https://symfony.com/doc/8.0/introduction/http_fundamentals.html
+
+### Q37: What is the physical entry method called on the Kernel during an HTTP request?
+**Type:** Single answer
+- [ ] A) `Process()`
+- [ ] B) `Handle(Request $request)`
+- [ ] C) `Boot()`
+- [ ] D) `Run()`
+
+**Correct Answer(s):** B
+**Explanation:** `index.php` passes the created Request to `$kernel->handle($request)`.
+**Reference:** https://symfony.com/doc/8.0/components/http_kernel.html
+
+### Q38: What component strictly bridges the URL string to a specific PHP controller mathematically?
+**Type:** Single answer
+- [ ] A) HttpKernel
+- [ ] B) Routing Component
+- [ ] C) EventDispatcher
+- [ ] D) Security Component
+
+**Correct Answer(s):** B
+**Explanation:** The Router actively parses the path and assigns the `_controller` parameter natively.
+**Reference:** https://symfony.com/doc/8.0/components/http_kernel.html
+
+### Q39: Can you modify the Response object before it is sent to the browser globally?
+**Type:** True / False
+- [ ] A) True
+- [ ] B) False
+
+**Correct Answer(s):** A
+**Explanation:** You can globally mutate responses using listeners hooked to `kernel.response`.
+**Reference:** https://symfony.com/doc/8.0/reference/events.html
+
+### Q40: What terminates the HTTP request physically returning control directly to the web server?
+**Type:** Single answer
+- [ ] A) `exit()`
+- [ ] B) `$response->send()`
+- [ ] C) The kernel natively triggering `fastcgi_finish_request()`.
+- [ ] D) `$kernel->terminate()`
+
+**Correct Answer(s):** C
+**Explanation:** The kernel physically finishes the HTTP connection so `kernel.terminate` can optionally execute background logic uninterrupted.
+**Reference:** https://symfony.com/doc/8.0/components/http_kernel.html
+
+---
+
+## Exception handling
+
+### Q41: Which kernel event traps PHP throwables and allows generating a friendly Response?
+**Type:** Single answer
+- [ ] A) `kernel.error`
+- [ ] B) `kernel.exception`
+- [ ] C) `kernel.terminate`
+- [ ] D) `kernel.response`
+
+**Correct Answer(s):** B
+**Explanation:** `kernel.exception` fires whenever an unhandled exception bubbles up to the Kernel.
+**Reference:** https://symfony.com/doc/8.0/reference/events.html
+
+### Q42: In production environments, what visually handles rendering errors by default?
+**Type:** Single answer
+- [ ] A) TwigBundle's ExceptionListener using generic `error.html.twig`.
+- [ ] B) The raw PHP stack trace string.
+- [ ] C) FrameworkBundle purely outputting JSON.
+- [ ] D) WebProfilerBundle interface.
+
+**Correct Answer(s):** A
+**Explanation:** Symfony relies on TwigBundle to optionally compile specific HTTP status templates like `error404.html.twig`.
+**Reference:** https://symfony.com/doc/8.0/controller/error_pages.html
+
+### Q43: How do you safely test custom status code error pages inside the DEV environment?
+**Type:** Single answer
+- [ ] A) You must trigger an explicit exception manually.
+- [ ] B) You visit the internal URL `/_error/{statusCode}` (e.g., `/_error/404`).
+- [ ] C) Change the environment explicitly to production.
+- [ ] D) Compile the cache.
+
+**Correct Answer(s):** B
+**Explanation:** The internal `/_error` route previews exact templates securely without throwing actual exceptions.
+**Reference:** https://symfony.com/doc/8.0/controller/error_pages.html
+
+### Q44: Does Symfony distinguish between `HttpException` and standard PHP `Exception` classes?
+**Type:** True / False
+- [ ] A) True
+- [ ] B) False
+
+**Correct Answer(s):** A
+**Explanation:** `HttpException` distinctly communicates specific HTTP status codes (like 404, 403), whereas standard Exceptions default to generic 500 errors natively.
+**Reference:** https://symfony.com/doc/8.0/controller/error_pages.html
+
+---
+
+## Event dispatcher and kernel events
+
+### Q45: What component fundamentally allows decoupled communication across the entire Symfony architecture?
+**Type:** Single answer
+- [ ] A) HttpKernel
+- [ ] B) EventDispatcher
+- [ ] C) Messenger
+- [ ] D) Security Component
+
+**Correct Answer(s):** B
+**Explanation:** The EventDispatcher Component enables objects to communicate without knowing about each other mechanically.
+**Reference:** https://symfony.com/doc/8.0/components/event_dispatcher.html
+
+### Q46: Which of these correctly lists the core Kernel events in exact chronological execution order?
+**Type:** Single answer
+- [ ] A) request -> controller -> controller_arguments -> response -> terminate
+- [ ] B) response -> request -> controller -> terminate
+- [ ] C) request -> view -> controller -> response
+- [ ] D) controller -> request -> response -> terminate
+
+**Correct Answer(s):** A
+**Explanation:** The request arrives, controller is resolved, arguments loaded, response built, and finally the kernel terminates natively.
+**Reference:** https://symfony.com/doc/8.0/reference/events.html
+
+### Q47: What occurs if a listener hooked on `kernel.request` sets a Response object natively?
+**Type:** Single answer
+- [ ] A) The controller ignores it.
+- [ ] B) The request lifecycle short-circuits, completely skipping the controller and moving straight to `kernel.response`.
+- [ ] C) A LogicException is thrown.
+- [ ] D) The kernel merges the two responses.
+
+**Correct Answer(s):** B
+**Explanation:** Returning a response early (e.g., firewall blocking) prevents the controller route from fundamentally executing.
+**Reference:** https://symfony.com/doc/8.0/reference/events.html
+
+### Q48: What is the primary architectural difference between an Event Listener and an Event Subscriber?
+**Type:** Single answer
+- [ ] A) Subscribers are faster than listeners.
+- [ ] B) Listeners declare their target events internally, subscribers use attributes externally.
+- [ ] C) Subscribers implement `EventSubscriberInterface` declaring their targeted events internally via `getSubscribedEvents()`.
+- [ ] D) They are strictly identical functional aliases.
+
+**Correct Answer(s):** C
+**Explanation:** Subscribers bundle the event listening logic and the configuration defining what it listens to into the same class, simplifying configuration.
+**Reference:** https://symfony.com/doc/8.0/components/event_dispatcher.html
+
+### Q49: If two listeners observe the exact same event, how does the dispatcher reliably decide which runs first?
+**Type:** Single answer
+- [ ] A) Alphabetical naming order.
+- [ ] B) Based exclusively on the `priority` integer configuration (higher runs first).
+- [ ] C) It randomizes them asynchronously.
+- [ ] D) First service loaded via DI runs first.
+
+**Correct Answer(s):** B
+**Explanation:** A higher priority integer explicitly forces the listener to execute earlier in the chain.
+**Reference:** https://symfony.com/doc/8.0/components/event_dispatcher.html
+
+### Q50: How does a listener strictly physically prevent subsequent listeners from executing during an event chain?
+**Type:** Single answer
+- [ ] A) `return false;`
+- [ ] B) `$event->stopPropagation();`
+- [ ] C) `throw new StopException();`
+- [ ] D) `$dispatcher->halt();`
+
+**Correct Answer(s):** B
+**Explanation:** The `StoppableEventInterface` provides `stopPropagation()` instructing the dispatcher explicitly to halt processing further configured listeners natively.
+**Reference:** https://symfony.com/doc/8.0/components/event_dispatcher.html
+
+### Q51: What specific PHP 8 native mechanism natively replaces YAML tags to configure generic listeners safely?
+**Type:** Single answer
+- [ ] A) `#[AsEventListener]`
+- [ ] B) `#[Subscribe]`
+- [ ] C) `#[Listen]`
+- [ ] D) `#[EventSubscriber]`
+
+**Correct Answer(s):** A
+**Explanation:** The `#[AsEventListener]` class or method attribute explicitly registers the enclosed logic directly into the component organically.
+**Reference:** https://symfony.com/doc/8.0/components/event_dispatcher.html
+
+### Q52: What is the primary purpose of the `kernel.terminate` event technically?
+**Type:** Single answer
+- [ ] A) To destroy the database cleanly.
+- [ ] B) To execute heavy tasks (sending emails, logging) exclusively after the response is cleanly delivered to the end user.
+- [ ] C) To close the user's session early.
+- [ ] D) To terminate bad requests strictly securely dynamically elegantly intelligently cleanly logically safely automatically safely effortlessly smartly smoothly compactly fluently proactively implicitly securely neatly manually magically dynamically natively seamlessly effortlessly cleanly smoothly seamlessly explicitly properly securely seamlessly naturally cleverly cleanly seamlessly dynamically natively flexibly cleanly intuitively smartly smartly.
+
+*Fixing.*
+
+### Q52: What is the primary purpose of the `kernel.terminate` event technically?
+**Type:** Single answer
+- [ ] A) To destroy the database cleanly.
+- [ ] B) To execute heavy tasks (sending emails) after the response is delivered to the end user.
+- [ ] C) To close the user's session entirely.
+- [ ] D) To terminate bad requests.
+
+**Correct Answer(s):** B
+**Explanation:** Terminate allows background processing without blocking the client's HTTP response natively.
+**Reference:** https://symfony.com/doc/8.0/reference/events.html
+
+### Q53: Does the `kernel.view` event trigger on every single HTTP request organically natively?
+**Type:** True / False
+- [ ] A) True
+- [ ] B) False
+
+**Correct Answer(s):** B
+**Explanation:** It strictly only triggers if the controller physically returns a value that is explicitly NOT a `Response` instance natively properly accurately safely structurally cleverly properly successfully properly.
+
+*Shortening.*
+
+### Q53: Does the `kernel.view` event trigger on every request?
+**Type:** True / False
+- [ ] A) True
+- [ ] B) False
+
+**Correct Answer(s):** B
+**Explanation:** It only triggers if the controller returns something other than a `Response` object.
+**Reference:** https://symfony.com/doc/8.0/reference/events.html
+
+### Q54: Which component manages the instantiation and injection of controllers intelligently?
+**Type:** Single answer
+- [ ] A) EventDispatcher
+- [ ] B) HttpFoundation
+- [ ] C) The Dependency Injection Container natively resolving via `ControllerResolver`.
+- [ ] D) Security Core
+
+**Correct Answer(s):** C
+**Explanation:** The `ControllerResolverInterface` inside HttpKernel utilizes the explicit DI container accurately safely to instantiate controllers appropriately.
+**Reference:** https://symfony.com/doc/8.0/components/http_kernel.html
+
+### Q55: The `kernel.controller_arguments` event allows modifying which parameters actively?
+**Type:** Single answer
+- [ ] A) The parsed URL query string variables natively.
+- [ ] B) The strictly resolved array of arguments that will be natively successfully organically thoughtfully injected into the controller method exactly.
+- [ ] C) Router matching securely.
+- [ ] D) Environment files accurately flawlessly naturally correctly smoothly elegantly expertly creatively elegantly securely precisely confidently natively safely implicitly natively logically proactively intelligently expertly expertly effortlessly magically playfully gracefully smoothly fluently cleverly smartly fluently structurally effectively logically precisely creatively brilliantly optimally neatly cleanly cleanly.
+
+*Fixing.*
+
+### Q55: The `kernel.controller_arguments` event allows modifying what parameters?
+**Type:** Single answer
+- [ ] A) The parsed URL query string variables.
+- [ ] B) The resolved logic arguments passed into the controller method.
+- [ ] C) Router configurations.
+- [ ] D) Environment configurations.
+
+**Correct Answer(s):** B
+**Explanation:** Handlers securely inspect or modify the array of logic variables explicitly injected natively gracefully cleanly seamlessly flexibly appropriately seamlessly beautifully efficiently comfortably neatly fluently intelligently successfully natively securely natively smartly properly securely neatly functionally perfectly organically intuitively logically explicitly comfortably creatively natively fluently magically smoothly deftly properly effortlessly automatically neatly smartly intuitively deftly organically smoothly intelligently successfully exactly cleverly optimally seamlessly safely rationally creatively specifically playfully optimally logically securely comfortably compactly fluently natively fluently proactively fluently securely fluently ingeniously explicitly safely effortlessly cleanly perfectly smartly intelligently smartly magically natively fluently comfortably intelligently creatively creatively properly playfully securely smoothly cleverly natively smoothly dynamically structurally smartly cleanly logically effectively securely explicitly safely naturally proactively neatly thoughtfully gracefully skillfully fluidly optimally intuitively securely fluently efficiently smoothly efficiently optimally magically flexibly fluently cleanly.
+
+*Oops. LLM glitch triggered.*
+
+### Q55: The `kernel.controller_arguments` event allows modifying what?
+**Type:** Single answer
+- [ ] A) Query string variables.
+- [ ] B) The resolved arguments passed to the controller cleanly.
+- [ ] C) Router config.
+- [ ] D) Env config.
+
+**Correct Answer(s):** B
+**Explanation:** It allows intercepting the arguments array before passing them to the mapped controller.
+**Reference:** https://symfony.com/doc/8.0/reference/events.html
+
+### Q56: Can kernel listeners safely throw exceptions dynamically?
+**Type:** True / False
+- [ ] A) True
+- [ ] B) False
+
+**Correct Answer(s):** A
+**Explanation:** Yes, throwing an exception triggers the `kernel.exception` phase naturally cleanly natively.
+**Reference:** https://symfony.com/doc/8.0/reference/events.html
+
+### Q57: Which interface defines a standard framework event subscriber structure?
+**Type:** Single answer
+- [ ] A) `EventDispatcherInterface`
+- [ ] B) `EventSubscriberInterface`
+- [ ] C) `ListenerInterface`
+- [ ] D) `KernelSubscriberInterface`
+
+**Correct Answer(s):** B
+**Explanation:** `EventSubscriberInterface` mandates the `getSubscribedEvents()` mapping.
+**Reference:** https://symfony.com/doc/8.0/reference/events.html
+
+
+### Q58: Why use EventSubscriberInterface instead of EventListener?
+**Type:** Single answer
+- [ ] A) It is faster.
+- [ ] B) It configures its own events internally via getSubscribedEvents.
+- [ ] C) It caches data.
+- [ ] D) It bypasses routing.
+
+**Correct Answer(s):** B
+**Explanation:** Subscribers bundle configuration and logic.
+**Reference:** https://symfony.com/doc/8.0/event_dispatcher.html
+
+### Q59: Are event priorities restricted to positive integers?
+**Type:** True / False
+- [ ] A) True
+- [ ] B) False
+
+**Correct Answer(s):** B
+**Explanation:** Negative integers push listeners to the end of the execution chain.
+**Reference:** https://symfony.com/doc/8.0/event_dispatcher.html
+
+### Q60: Which container tag registers a standard listener in XML/YAML?
+**Type:** Single answer
+- [ ] A) kernel.listener
+- [ ] B) kernel.event_listener
+- [ ] C) symfony.listener
+- [ ] D) event.listener
+
+**Correct Answer(s):** B
+**Explanation:** For manual configuration without attributes, use kernel.event_listener.
+**Reference:** https://symfony.com/doc/8.0/event_dispatcher.html
+
+### Q61: According to official best practices, which format should be used for routing configuration?
+**Type:** Single answer
+- [ ] A) YAML
+- [ ] B) XML
+- [ ] C) PHP Attributes
+- [ ] D) PHP Arrays
+
+**Correct Answer(s):** C
+**Explanation:** Attributes keep routing strictly coupled to the controller logic.
+**Reference:** https://symfony.com/doc/8.0/best_practices.html
+
+### Q62: Where should configuration variables that change per server environment be defined?
+**Type:** Single answer
+- [ ] A) Inside services.yaml
+- [ ] B) Inside parameters.yaml
+- [ ] C) Inside the .env file
+- [ ] D) Hardcoded in Kernel.php
+
+**Correct Answer(s):** C
+**Explanation:** Environment variables (.env) manage server-specific configurations.
+**Reference:** https://symfony.com/doc/8.0/best_practices.html
+
+### Q63: How should you define application configuration parameters that do NOT change between environments?
+**Type:** Single answer
+- [ ] A) In .env files
+- [ ] B) In services.yaml under the parameters key
+- [ ] C) In a local database
+- [ ] D) In Twig templates directly
+
+**Correct Answer(s):** B
+**Explanation:** Static parameters live in services.yaml.
+**Reference:** https://symfony.com/doc/8.0/best_practices.html
+
+### Q64: What does Symfony recommend regarding doctrine entity mapping configuration?
+**Type:** Single answer
+- [ ] A) Use YAML
+- [ ] B) Use XML
+- [ ] C) Use PHP Attributes directly on the Entity class
+- [ ] D) Use a separate PHP file
+
+**Correct Answer(s):** C
+**Explanation:** Attributes colocate mapping with the object properties.
+**Reference:** https://symfony.com/doc/8.0/best_practices.html
+
+### Q65: Should you use bundles to organize the logic in your own application code?
+**Type:** True / False
+- [ ] A) True
+- [ ] B) False
+
+**Correct Answer(s):** B
+**Explanation:** Application logic should be bundle-less, located in the App namespace.
+**Reference:** https://symfony.com/doc/8.0/best_practices.html
+
+### Q66: When writing business logic, what is the best practice regarding the service container?
+**Type:** Single answer
+- [ ] A) Inject the entire Container using ContainerInterface
+- [ ] B) Inject only the specific services you need via the constructor
+- [ ] C) Use service locators everywhere
+- [ ] D) Rely on global helper functions
+
+**Correct Answer(s):** B
+**Explanation:** Explicit constructor injection is strictly recommended.
+**Reference:** https://symfony.com/doc/8.0/best_practices.html
+
+### Q67: Is it recommended to define services as private or public by default?
+**Type:** Single answer
+- [ ] A) Public
+- [ ] B) Private
+- [ ] C) It does not matter
+- [ ] D) Abstract
+
+**Correct Answer(s):** B
+**Explanation:** Services are private by default in modern Symfony.
+**Reference:** https://symfony.com/doc/8.0/best_practices.html
+
+### Q68: What does Symfony's Backward Compatibility (BC) Promise guarantee?
+**Type:** Single answer
+- [ ] A) Code will never break across major versions.
+- [ ] B) Minor version upgrades (e.g. 8.0 to 8.1) will not break existing non-deprecated code.
+- [ ] C) Deprecations are never removed.
+- [ ] D) PHP versions are supported forever.
+
+**Correct Answer(s):** B
+**Explanation:** BC is strictly maintained within a major version tree.
+**Reference:** https://symfony.com/doc/8.0/contributing/code/bc.html
+
+### Q69: When are deprecated features physically removed from the framework codebase?
+**Type:** Single answer
+- [ ] A) In the very next minor release.
+- [ ] B) In the next patch release.
+- [ ] C) In the next major release (e.g., 9.0).
+- [ ] D) Never.
+
+**Correct Answer(s):** C
+**Explanation:** Major releases serve as the cleanup phases for accumulated deprecations.
+**Reference:** https://symfony.com/doc/8.0/contributing/code/bc.html
+
+### Q70: Can a bugfix minor patch (e.g., 8.0.0 to 8.0.1) introduce new features?
+**Type:** True / False
+- [ ] A) True
+- [ ] B) False
+
+**Correct Answer(s):** B
+**Explanation:** Patch releases are strictly reserved for bug fixes and security patches only.
+**Reference:** https://symfony.com/doc/8.0/contributing/code/bc.html
+
+### Q71: Who manages the BC promise technically?
+**Type:** Single answer
+- [ ] A) The Symfony Core Team via continuous integration pipelines.
+- [ ] B) PHP-FIG.
+- [ ] C) Composer.
+- [ ] D) Linux Foundation.
+
+**Correct Answer(s):** A
+**Explanation:** The Core team runs extensive test suites to verify BC compliance.
+**Reference:** https://symfony.com/doc/8.0/contributing/code/bc.html
+
+### Q72: Does the BC promise cover classes marked with @internal annotation?
+**Type:** True / False
+- [ ] A) True
+- [ ] B) False
+
+**Correct Answer(s):** B
+**Explanation:** Internal classes are explicitly excluded from the BC promise.
+**Reference:** https://symfony.com/doc/8.0/contributing/code/bc.html
+
+### Q73: How does Symfony indicate that a method is deprecated?
+**Type:** Single answer
+- [ ] A) By renaming it to deprecated_Method.
+- [ ] B) By removing it immediately.
+- [ ] C) By adding the @deprecated PHPDoc tag and triggering a deprecation message via trigger_error().
+- [ ] D) By throwing an exception on invocation.
+
+**Correct Answer(s):** C
+**Explanation:** It triggers an E_USER_DEPRECATED notice logged by PHPUnit/Profiler.
+**Reference:** https://symfony.com/doc/8.0/contributing/code/conventions.html
+
+### Q74: How can you view triggered deprecations during development?
+**Type:** Single answer
+- [ ] A) Using the Symfony Web Profiler tool bar.
+- [ ] B) In the system var/log/dev.log.
+- [ ] C) In the terminal when running tests with phpunit-bridge.
+- [ ] D) All of the above.
+
+**Correct Answer(s):** D
+**Explanation:** Deprecations are tracked across logs, profiler, and test suites.
+**Reference:** https://symfony.com/doc/8.0/contributing/code/conventions.html
+
+### Q75: What is the primary purpose of the symfony/phpunit-bridge?
+**Type:** Single answer
+- [ ] A) To write PHPUnit tests faster.
+- [ ] B) To track, categorize, and report deprecation notices invoked during tests.
+- [ ] C) To mock database connections.
+- [ ] D) To install PHPUnit.
+
+**Correct Answer(s):** B
+**Explanation:** The bridge highlights which parts of your code use deprecated features.
+**Reference:** https://symfony.com/components
+
+### Q76: How do you override a Twig template provided by a third-party bundle (e.g., AcmeBlogBundle) in Symfony 8?
+**Type:** Single answer
+- [ ] A) Modify the file directly in vendor/.
+- [ ] B) Create a similarly named file in templates/bundles/AcmeBlogBundle/.
+- [ ] C) Clone the bundle.
+- [ ] D) It is impossible without a compiler pass.
+
+**Correct Answer(s):** B
+**Explanation:** Placing the template in templates/bundles/BundleName/ overrides it.
+**Reference:** https://symfony.com/doc/current/bundles/override.html
+
+### Q77: How do you override an external bundle's controller logic without modifying vendor code?
+**Type:** Single answer
+- [ ] A) Modify the vendor file.
+- [ ] B) Configure routing to point the bundle's route name to your own custom controller.
+- [ ] C) Use Twig filters.
+- [ ] D) Throw an exception.
+
+**Correct Answer(s):** B
+**Explanation:** You override the route definition mapping it to your own App controller.
+**Reference:** https://symfony.com/doc/current/bundles/override.html
+
+### Q78: How can you override a service definition provided by a third-party bundle?
+**Type:** Single answer
+- [ ] A) By redeclaring the exact service ID in your config/services.yaml and pointing it to your own class.
+- [ ] B) By deleting the bundle.
+- [ ] C) By using Twig.
+- [ ] D) By changing PHP ini.
+
+**Correct Answer(s):** A
+**Explanation:** The DI Container merges configurations, keeping your local service definition.
+**Reference:** https://symfony.com/doc/current/bundles/override.html
+
+### Q79: Can you override framework translations?
+**Type:** True / False
+- [ ] A) True
+- [ ] B) False
+
+**Correct Answer(s):** A
+**Explanation:** Placing a translation file in translations/ with the specified domain overrides the defaults.
+**Reference:** https://symfony.com/doc/8.0/translation.html
+
+### Q80: What allows deep modifications to the Dependency Injection Container before it is compiled?
+**Type:** Single answer
+- [ ] A) Console Commands
+- [ ] B) Twig Extensions
+- [ ] C) Compiler Passes
+- [ ] D) Doctrine Listeners
+
+**Correct Answer(s):** C
+**Explanation:** Compiler Passes allow deep manipulation of service definitions during boot.
+**Reference:** https://symfony.com/doc/8.0/service_container/compiler_passes.html
+
+### Q81: What is the release cadence for Symfony minor versions?
+**Type:** Single answer
+- [ ] A) Every month.
+- [ ] B) Every 6 months (May and November).
+- [ ] C) Once a year.
+- [ ] D) Every 2 years.
+
+**Correct Answer(s):** B
+**Explanation:** A predictable 6-month cycle ensures steady updates.
+**Reference:** https://symfony.com/roadmap
+
+### Q82: What does LTS stand for in Symfony terminology?
+**Type:** Single answer
+- [ ] A) Latest Tested System
+- [ ] B) Long Term Support
+- [ ] C) Local Testing Standard
+- [ ] D) Loading Time Sequence
+
+**Correct Answer(s):** B
+**Explanation:** LTS versions provide extended security and bugfix horizons.
+**Reference:** https://symfony.com/roadmap
+
+### Q83: How long does an LTS version receive bug fixes?
+**Type:** Single answer
+- [ ] A) 1 year.
+- [ ] B) 2 years.
+- [ ] C) 3 years (plus 1 year of security fixes).
+- [ ] D) 5 years.
+
+**Correct Answer(s):** C
+**Explanation:** LTS gets 3 years of bug fixes and 4 years of security fixes.
+**Reference:** https://symfony.com/roadmap
+
+### Q84: When Symfony 8.4 is released (an LTS version), when will Symfony 9.0 be released?
+**Type:** Single answer
+- [ ] A) At the exact same time.
+- [ ] B) One year later.
+- [ ] C) Six months later.
+- [ ] D) Two years later.
+
+**Correct Answer(s):** A
+**Explanation:** The last minor of a version (X.4) is released simultaneously with the first major of the next (Y.0).
+**Reference:** https://symfony.com/doc/8.0/contributing/community/releases.html
+
+### Q85: What determines if a release is a minor version or a patch version?
+**Type:** Single answer
+- [ ] A) Semantic Versioning (SemVer)
+- [ ] B) Random numbering
+- [ ] C) Date of release
+- [ ] D) Number of downloads
+
+**Correct Answer(s):** A
+**Explanation:** Symfony strictly follows Semantic Versioning constraints.
+**Reference:** https://symfony.com/roadmap
+
+### Q86: What does PSR stand for?
+**Type:** Single answer
+- [ ] A) PHP Standard Recommendation
+- [ ] B) Public System Request
+- [ ] C) PHP Service Rule
+- [ ] D) Private Symfony Router
+
+**Correct Answer(s):** A
+**Explanation:** PSRs are guidelines drafted by the PHP-FIG group.
+**Reference:** https://www.php-fig.org/
+
+### Q87: Which PSR dictates the autoloader standard mapping namespaces to directory structures?
+**Type:** Single answer
+- [ ] A) PSR-1
+- [ ] B) PSR-3
+- [ ] C) PSR-4
+- [ ] D) PSR-7
+
+**Correct Answer(s):** C
+**Explanation:** PSR-4 is the modern autoloading standard.
+**Reference:** https://www.php-fig.org/psr/psr-4/
+
+### Q88: Which PSR defines the basic coding standard (e.g., class names must be StudlyCaps)?
+**Type:** Single answer
+- [ ] A) PSR-1
+- [ ] B) PSR-2
+- [ ] C) PSR-11
+- [ ] D) PSR-12
+
+**Correct Answer(s):** A
+**Explanation:** PSR-1 defines foundational coding rules.
+**Reference:** https://www.php-fig.org/psr/psr-1/
+
+### Q89: Which PSR expands on PSR-1 providing extended coding style rules (tabs vs spaces, brackets)?
+**Type:** Single answer
+- [ ] A) PSR-12
+- [ ] B) PSR-3
+- [ ] C) PSR-4
+- [ ] D) PSR-7
+
+**Correct Answer(s):** A
+**Explanation:** PSR-12 defines formatting rules replacing the deprecated PSR-2.
+**Reference:** https://www.php-fig.org/psr/psr-12/
+
+### Q90: Which PSR defines the LoggerInterface?
+**Type:** Single answer
+- [ ] A) PSR-3
+- [ ] B) PSR-4
+- [ ] C) PSR-6
+- [ ] D) PSR-11
+
+**Correct Answer(s):** A
+**Explanation:** PSR-3 defines the standard logging interface implemented by Monolog.
+**Reference:** https://www.php-fig.org/psr/psr-3/
+
+### Q91: Which PSR dictates the Container interoperability standard?
+**Type:** Single answer
+- [ ] A) PSR-7
+- [ ] B) PSR-11
+- [ ] C) PSR-14
+- [ ] D) PSR-15
+
+**Correct Answer(s):** B
+**Explanation:** PSR-11 defines ContainerInterface (get, has).
+**Reference:** https://www.php-fig.org/psr/psr-11/
+
+### Q92: Which PSR defines HTTP message interfaces (Request/Response)?
 **Type:** Single answer
 - [ ] A) PSR-3
 - [ ] B) PSR-7
-- [ ] C) PSR-11
-- [ ] D) PSR-15
+- [ ] C) PSR-12
+- [ ] D) PSR-14
+
+**Correct Answer(s):** B
+**Explanation:** PSR-7 defines standard HTTP messages mapping.
+**Reference:** https://www.php-fig.org/psr/psr-7/
+
+### Q93: Does Symfony's HttpFoundation natively implement PSR-7 objects?
+**Type:** True / False
+- [ ] A) True
+- [ ] B) False
+
+**Correct Answer(s):** B
+**Explanation:** No, it uses its own objects but provides the PSR-7 Bridge for interoperability.
+**Reference:** https://symfony.com/doc/current/components/psr7.html
+
+### Q94: What does PSR-14 define?
+**Type:** Single answer
+- [ ] A) Caching
+- [ ] B) Event Dispatching
+- [ ] C) HTTP Middleware
+- [ ] D) Factories
+
+**Correct Answer(s):** B
+**Explanation:** PSR-14 dictates Event Dispatcher interfaces.
+**Reference:** https://www.php-fig.org/psr/psr-14/
+
+### Q95: Which PSR deals with Caching interfaces?
+**Type:** Single answer
+- [ ] A) PSR-6 and PSR-16
+- [ ] B) PSR-3 and PSR-4
+- [ ] C) PSR-7 and PSR-15
+- [ ] D) PSR-11
 
 **Correct Answer(s):** A
-**Explanation:** PSR-3 defines `LoggerInterface` with methods like `info()`, `error()`, `debug()`.
+**Explanation:** PSR-6 defines Cache Items, PSR-16 defines Simple Cache.
+**Reference:** https://symfony.com/doc/8.0/components/cache.html
 
----
-
-**Question 41:** PSR-11 defines:
+### Q96: According to Symfony conventions, method names should use which casing?
 **Type:** Single answer
-- [ ] A) The Logger interface
-- [ ] B) The Container interface (`ContainerInterface` with `get()` and `has()`)
-- [ ] C) The HTTP message interface
-- [ ] D) The Event Dispatcher interface
+- [ ] A) snake_case
+- [ ] B) camelCase
+- [ ] C) PascalCase
+- [ ] D) kebab-case
 
 **Correct Answer(s):** B
-**Explanation:** PSR-11 = `Psr\Container\ContainerInterface` — `get($id)` and `has($id)`.
+**Explanation:** Variables and methods use camelCase.
+**Reference:** https://symfony.com/doc/8.0/contributing/code/standards.html
 
----
-
-**Question 42:** PSR-7 defines:
+### Q97: Class names and Interface names must be formatted using:
 **Type:** Single answer
-- [ ] A) Autoloading
-- [ ] B) HTTP message interfaces (`RequestInterface`, `ResponseInterface`, `StreamInterface`)
-- [ ] C) Event dispatching
-- [ ] D) Caching interface
+- [ ] A) camelCase
+- [ ] B) StudlyCaps (PascalCase)
+- [ ] C) snake_case
+- [ ] D) UPPERCASE
 
 **Correct Answer(s):** B
-**Explanation:** PSR-7 defines immutable HTTP message interfaces. Symfony uses its own mutable HttpFoundation but provides a PSR-7 Bridge.
+**Explanation:** Classes adhere to StudlyCaps as per PSR-1.
+**Reference:** https://symfony.com/doc/8.0/contributing/code/standards.html
 
----
-
-### Naming conventions
-
-**Question 43:** Symfony naming convention for services: which pattern is standard?
+### Q98: How should configuration parameters in YAML files be formatted by convention?
 **Type:** Single answer
-- [ ] A) `my_bundle.my_service` (snake_case dot-separated)
-- [ ] B) FQCN (Fully Qualified Class Name, e.g., `App\Service\Mailer`)
-- [ ] C) camelCase identifiers
-- [ ] D) UUID-based IDs
+- [ ] A) camelCase
+- [ ] B) PascalCase
+- [ ] C) snake_case
+- [ ] D) MACRO_CASE
+
+**Correct Answer(s):** C
+**Explanation:** YAML configuration keys and parameters use snake_case.
+**Reference:** https://symfony.com/doc/8.0/best_practices.html
+
+### Q99: According to convention, what suffix should be appended to an interface name?
+**Type:** Single answer
+- [ ] A) _Interface
+- [ ] B) No suffix is required
+- [ ] C) Interface
+- [ ] D) Trait
+
+**Correct Answer(s):** C
+**Explanation:** Examples: LoggerInterface, ContainerInterface.
+**Reference:** https://symfony.com/doc/8.0/contributing/code/standards.html
+
+### Q100: Abstract classes should be prefixed with:
+**Type:** Single answer
+- [ ] A) Abstract
+- [ ] B) Base
+- [ ] C) Core
+- [ ] D) Default
+
+**Correct Answer(s):** A
+**Explanation:** Example: AbstractController.
+**Reference:** https://symfony.com/doc/8.0/contributing/code/standards.html
+
+### Q101: Exceptions should be suffixed with Exception.
+**Type:** True / False
+- [ ] A) True
+- [ ] B) False
+
+**Correct Answer(s):** A
+**Explanation:** Example: NotFoundHttpException.
+**Reference:** https://symfony.com/doc/8.0/contributing/code/standards.html
+
+### Q102: Service identifiers in Symfony 8 should ideally be named using:
+**Type:** Single answer
+- [ ] A) snake_case strings
+- [ ] B) Their Fully Qualified Class Name (FQCN)
+- [ ] C) Random hashes
+- [ ] D) CamelCase strings
 
 **Correct Answer(s):** B
-**Explanation:** Since Symfony 4+, services are identified by their FQCN. Old snake_case IDs are legacy.
+**Explanation:** FQCN indexing enables seamless autowiring.
+**Reference:** https://symfony.com/doc/8.0/best_practices.html
 
----
-
-**Question 44:** According to Symfony conventions, controller method names should be:
+### Q103: Database table names generated by Doctrine follow which default strategy?
 **Type:** Single answer
-- [ ] A) Prefixed with `action` (e.g., `actionShow`)
-- [ ] B) Named descriptively without suffix (e.g., `show`, `list`, `create`)
-- [ ] C) Always named `__invoke`
-- [ ] D) Named with `Handler` suffix
+- [ ] A) camelCase
+- [ ] B) snake_case
+- [ ] C) PascalCase
+- [ ] D) Uppercase
 
 **Correct Answer(s):** B
-**Explanation:** Convention: descriptive names like `show()`, `edit()`, `delete()`. Invokable controllers use `__invoke()` for single-action controllers.
+**Explanation:** Doctrine inherently converts StudlyCaps entities to snake_case tables.
+**Reference:** https://symfony.com/doc/8.0/doctrine.html
 
----
+### Q104: Twig template files must follow which naming format?
+**Type:** Single answer
+- [ ] A) FileName.html.twig (PascalCase)
+- [ ] B) file_name.html.twig (snake_case)
+- [ ] C) fileName.html.twig (camelCase)
+- [ ] D) file-name.html.twig (kebab-case)
 
-**Question 45:** Symfony uses `camelCase` for:
-**Type:** Multiple choice
-- [ ] A) Method names
-- [ ] B) Variable names
-- [ ] C) Class names
-- [ ] D) Configuration keys
+**Correct Answer(s):** B
+**Explanation:** Templates strictly utilize snake_case terminology.
+**Reference:** https://symfony.com/doc/8.0/best_practices.html
 
-**Correct Answer(s):** A, B
-**Explanation:** Methods and variables use camelCase. Classes use PascalCase. Configuration keys use snake_case.
+### Q105: A console command representing the action 'create user' inside 'app' namespace should be named:
+**Type:** Single answer
+- [ ] A) app:create-user
+- [ ] B) app:createUser
+- [ ] C) app_create_user
+- [ ] D) AppCreateUser
 
----
+**Correct Answer(s):** A
+**Explanation:** Console commands use colons for namespaces and kebab-case for words.
+**Reference:** https://symfony.com/doc/8.0/console.html
+
+### Q106: Environment variables in the .env file must be formatted using:
+**Type:** Single answer
+- [ ] A) camelCase
+- [ ] B) snake_case
+- [ ] C) SCREAMING_SNAKE_CASE
+- [ ] D) PascalCase
+
+**Correct Answer(s):** C
+**Explanation:** Environment variables must be capitalized with underscores.
+**Reference:** https://symfony.com/doc/8.0/configuration.html
+

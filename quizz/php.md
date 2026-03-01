@@ -5,7 +5,7 @@
 
 ### PHP API up to PHP 8.4 version
 
-**Question 1:** PHP 8.1 introduced Fibers for cooperative multitasking.
+### Q1: PHP 8.1 introduced Fibers for cooperative multitasking.
 **Type:** True / False
 - [ ] A) True
 - [ ] B) False
@@ -15,7 +15,7 @@
 
 ---
 
-**Question 2:** Which PHP version introduced the `readonly` keyword for class properties?
+### Q2: Which PHP version introduced the `readonly` keyword for class properties?
 **Type:** Single answer
 - [ ] A) PHP 8.0
 - [ ] B) PHP 8.1
@@ -27,7 +27,7 @@
 
 ---
 
-**Question 3:** Which of the following features were introduced in PHP 8.0? (Select all that apply)
+### Q3: Which of the following features were introduced in PHP 8.0? (Select all that apply)
 **Type:** Multiple choice
 - [ ] A) Named arguments
 - [ ] B) Union types
@@ -41,7 +41,7 @@
 
 ---
 
-**Question 4:** What is the output of the following PHP 8.0 code?
+### Q4: What is the output of the following PHP 8.0 code?
 ```php
 echo match(true) {
     1 > 2 => 'A',
@@ -60,7 +60,7 @@ echo match(true) {
 
 ---
 
-**Question 5:** PHP 8.2 introduced `readonly` classes. What does marking a class as `readonly` do?
+### Q5: PHP 8.2 introduced `readonly` classes. What does marking a class as `readonly` do?
 **Type:** Single answer
 - [ ] A) All methods become read-only (no side effects)
 - [ ] B) All declared properties are implicitly `readonly`
@@ -72,7 +72,7 @@ echo match(true) {
 
 ---
 
-**Question 6:** Which PHP 8.1 feature allows declaring types on class constants?
+### Q6: Which PHP 8.1 feature allows declaring types on class constants?
 **Type:** Single answer
 - [ ] A) Typed constants
 - [ ] B) `const` type declarations
@@ -84,7 +84,7 @@ echo match(true) {
 
 ---
 
-**Question 7:** In PHP 8.0, constructor property promotion allows you to declare and assign properties in the constructor signature.
+### Q7: In PHP 8.0, constructor property promotion allows you to declare and assign properties in the constructor signature.
 **Type:** True / False
 - [ ] A) True
 - [ ] B) False
@@ -94,7 +94,7 @@ echo match(true) {
 
 ---
 
-**Question 8:** Which of the following are valid PHP 8.0+ features? (Select all that apply)
+### Q8: Which of the following are valid PHP 8.0+ features? (Select all that apply)
 **Type:** Multiple choice
 - [ ] A) Nullsafe operator `?->`
 - [ ] B) `str_contains()` function
@@ -107,7 +107,7 @@ echo match(true) {
 
 ---
 
-**Question 9:** What does the `never` return type in PHP 8.1 indicate?
+### Q9: What does the `never` return type in PHP 8.1 indicate?
 **Type:** Single answer
 - [ ] A) The function returns `null`
 - [ ] B) The function always throws an exception or calls `exit()`
@@ -119,7 +119,7 @@ echo match(true) {
 
 ---
 
-**Question 10:** Intersection types (e.g., `CountableInterface&Iterator`) were introduced in which PHP version?
+### Q10: Intersection types (e.g., `CountableInterface&Iterator`) were introduced in which PHP version?
 **Type:** Single answer
 - [ ] A) PHP 8.0
 - [ ] B) PHP 8.1
@@ -131,7 +131,7 @@ echo match(true) {
 
 ---
 
-**Question 11:** What is the output of this PHP 8.0 code?
+### Q11: What is the output of this PHP 8.0 code?
 ```php
 function test(string $a, string $b): string {
     return "$a-$b";
@@ -149,7 +149,7 @@ echo test(b: 'world', a: 'hello');
 
 ---
 
-**Question 12:** Which PHP version first supported Disjunctive Normal Form (DNF) types like `(A&B)|C`?
+### Q12: Which PHP version first supported Disjunctive Normal Form (DNF) types like `(A&B)|C`?
 **Type:** Single answer
 - [ ] A) PHP 8.1
 - [ ] B) PHP 8.2
@@ -161,7 +161,7 @@ echo test(b: 'world', a: 'hello');
 
 ---
 
-**Question 13:** PHP 8.3 introduced the `#[\Override]` attribute. What does it do?
+### Q13: PHP 8.3 introduced the `#[\Override]` attribute. What does it do?
 **Type:** Single answer
 - [ ] A) Prevents the method from being overridden
 - [ ] B) Marks a method as intentionally overriding a parent method — errors if no parent method exists
@@ -173,7 +173,7 @@ echo test(b: 'world', a: 'hello');
 
 ---
 
-**Question 14:** The `json_validate()` function was introduced in PHP 8.3.
+### Q14: The `json_validate()` function was introduced in PHP 8.3.
 **Type:** True / False
 - [ ] A) True
 - [ ] B) False
@@ -183,7 +183,7 @@ echo test(b: 'world', a: 'hello');
 
 ---
 
-**Question 15:** What is the output of this PHP 8.0 code?
+### Q15: What is the output of this PHP 8.0 code?
 ```php
 $result = match('0') {
     0 => 'integer zero',
@@ -203,7 +203,7 @@ echo $result;
 
 ---
 
-**Question 16:** In PHP 8.4, the `new MyClass()->method()` chaining syntax without parentheses wrapping is now valid.
+### Q16: In PHP 8.4, the `new MyClass()->method()` chaining syntax without parentheses wrapping is now valid.
 **Type:** True / False
 - [ ] A) True
 - [ ] B) False
@@ -213,7 +213,7 @@ echo $result;
 
 ---
 
-**Question 17:** Which of the following functions were added in PHP 8.4? (Select all that apply)
+### Q17: Which of the following functions were added in PHP 8.4? (Select all that apply)
 **Type:** Multiple choice
 - [ ] A) `array_find()`
 - [ ] B) `array_find_key()`
@@ -226,7 +226,7 @@ echo $result;
 
 ---
 
-**Question 18:** PHP 8.1 added `enum` as a built-in language construct. Before 8.1, enums had to be emulated with constants or third-party libraries.
+### Q18: PHP 8.1 added `enum` as a built-in language construct. Before 8.1, enums had to be emulated with constants or third-party libraries.
 **Type:** True / False
 - [ ] A) True
 - [ ] B) False
@@ -236,7 +236,7 @@ echo $result;
 
 ---
 
-**Question 19:** What is the output?
+### Q19: What is the output?
 ```php
 $fn = fn(int $x) => $x * 2;
 echo $fn(5);
@@ -252,7 +252,7 @@ echo $fn(5);
 
 ---
 
-**Question 20:** Which PHP version introduced the `null`, `true`, and `false` as standalone types?
+### Q20: Which PHP version introduced the `null`, `true`, and `false` as standalone types?
 **Type:** Single answer
 - [ ] A) PHP 8.0
 - [ ] B) PHP 8.1
@@ -264,7 +264,7 @@ echo $fn(5);
 
 ---
 
-**Question 21:** First-class callable syntax (`strlen(...)`) was introduced in PHP 8.0.
+### Q21: First-class callable syntax (`strlen(...)`) was introduced in PHP 8.0.
 **Type:** True / False
 - [ ] A) True
 - [ ] B) False
@@ -274,7 +274,7 @@ echo $fn(5);
 
 ---
 
-**Question 22:** What does `#[Attribute(Attribute::TARGET_METHOD)]` mean on a custom attribute class?
+### Q22: What does `#[Attribute(Attribute::TARGET_METHOD)]` mean on a custom attribute class?
 **Type:** Single answer
 - [ ] A) The attribute can only be applied to methods
 - [ ] B) The attribute can only be applied to classes
@@ -286,7 +286,7 @@ echo $fn(5);
 
 ---
 
-**Question 23:** PHP 8.3 introduced `#[\Override]`. What happens if you apply it to a method that does NOT override a parent method?
+### Q23: PHP 8.3 introduced `#[\Override]`. What happens if you apply it to a method that does NOT override a parent method?
 **Type:** Single answer
 - [ ] A) Nothing happens
 - [ ] B) A deprecation notice is triggered
@@ -298,7 +298,7 @@ echo $fn(5);
 
 ---
 
-**Question 24:** Which of these are valid `match` expression features in PHP 8.0? (Select all)
+### Q24: Which of these are valid `match` expression features in PHP 8.0? (Select all)
 **Type:** Multiple choice
 - [ ] A) Uses strict comparison (`===`)
 - [ ] B) Returns a value
@@ -311,7 +311,7 @@ echo $fn(5);
 
 ---
 
-**Question 25:** What does `mixed` type mean in PHP 8.0+?
+### Q25: What does `mixed` type mean in PHP 8.0+?
 **Type:** Single answer
 - [ ] A) The type is unknown
 - [ ] B) Equivalent to `string|int|float|bool|array|object|callable|null`
@@ -323,7 +323,7 @@ echo $fn(5);
 
 ---
 
-**Question 26:** In PHP 8.2, which of the following is deprecated?
+### Q26: In PHP 8.2, which of the following is deprecated?
 **Type:** Multiple choice
 - [ ] A) Dynamic properties on classes without `#[AllowDynamicProperties]`
 - [ ] B) `utf8_encode()` and `utf8_decode()`
@@ -335,7 +335,7 @@ echo $fn(5);
 
 ---
 
-**Question 27:** What is the output?
+### Q27: What is the output?
 ```php
 $arr = [3, 1, 4, 1, 5];
 $found = array_find($arr, fn($v) => $v > 3);
@@ -352,7 +352,7 @@ echo $found;
 
 ---
 
-**Question 28:** The `$` is required when accessing an enum case.
+### Q28: The `$` is required when accessing an enum case.
 **Type:** True / False
 - [ ] A) True
 - [ ] B) False
@@ -362,7 +362,7 @@ echo $found;
 
 ---
 
-**Question 29:** Named arguments can be combined with positional arguments, but positional arguments must come first.
+### Q29: Named arguments can be combined with positional arguments, but positional arguments must come first.
 **Type:** True / False
 - [ ] A) True
 - [ ] B) False
@@ -372,7 +372,7 @@ echo $found;
 
 ---
 
-**Question 30:** What happens with this PHP 8.4 property hook?
+### Q30: What happens with this PHP 8.4 property hook?
 ```php
 class Product {
     public string $name {
@@ -396,7 +396,7 @@ echo $p->name;
 
 ### Object Oriented Programming
 
-**Question 31:** Which of the following are valid visibility modifiers in PHP 8.x? (Select all)
+### Q31: Which of the following are valid visibility modifiers in PHP 8.x? (Select all)
 **Type:** Multiple choice
 - [ ] A) `public`
 - [ ] B) `private`
@@ -409,7 +409,7 @@ echo $p->name;
 
 ---
 
-**Question 32:** What is the output?
+### Q32: What is the output?
 ```php
 class A {
     public function whoAmI(): string {
@@ -430,7 +430,7 @@ echo (new B())->whoAmI();
 
 ---
 
-**Question 33:** Which keyword prevents a class from being instantiated?
+### Q33: Which keyword prevents a class from being instantiated?
 **Type:** Single answer
 - [ ] A) `final`
 - [ ] B) `abstract`
@@ -442,7 +442,7 @@ echo (new B())->whoAmI();
 
 ---
 
-**Question 34:** A `final` class can be extended by another class.
+### Q34: A `final` class can be extended by another class.
 **Type:** True / False
 - [ ] A) True
 - [ ] B) False
@@ -452,7 +452,7 @@ echo (new B())->whoAmI();
 
 ---
 
-**Question 35:** What is the correct way to call a parent constructor in PHP?
+### Q35: What is the correct way to call a parent constructor in PHP?
 **Type:** Single answer
 - [ ] A) `parent::__construct()`
 - [ ] B) `super().__init__()`
@@ -464,7 +464,7 @@ echo (new B())->whoAmI();
 
 ---
 
-**Question 36:** What is the output?
+### Q36: What is the output?
 ```php
 class Counter {
     private static int $count = 0;
@@ -487,7 +487,7 @@ echo Counter::getCount();
 
 ---
 
-**Question 37:** Which magic method is called when accessing a non-existent or inaccessible property?
+### Q37: Which magic method is called when accessing a non-existent or inaccessible property?
 **Type:** Single answer
 - [ ] A) `__call()`
 - [ ] B) `__get()`
@@ -499,7 +499,7 @@ echo Counter::getCount();
 
 ---
 
-**Question 38:** PHP supports multiple inheritance (extending more than one class).
+### Q38: PHP supports multiple inheritance (extending more than one class).
 **Type:** True / False
 - [ ] A) True
 - [ ] B) False
@@ -509,7 +509,7 @@ echo Counter::getCount();
 
 ---
 
-**Question 39:** Which of the following are valid ways to check an object's type in PHP? (Select all)
+### Q39: Which of the following are valid ways to check an object's type in PHP? (Select all)
 **Type:** Multiple choice
 - [ ] A) `instanceof`
 - [ ] B) `is_a()`
@@ -522,7 +522,7 @@ echo Counter::getCount();
 
 ---
 
-**Question 40:** What is the output?
+### Q40: What is the output?
 ```php
 class Base {
     public function hello(): string { return 'Base'; }
@@ -544,7 +544,7 @@ greet(new Child());
 
 ---
 
-**Question 41:** Which of the following statements about `__clone()` are true? (Select all)
+### Q41: Which of the following statements about `__clone()` are true? (Select all)
 **Type:** Multiple choice
 - [ ] A) It is called when `clone $object` is used
 - [ ] B) It performs a deep copy by default
@@ -556,7 +556,7 @@ greet(new Child());
 
 ---
 
-**Question 42:** What is the output?
+### Q42: What is the output?
 ```php
 class A {
     public function __toString(): string { return 'Object A'; }
@@ -574,7 +574,7 @@ echo new A();
 
 ---
 
-**Question 43:** What is late static binding and which keyword enables it?
+### Q43: What is late static binding and which keyword enables it?
 **Type:** Single answer
 - [ ] A) `self` — resolves at runtime
 - [ ] B) `static` — resolves at runtime to the calling class
@@ -586,7 +586,7 @@ echo new A();
 
 ---
 
-**Question 44:** An `abstract` method must NOT have a body.
+### Q44: An `abstract` method must NOT have a body.
 **Type:** True / False
 - [ ] A) True
 - [ ] B) False
@@ -596,7 +596,7 @@ echo new A();
 
 ---
 
-**Question 45:** What is the output?
+### Q45: What is the output?
 ```php
 interface Printable { public function print(): void; }
 class Doc implements Printable { public function print(): void { echo 'Doc'; } }
@@ -614,7 +614,7 @@ echo $obj instanceof Printable ? 'Yes' : 'No';
 
 ---
 
-**Question 46:** In PHP 8, you can use union types for properties. What is the syntax?
+### Q46: In PHP 8, you can use union types for properties. What is the syntax?
 **Type:** Single answer
 - [ ] A) `public string|int $value;`
 - [ ] B) `public (string, int) $value;`
@@ -626,7 +626,7 @@ echo $obj instanceof Printable ? 'Yes' : 'No';
 
 ---
 
-**Question 47:** Promoted constructor parameters cannot have default values.
+### Q47: Promoted constructor parameters cannot have default values.
 **Type:** True / False
 - [ ] A) True
 - [ ] B) False
@@ -636,7 +636,7 @@ echo $obj instanceof Printable ? 'Yes' : 'No';
 
 ---
 
-**Question 48:** What is the output?
+### Q48: What is the output?
 ```php
 $obj = new stdClass();
 $obj->dynamic = 'test';
@@ -653,7 +653,7 @@ echo $obj->dynamic;
 
 ---
 
-**Question 49:** What happens when you try to set a `readonly` property twice?
+### Q49: What happens when you try to set a `readonly` property twice?
 **Type:** Single answer
 - [ ] A) The second value overwrites the first
 - [ ] B) An `Error` is thrown
@@ -665,7 +665,7 @@ echo $obj->dynamic;
 
 ---
 
-**Question 50:** Which PHP version introduced the `enum` keyword?
+### Q50: Which PHP version introduced the `enum` keyword?
 **Type:** Single answer
 - [ ] A) PHP 7.4
 - [ ] B) PHP 8.0
@@ -679,7 +679,7 @@ echo $obj->dynamic;
 
 ### Namespaces
 
-**Question 51:** What keyword is used to declare a namespace in PHP?
+### Q51: What keyword is used to declare a namespace in PHP?
 **Type:** Single answer
 - [ ] A) `package`
 - [ ] B) `namespace`
@@ -691,7 +691,7 @@ echo $obj->dynamic;
 
 ---
 
-**Question 52:** The `namespace` declaration must be the very first statement in a PHP file.
+### Q52: The `namespace` declaration must be the very first statement in a PHP file.
 **Type:** True / False
 - [ ] A) True
 - [ ] B) False
@@ -701,7 +701,7 @@ echo $obj->dynamic;
 
 ---
 
-**Question 53:** What does the `use` keyword do at the top of a PHP file?
+### Q53: What does the `use` keyword do at the top of a PHP file?
 **Type:** Single answer
 - [ ] A) Includes another file
 - [ ] B) Imports a class, function, or constant from a namespace
@@ -713,7 +713,7 @@ echo $obj->dynamic;
 
 ---
 
-**Question 54:** What is the output?
+### Q54: What is the output?
 ```php
 namespace App\Service;
 class Logger { public function log(): string { return __NAMESPACE__; } }
@@ -730,7 +730,7 @@ echo (new Logger())->log();
 
 ---
 
-**Question 55:** You can import multiple classes from the same namespace in a single `use` statement with braces.
+### Q55: You can import multiple classes from the same namespace in a single `use` statement with braces.
 **Type:** True / False
 - [ ] A) True
 - [ ] B) False
@@ -740,7 +740,7 @@ echo (new Logger())->log();
 
 ---
 
-**Question 56:** How do you alias a class on import?
+### Q56: How do you alias a class on import?
 **Type:** Single answer
 - [ ] A) `use App\Service\Logger as Log;`
 - [ ] B) `import App\Service\Logger alias Log;`
@@ -752,7 +752,7 @@ echo (new Logger())->log();
 
 ---
 
-**Question 57:** What does a leading backslash `\` before a class name mean?
+### Q57: What does a leading backslash `\` before a class name mean?
 **Type:** Single answer
 - [ ] A) It references the class in the current namespace
 - [ ] B) It references the class in the global namespace
@@ -764,7 +764,7 @@ echo (new Logger())->log();
 
 ---
 
-**Question 58:** Two classes in different namespaces can have the same short class name.
+### Q58: Two classes in different namespaces can have the same short class name.
 **Type:** True / False
 - [ ] A) True
 - [ ] B) False
@@ -774,7 +774,7 @@ echo (new Logger())->log();
 
 ---
 
-**Question 59:** What is PSR-4 and how does it relate to namespaces?
+### Q59: What is PSR-4 and how does it relate to namespaces?
 **Type:** Single answer
 - [ ] A) A coding standard for indentation
 - [ ] B) An autoloading standard mapping namespace prefixes to directory structures
@@ -786,7 +786,7 @@ echo (new Logger())->log();
 
 ---
 
-**Question 60:** What is the output?
+### Q60: What is the output?
 ```php
 namespace App;
 function strlen(string $s): int { return 42; }
@@ -805,7 +805,7 @@ echo strlen('hello');
 
 ### Attributes
 
-**Question 61:** PHP Attributes were introduced in which version?
+### Q61: PHP Attributes were introduced in which version?
 **Type:** Single answer
 - [ ] A) PHP 7.4
 - [ ] B) PHP 8.0
@@ -817,7 +817,7 @@ echo strlen('hello');
 
 ---
 
-**Question 62:** What is the syntax for applying an attribute to a class in PHP 8?
+### Q62: What is the syntax for applying an attribute to a class in PHP 8?
 **Type:** Single answer
 - [ ] A) `@Attribute class Foo {}`
 - [ ] B) `#[MyAttribute] class Foo {}`
@@ -829,7 +829,7 @@ echo strlen('hello');
 
 ---
 
-**Question 63:** An attribute class must itself be marked with `#[Attribute]` to be used as an attribute.
+### Q63: An attribute class must itself be marked with `#[Attribute]` to be used as an attribute.
 **Type:** True / False
 - [ ] A) True
 - [ ] B) False
@@ -839,7 +839,7 @@ echo strlen('hello');
 
 ---
 
-**Question 64:** Which of the following are valid `Attribute::TARGET_*` flags? (Select all)
+### Q64: Which of the following are valid `Attribute::TARGET_*` flags? (Select all)
 **Type:** Multiple choice
 - [ ] A) `TARGET_CLASS`
 - [ ] B) `TARGET_METHOD`
@@ -853,7 +853,7 @@ echo strlen('hello');
 
 ---
 
-**Question 65:** Attributes can accept arguments. How do you pass arguments to an attribute in PHP 8?
+### Q65: Attributes can accept arguments. How do you pass arguments to an attribute in PHP 8?
 **Type:** Single answer
 - [ ] A) `#[Route('/path', name: 'route_name')]`
 - [ ] B) `#[Route, '/path', 'route_name']`
@@ -865,7 +865,7 @@ echo strlen('hello');
 
 ---
 
-**Question 66:** Multiple attributes can be applied to the same target.
+### Q66: Multiple attributes can be applied to the same target.
 **Type:** True / False
 - [ ] A) True
 - [ ] B) False
@@ -875,7 +875,7 @@ echo strlen('hello');
 
 ---
 
-**Question 67:** Which Symfony components heavily use PHP Attributes in Symfony 8? (Select all)
+### Q67: Which Symfony components heavily use PHP Attributes in Symfony 8? (Select all)
 **Type:** Multiple choice
 - [ ] A) Routing
 - [ ] B) Dependency Injection
@@ -888,7 +888,7 @@ echo strlen('hello');
 
 ---
 
-**Question 68:** Attributes are read at compile time and automatically execute code.
+### Q68: Attributes are read at compile time and automatically execute code.
 **Type:** True / False
 - [ ] A) True
 - [ ] B) False
@@ -898,7 +898,7 @@ echo strlen('hello');
 
 ---
 
-**Question 69:** How do you retrieve attributes from a class at runtime in PHP?
+### Q69: How do you retrieve attributes from a class at runtime in PHP?
 **Type:** Single answer
 - [ ] A) `$class->annotations()`
 - [ ] B) `(new ReflectionClass(Foo::class))->getAttributes()`
@@ -910,7 +910,7 @@ echo strlen('hello');
 
 ---
 
-**Question 70:** What does `#[Attribute(Attribute::IS_REPEATABLE)]` allow?
+### Q70: What does `#[Attribute(Attribute::IS_REPEATABLE)]` allow?
 **Type:** Single answer
 - [ ] A) The attribute can be used on any target
 - [ ] B) The attribute can be applied multiple times to the same target
@@ -924,7 +924,7 @@ echo strlen('hello');
 
 ### Interfaces
 
-**Question 71:** An interface can contain method implementations in PHP 8.
+### Q71: An interface can contain method implementations in PHP 8.
 **Type:** True / False
 - [ ] A) True
 - [ ] B) False
@@ -934,7 +934,7 @@ echo strlen('hello');
 
 ---
 
-**Question 72:** An interface can declare constants.
+### Q72: An interface can declare constants.
 **Type:** True / False
 - [ ] A) True
 - [ ] B) False
@@ -944,7 +944,7 @@ echo strlen('hello');
 
 ---
 
-**Question 73:** A PHP class can implement multiple interfaces.
+### Q73: A PHP class can implement multiple interfaces.
 **Type:** True / False
 - [ ] A) True
 - [ ] B) False
@@ -954,7 +954,7 @@ echo strlen('hello');
 
 ---
 
-**Question 74:** What happens if a class implements an interface but does not define all its methods?
+### Q74: What happens if a class implements an interface but does not define all its methods?
 **Type:** Single answer
 - [ ] A) A deprecation notice
 - [ ] B) A fatal error
@@ -966,7 +966,7 @@ echo strlen('hello');
 
 ---
 
-**Question 75:** Interfaces can extend other interfaces.
+### Q75: Interfaces can extend other interfaces.
 **Type:** True / False
 - [ ] A) True
 - [ ] B) False
@@ -976,7 +976,7 @@ echo strlen('hello');
 
 ---
 
-**Question 76:** All methods declared in an interface are implicitly:
+### Q76: All methods declared in an interface are implicitly:
 **Type:** Single answer
 - [ ] A) `private`
 - [ ] B) `protected`
@@ -988,7 +988,7 @@ echo strlen('hello');
 
 ---
 
-**Question 77:** An interface can be instantiated directly with `new InterfaceName()`.
+### Q77: An interface can be instantiated directly with `new InterfaceName()`.
 **Type:** True / False
 - [ ] A) True
 - [ ] B) False
@@ -998,7 +998,7 @@ echo strlen('hello');
 
 ---
 
-**Question 78:** Which of these is a valid interface extending multiple interfaces?
+### Q78: Which of these is a valid interface extending multiple interfaces?
 **Type:** Single answer
 - [ ] A) `interface C extends A, B {}`
 - [ ] B) `interface C implements A, B {}`
@@ -1012,7 +1012,7 @@ echo strlen('hello');
 
 ### Anonymous functions and closures
 
-**Question 79:** What is the difference between an anonymous function and an arrow function in PHP?
+### Q79: What is the difference between an anonymous function and an arrow function in PHP?
 **Type:** Single answer
 - [ ] A) Arrow functions can have multiple expressions; anonymous functions cannot
 - [ ] B) Anonymous functions capture variables by value using `use`; arrow functions auto-capture from outer scope
@@ -1024,7 +1024,7 @@ echo strlen('hello');
 
 ---
 
-**Question 80:** What is the output?
+### Q80: What is the output?
 ```php
 $x = 10;
 $fn = function() use ($x) { return $x; };
@@ -1042,7 +1042,7 @@ echo $fn();
 
 ---
 
-**Question 81:** What is the output?
+### Q81: What is the output?
 ```php
 $x = 10;
 $fn = function() use (&$x) { return $x; };
@@ -1060,7 +1060,7 @@ echo $fn();
 
 ---
 
-**Question 82:** Arrow functions (`fn() =>`) can contain multiple statements.
+### Q82: Arrow functions (`fn() =>`) can contain multiple statements.
 **Type:** True / False
 - [ ] A) True
 - [ ] B) False
@@ -1070,7 +1070,7 @@ echo $fn();
 
 ---
 
-**Question 83:** What is the output?
+### Q83: What is the output?
 ```php
 $x = 5;
 $fn = fn() => $x * 2;
@@ -1088,7 +1088,7 @@ echo $fn();
 
 ---
 
-**Question 84:** `Closure::bind()` and `Closure::bindTo()` allow changing the `$this` context of a closure.
+### Q84: `Closure::bind()` and `Closure::bindTo()` allow changing the `$this` context of a closure.
 **Type:** True / False
 - [ ] A) True
 - [ ] B) False
@@ -1098,7 +1098,7 @@ echo $fn();
 
 ---
 
-**Question 85:** `Closure::fromCallable()` converts a callable (e.g., a function name string) into a `Closure` instance.
+### Q85: `Closure::fromCallable()` converts a callable (e.g., a function name string) into a `Closure` instance.
 **Type:** True / False
 - [ ] A) True
 - [ ] B) False
@@ -1108,7 +1108,7 @@ echo $fn();
 
 ---
 
-**Question 86:** A closure defined with `static function()` has access to `$this`.
+### Q86: A closure defined with `static function()` has access to `$this`.
 **Type:** True / False
 - [ ] A) True
 - [ ] B) False
@@ -1120,7 +1120,7 @@ echo $fn();
 
 ### Abstract classes
 
-**Question 87:** An abstract class can contain both abstract and concrete (implemented) methods.
+### Q87: An abstract class can contain both abstract and concrete (implemented) methods.
 **Type:** True / False
 - [ ] A) True
 - [ ] B) False
@@ -1130,7 +1130,7 @@ echo $fn();
 
 ---
 
-**Question 88:** An abstract class can be instantiated directly with `new AbstractClassName()`.
+### Q88: An abstract class can be instantiated directly with `new AbstractClassName()`.
 **Type:** True / False
 - [ ] A) True
 - [ ] B) False
@@ -1140,7 +1140,7 @@ echo $fn();
 
 ---
 
-**Question 89:** What is the key difference between an abstract class and an interface?
+### Q89: What is the key difference between an abstract class and an interface?
 **Type:** Single answer
 - [ ] A) Abstract classes can have state (properties); interfaces cannot (except constants)
 - [ ] B) Interfaces can have constructors; abstract classes cannot
@@ -1152,7 +1152,7 @@ echo $fn();
 
 ---
 
-**Question 90:** A class can extend an abstract class AND implement one or more interfaces simultaneously.
+### Q90: A class can extend an abstract class AND implement one or more interfaces simultaneously.
 **Type:** True / False
 - [ ] A) True
 - [ ] B) False
@@ -1162,7 +1162,7 @@ echo $fn();
 
 ---
 
-**Question 91:** If a child class extends an abstract class but doesn't implement all abstract methods, what must the child class be declared as?
+### Q91: If a child class extends an abstract class but doesn't implement all abstract methods, what must the child class be declared as?
 **Type:** Single answer
 - [ ] A) `final`
 - [ ] B) `abstract`
@@ -1176,7 +1176,7 @@ echo $fn();
 
 ### Exception and error handling
 
-**Question 92:** Which of these is the base class for all exceptions in PHP?
+### Q92: Which of these is the base class for all exceptions in PHP?
 **Type:** Single answer
 - [ ] A) `Exception`
 - [ ] B) `Throwable`
@@ -1188,7 +1188,7 @@ echo $fn();
 
 ---
 
-**Question 93:** What is the difference between `Exception` and `Error` in PHP?
+### Q93: What is the difference between `Exception` and `Error` in PHP?
 **Type:** Single answer
 - [ ] A) `Exception` is for user-thrown errors; `Error` is for engine-level errors (type errors, division by zero)
 - [ ] B) They are identical
@@ -1200,7 +1200,7 @@ echo $fn();
 
 ---
 
-**Question 94:** Can you have multiple `catch` blocks for a single `try` block?
+### Q94: Can you have multiple `catch` blocks for a single `try` block?
 **Type:** True / False
 - [ ] A) True
 - [ ] B) False
@@ -1210,7 +1210,7 @@ echo $fn();
 
 ---
 
-**Question 95:** What is the pipe (`|`) catch syntax in PHP 8.0?
+### Q95: What is the pipe (`|`) catch syntax in PHP 8.0?
 **Type:** Single answer
 - [ ] A) Catch the first exception type only
 - [ ] B) Catch multiple exception types in a single `catch` block
@@ -1222,7 +1222,7 @@ echo $fn();
 
 ---
 
-**Question 96:** The `finally` block is executed:
+### Q96: The `finally` block is executed:
 **Type:** Single answer
 - [ ] A) Only if an exception is thrown
 - [ ] B) Only if no exception is thrown
@@ -1234,7 +1234,7 @@ echo $fn();
 
 ---
 
-**Question 97:** PHP 8.0 allows non-capturing catches. What does `catch (Exception)` (without `$e`) mean?
+### Q97: PHP 8.0 allows non-capturing catches. What does `catch (Exception)` (without `$e`) mean?
 **Type:** Single answer
 - [ ] A) The exception is silently ignored
 - [ ] B) The exception is caught but not assigned to a variable
@@ -1246,7 +1246,7 @@ echo $fn();
 
 ---
 
-**Question 98:** What does `set_exception_handler()` do?
+### Q98: What does `set_exception_handler()` do?
 **Type:** Single answer
 - [ ] A) Registers a handler for uncaught exceptions
 - [ ] B) Replaces the `try/catch` mechanism
@@ -1260,7 +1260,7 @@ echo $fn();
 
 ### Traits
 
-**Question 99:** What is a Trait in PHP?
+### Q99: What is a Trait in PHP?
 **Type:** Single answer
 - [ ] A) A class that can be instantiated
 - [ ] B) A mechanism for code reuse in single-inheritance languages
@@ -1272,7 +1272,7 @@ echo $fn();
 
 ---
 
-**Question 100:** Traits can contain properties.
+### Q100: Traits can contain properties.
 **Type:** True / False
 - [ ] A) True
 - [ ] B) False
@@ -1282,7 +1282,7 @@ echo $fn();
 
 ---
 
-**Question 101:** Traits can implement interfaces.
+### Q101: Traits can implement interfaces.
 **Type:** True / False
 - [ ] A) True
 - [ ] B) False
@@ -1292,7 +1292,7 @@ echo $fn();
 
 ---
 
-**Question 102:** If two traits define a method with the same name, what keyword resolves the conflict?
+### Q102: If two traits define a method with the same name, what keyword resolves the conflict?
 **Type:** Single answer
 - [ ] A) `resolve`
 - [ ] B) `insteadof`
@@ -1304,7 +1304,7 @@ echo $fn();
 
 ---
 
-**Question 103:** What does `as` do in the context of a trait `use` statement?
+### Q103: What does `as` do in the context of a trait `use` statement?
 **Type:** Single answer
 - [ ] A) Changes the trait method's visibility or creates an alias
 - [ ] B) Removes the method
@@ -1316,7 +1316,7 @@ echo $fn();
 
 ---
 
-**Question 104:** In PHP, the precedence for method resolution is: class method > trait method > inherited method.
+### Q104: In PHP, the precedence for method resolution is: class method > trait method > inherited method.
 **Type:** True / False
 - [ ] A) True
 - [ ] B) False
@@ -1326,7 +1326,7 @@ echo $fn();
 
 ---
 
-**Question 105:** A trait can contain abstract methods.
+### Q105: A trait can contain abstract methods.
 **Type:** True / False
 - [ ] A) True
 - [ ] B) False
@@ -1338,7 +1338,7 @@ echo $fn();
 
 ### Enums
 
-**Question 106:** What is the difference between a pure enum and a backed enum in PHP 8.1?
+### Q106: What is the difference between a pure enum and a backed enum in PHP 8.1?
 **Type:** Single answer
 - [ ] A) Pure enums have no associated value; backed enums have a scalar value (string or int) for each case
 - [ ] B) Pure enums can only have integer cases
@@ -1350,7 +1350,7 @@ echo $fn();
 
 ---
 
-**Question 107:** What is the output?
+### Q107: What is the output?
 ```php
 enum Color: string {
     case Red = 'red';
@@ -1369,7 +1369,7 @@ echo Color::Red->value;
 
 ---
 
-**Question 108:** What does `Color::from('red')` do?
+### Q108: What does `Color::from('red')` do?
 **Type:** Single answer
 - [ ] A) Returns `Color::Red`
 - [ ] B) Returns `'red'`
@@ -1381,7 +1381,7 @@ echo Color::Red->value;
 
 ---
 
-**Question 109:** `Enum::tryFrom()` returns `null` if no matching case is found.
+### Q109: `Enum::tryFrom()` returns `null` if no matching case is found.
 **Type:** True / False
 - [ ] A) True
 - [ ] B) False
@@ -1391,7 +1391,7 @@ echo Color::Red->value;
 
 ---
 
-**Question 110:** Enums can implement interfaces.
+### Q110: Enums can implement interfaces.
 **Type:** True / False
 - [ ] A) True
 - [ ] B) False
@@ -1401,7 +1401,7 @@ echo Color::Red->value;
 
 ---
 
-**Question 111:** Enums can have methods (non-static).
+### Q111: Enums can have methods (non-static).
 **Type:** True / False
 - [ ] A) True
 - [ ] B) False
@@ -1411,7 +1411,7 @@ echo Color::Red->value;
 
 ---
 
-**Question 112:** You can use `new` to instantiate an enum case.
+### Q112: You can use `new` to instantiate an enum case.
 **Type:** True / False
 - [ ] A) True
 - [ ] B) False
@@ -1421,7 +1421,7 @@ echo Color::Red->value;
 
 ---
 
-**Question 113:** Enums can have constructors.
+### Q113: Enums can have constructors.
 **Type:** True / False
 - [ ] A) True
 - [ ] B) False
@@ -1431,7 +1431,7 @@ echo Color::Red->value;
 
 ---
 
-**Question 114:** What does `Color::cases()` return?
+### Q114: What does `Color::cases()` return?
 **Type:** Single answer
 - [ ] A) An array of all case names as strings
 - [ ] B) An array of all enum case instances
@@ -1443,7 +1443,7 @@ echo Color::Red->value;
 
 ---
 
-**Question 115:** Enums support the `use` keyword for traits.
+### Q115: Enums support the `use` keyword for traits.
 **Type:** True / False
 - [ ] A) True
 - [ ] B) False
@@ -1455,7 +1455,7 @@ echo Color::Red->value;
 
 ### PHP 8.4 Specifics
 
-**Question 116:** PHP 8.4 property hooks allow defining custom get and set behavior directly on a property without traditional getter/setter methods.
+### Q116: PHP 8.4 property hooks allow defining custom get and set behavior directly on a property without traditional getter/setter methods.
 **Type:** True / False
 - [ ] A) True
 - [ ] B) False
@@ -1465,7 +1465,7 @@ echo Color::Red->value;
 
 ---
 
-**Question 117:** What is the output?
+### Q117: What is the output?
 ```php
 class User {
     public string $name {
@@ -1487,7 +1487,7 @@ echo $u->name;
 
 ---
 
-**Question 118:** What does `public private(set) string $name;` mean in PHP 8.4?
+### Q118: What does `public private(set) string $name;` mean in PHP 8.4?
 **Type:** Single answer
 - [ ] A) The property is both public and private simultaneously
 - [ ] B) Reading is public, but writing is restricted to the class itself (private)
@@ -1499,7 +1499,7 @@ echo $u->name;
 
 ---
 
-**Question 119:** Which of the following are valid asymmetric visibility declarations in PHP 8.4? (Select all)
+### Q119: Which of the following are valid asymmetric visibility declarations in PHP 8.4? (Select all)
 **Type:** Multiple choice
 - [ ] A) `public private(set) string $name;`
 - [ ] B) `public protected(set) string $name;`
@@ -1511,7 +1511,7 @@ echo $u->name;
 
 ---
 
-**Question 120:** `array_any()` in PHP 8.4 returns `true` if at least one element satisfies the callback.
+### Q120: `array_any()` in PHP 8.4 returns `true` if at least one element satisfies the callback.
 **Type:** True / False
 - [ ] A) True
 - [ ] B) False
@@ -1521,7 +1521,7 @@ echo $u->name;
 
 ---
 
-**Question 121:** What does `array_all()` return in PHP 8.4?
+### Q121: What does `array_all()` return in PHP 8.4?
 **Type:** Single answer
 - [ ] A) `true` if at least one element matches the callback
 - [ ] B) `true` only if ALL elements match the callback
@@ -1533,7 +1533,7 @@ echo $u->name;
 
 ---
 
-**Question 122:** What does `array_find_key()` return in PHP 8.4?
+### Q122: What does `array_find_key()` return in PHP 8.4?
 **Type:** Single answer
 - [ ] A) The first value satisfying the callback
 - [ ] B) The key of the first element satisfying the callback
@@ -1545,7 +1545,7 @@ echo $u->name;
 
 ---
 
-**Question 123:** In PHP 8.4, `new` expressions can chain method calls without wrapping in parentheses.
+### Q123: In PHP 8.4, `new` expressions can chain method calls without wrapping in parentheses.
 ```php
 $result = new DateTime()->format('Y-m-d');
 ```
@@ -1558,7 +1558,7 @@ $result = new DateTime()->format('Y-m-d');
 
 ---
 
-**Question 124:** Property hooks can define both `get` and `set` independently. You are NOT required to define both.
+### Q124: Property hooks can define both `get` and `set` independently. You are NOT required to define both.
 **Type:** True / False
 - [ ] A) True
 - [ ] B) False
@@ -1568,7 +1568,7 @@ $result = new DateTime()->format('Y-m-d');
 
 ---
 
-**Question 125:** What is the output?
+### Q125: What is the output?
 ```php
 $arr = [1, 2, 3, 4, 5];
 $result = array_find($arr, fn($v) => $v > 10);
@@ -1583,4 +1583,3 @@ var_dump($result);
 **Correct Answer(s):** C
 **Explanation:** `array_find()` returns `null` when no element matches the callback.
 
----

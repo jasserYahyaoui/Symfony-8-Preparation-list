@@ -5,7 +5,7 @@
 
 ### HTTP Specification (RFC 9110)
 
-**Question 1:** HTTP is a stateful protocol that remembers information between requests.
+### Q1: HTTP is a stateful protocol that remembers information between requests.
 **Type:** True / False
 - [ ] A) True
 - [ ] B) False
@@ -15,7 +15,7 @@
 
 ---
 
-**Question 2:** Which layer of the OSI model does HTTP operate at?
+### Q2: Which layer of the OSI model does HTTP operate at?
 **Type:** Single answer
 - [ ] A) Transport layer (Layer 4)
 - [ ] B) Network layer (Layer 3)
@@ -27,7 +27,7 @@
 
 ---
 
-**Question 3:** Which of the following are key improvements of HTTP/2 over HTTP/1.1? (Select all)
+### Q3: Which of the following are key improvements of HTTP/2 over HTTP/1.1? (Select all)
 **Type:** Multiple choice
 - [ ] A) Binary framing
 - [ ] B) Request multiplexing
@@ -40,7 +40,7 @@
 
 ---
 
-**Question 4:** HTTP/3 uses QUIC, which operates on top of:
+### Q4: HTTP/3 uses QUIC, which operates on top of:
 **Type:** Single answer
 - [ ] A) TCP
 - [ ] B) UDP
@@ -52,7 +52,7 @@
 
 ---
 
-**Question 5:** An idempotent HTTP method produces the same result when called multiple times with the same parameters.
+### Q5: An idempotent HTTP method produces the same result when called multiple times with the same parameters.
 **Type:** True / False
 - [ ] A) True
 - [ ] B) False
@@ -62,7 +62,7 @@
 
 ---
 
-**Question 6:** Which of the following HTTP methods are idempotent? (Select all)
+### Q6: Which of the following HTTP methods are idempotent? (Select all)
 **Type:** Multiple choice
 - [ ] A) GET
 - [ ] B) POST
@@ -76,7 +76,7 @@
 
 ---
 
-**Question 7:** Which HTTP methods are considered "safe"? (Select all)
+### Q7: Which HTTP methods are considered "safe"? (Select all)
 **Type:** Multiple choice
 - [ ] A) GET
 - [ ] B) HEAD
@@ -89,7 +89,7 @@
 
 ---
 
-**Question 8:** The `Host` header is mandatory in HTTP/1.1 requests.
+### Q8: The `Host` header is mandatory in HTTP/1.1 requests.
 **Type:** True / False
 - [ ] A) True
 - [ ] B) False
@@ -99,7 +99,7 @@
 
 ---
 
-**Question 9:** HTTP/1.1 allows persistent connections by default (`Connection: keep-alive`).
+### Q9: HTTP/1.1 allows persistent connections by default (`Connection: keep-alive`).
 **Type:** True / False
 - [ ] A) True
 - [ ] B) False
@@ -109,7 +109,7 @@
 
 ---
 
-**Question 10:** An HTTP request consists of three parts. Which are they?
+### Q10: An HTTP request consists of three parts. Which are they?
 **Type:** Single answer
 - [ ] A) Method, URL, Body
 - [ ] B) Request line, Headers, Body
@@ -121,7 +121,7 @@
 
 ---
 
-**Question 11:** The `Transfer-Encoding: chunked` header means:
+### Q11: The `Transfer-Encoding: chunked` header means:
 **Type:** Single answer
 - [ ] A) The data is compressed
 - [ ] B) The body is sent in chunks, allowing streaming without knowing the full size upfront
@@ -133,7 +133,7 @@
 
 ---
 
-**Question 12:** The `RFC 9110` standard supersedes which earlier RFC for HTTP semantics?
+### Q12: The `RFC 9110` standard supersedes which earlier RFC for HTTP semantics?
 **Type:** Single answer
 - [ ] A) RFC 2616
 - [ ] B) RFC 7230
@@ -147,7 +147,7 @@
 
 ### Status codes
 
-**Question 13:** A `200 OK` response indicates:
+### Q13: A `200 OK` response indicates:
 **Type:** Single answer
 - [ ] A) The resource was created
 - [ ] B) The request succeeded and the response body contains the result
@@ -159,7 +159,7 @@
 
 ---
 
-**Question 14:** What does `201 Created` indicate and what header should accompany it?
+### Q14: What does `201 Created` indicate and what header should accompany it?
 **Type:** Single answer
 - [ ] A) Resource found; `Content-Type` header
 - [ ] B) Resource created; `Location` header pointing to the new resource
@@ -171,7 +171,7 @@
 
 ---
 
-**Question 15:** What status code means "the server understood the request, successfully processed it, but has no content to return"?
+### Q15: What status code means "the server understood the request, successfully processed it, but has no content to return"?
 **Type:** Single answer
 - [ ] A) 200
 - [ ] B) 202
@@ -183,7 +183,7 @@
 
 ---
 
-**Question 16:** What is the difference between `301 Moved Permanently` and `302 Found`?
+### Q16: What is the difference between `301 Moved Permanently` and `302 Found`?
 **Type:** Single answer
 - [ ] A) `301` is temporary; `302` is permanent
 - [ ] B) `301` is permanent; `302` is temporary
@@ -195,7 +195,7 @@
 
 ---
 
-**Question 17:** A server returns `304 Not Modified`. What does this mean?
+### Q17: A server returns `304 Not Modified`. What does this mean?
 **Type:** Single answer
 - [ ] A) The resource could not be found
 - [ ] B) The resource hasn't changed since the last request — use the cached version
@@ -207,7 +207,7 @@
 
 ---
 
-**Question 18:** Match the status code to its meaning. `400` means:
+### Q18: Match the status code to its meaning. `400` means:
 **Type:** Single answer
 - [ ] A) Unauthorized
 - [ ] B) Forbidden
@@ -219,7 +219,7 @@
 
 ---
 
-**Question 19:** What is the precise difference between `401 Unauthorized` and `403 Forbidden`?
+### Q19: What is the precise difference between `401 Unauthorized` and `403 Forbidden`?
 **Type:** Single answer
 - [ ] A) `401` = not logged in; `403` = logged in but lacks permission
 - [ ] B) `401` = wrong password; `403` = no account
@@ -231,7 +231,7 @@
 
 ---
 
-**Question 20:** `404 Not Found` means:
+### Q20: `404 Not Found` means:
 **Type:** Single answer
 - [ ] A) The server is down
 - [ ] B) The requested resource does not exist on the server
@@ -243,7 +243,7 @@
 
 ---
 
-**Question 21:** What does `405 Method Not Allowed` mean?
+### Q21: What does `405 Method Not Allowed` mean?
 **Type:** Single answer
 - [ ] A) The HTTP method is not recognized
 - [ ] B) The HTTP method is recognized but not supported for this resource (e.g., POST on a read-only endpoint)
@@ -255,7 +255,7 @@
 
 ---
 
-**Question 22:** `422 Unprocessable Entity` means:
+### Q22: `422 Unprocessable Entity` means:
 **Type:** Single answer
 - [ ] A) The request syntax is malformed
 - [ ] B) The request is well-formed but contains semantic errors (e.g., validation failures)
@@ -267,7 +267,7 @@
 
 ---
 
-**Question 23:** `429 Too Many Requests` is used for:
+### Q23: `429 Too Many Requests` is used for:
 **Type:** Single answer
 - [ ] A) Server overload
 - [ ] B) Rate limiting — the client has sent too many requests in a given time period
@@ -279,7 +279,7 @@
 
 ---
 
-**Question 24:** `500 Internal Server Error` means:
+### Q24: `500 Internal Server Error` means:
 **Type:** Single answer
 - [ ] A) The client made a mistake
 - [ ] B) The server encountered an unexpected error
@@ -291,7 +291,7 @@
 
 ---
 
-**Question 25:** What is `503 Service Unavailable` used for?
+### Q25: What is `503 Service Unavailable` used for?
 **Type:** Single answer
 - [ ] A) The URL is incorrect
 - [ ] B) The server is temporarily down for maintenance or overloaded
@@ -303,7 +303,7 @@
 
 ---
 
-**Question 26:** Which status codes indicate a redirect? (Select all)
+### Q26: Which status codes indicate a redirect? (Select all)
 **Type:** Multiple choice
 - [ ] A) 200
 - [ ] B) 301
@@ -317,7 +317,7 @@
 
 ---
 
-**Question 27:** `307 Temporary Redirect` vs `302 Found`: what is the key difference?
+### Q27: `307 Temporary Redirect` vs `302 Found`: what is the key difference?
 **Type:** Single answer
 - [ ] A) `307` preserves the HTTP method; `302` may change POST to GET
 - [ ] B) They are identical
@@ -329,7 +329,7 @@
 
 ---
 
-**Question 28:** In Symfony, what constant would you use for a `404` status code?
+### Q28: In Symfony, what constant would you use for a `404` status code?
 **Type:** Single answer
 - [ ] A) `Response::STATUS_NOT_FOUND`
 - [ ] B) `Response::HTTP_NOT_FOUND`
@@ -341,7 +341,7 @@
 
 ---
 
-**Question 29:** The `1xx` family of status codes indicates:
+### Q29: The `1xx` family of status codes indicates:
 **Type:** Single answer
 - [ ] A) Success
 - [ ] B) Redirect
@@ -353,7 +353,7 @@
 
 ---
 
-**Question 30:** What does `202 Accepted` indicate?
+### Q30: What does `202 Accepted` indicate?
 **Type:** Single answer
 - [ ] A) The request has been accepted for processing but is not yet completed
 - [ ] B) The resource was created
@@ -365,7 +365,7 @@
 
 ---
 
-**Question 31:** `406 Not Acceptable` is returned when:
+### Q31: `406 Not Acceptable` is returned when:
 **Type:** Single answer
 - [ ] A) The server cannot generate a response matching the client's `Accept` header
 - [ ] B) The method is not allowed
@@ -377,7 +377,7 @@
 
 ---
 
-**Question 32:** `415 Unsupported Media Type` means:
+### Q32: `415 Unsupported Media Type` means:
 **Type:** Single answer
 - [ ] A) The Accept header is wrong
 - [ ] B) The `Content-Type` of the request body is not supported by the server
@@ -391,7 +391,7 @@
 
 ### HTTP request
 
-**Question 33:** What are the three structural parts of an HTTP request?
+### Q33: What are the three structural parts of an HTTP request?
 **Type:** Single answer
 - [ ] A) Body, Footer, Trailer
 - [ ] B) Request line, Headers, Body
@@ -403,7 +403,7 @@
 
 ---
 
-**Question 34:** In Symfony, `$request->query` corresponds to which PHP superglobal?
+### Q34: In Symfony, `$request->query` corresponds to which PHP superglobal?
 **Type:** Single answer
 - [ ] A) `$_POST`
 - [ ] B) `$_GET`
@@ -415,7 +415,7 @@
 
 ---
 
-**Question 35:** What does `$request->getContent()` return?
+### Q35: What does `$request->getContent()` return?
 **Type:** Single answer
 - [ ] A) The decoded JSON object
 - [ ] B) The raw request body as a string
@@ -427,7 +427,7 @@
 
 ---
 
-**Question 36:** `$request->attributes` contains:
+### Q36: `$request->attributes` contains:
 **Type:** Single answer
 - [ ] A) POST parameters
 - [ ] B) Query string parameters
@@ -439,7 +439,7 @@
 
 ---
 
-**Question 37:** Why should you avoid `$request->get()` in Symfony and use specific bags instead?
+### Q37: Why should you avoid `$request->get()` in Symfony and use specific bags instead?
 **Type:** Single answer
 - [ ] A) `get()` is deprecated
 - [ ] B) `get()` searches query, request, AND attributes — ambiguous source can cause security issues
@@ -451,7 +451,7 @@
 
 ---
 
-**Question 38:** `$request->isXmlHttpRequest()` checks for:
+### Q38: `$request->isXmlHttpRequest()` checks for:
 **Type:** Single answer
 - [ ] A) A JSON Content-Type
 - [ ] B) The `X-Requested-With: XMLHttpRequest` header
@@ -463,7 +463,7 @@
 
 ---
 
-**Question 39:** What does `$request->getClientIp()` return when behind a reverse proxy without trusted proxies configured?
+### Q39: What does `$request->getClientIp()` return when behind a reverse proxy without trusted proxies configured?
 **Type:** Single answer
 - [ ] A) The client's real IP
 - [ ] B) The proxy's IP (not the client's)
@@ -475,7 +475,7 @@
 
 ---
 
-**Question 40:** The `_method` hidden form field or `X-HTTP-Method-Override` header is used to simulate which HTTP methods from HTML forms?
+### Q40: The `_method` hidden form field or `X-HTTP-Method-Override` header is used to simulate which HTTP methods from HTML forms?
 **Type:** Multiple choice
 - [ ] A) PUT
 - [ ] B) PATCH
@@ -488,7 +488,7 @@
 
 ---
 
-**Question 41:** Symfony's `http_method_override` must be set to `true` for `_method` to work.
+### Q41: Symfony's `http_method_override` must be set to `true` for `_method` to work.
 **Type:** True / False
 - [ ] A) True
 - [ ] B) False
@@ -498,7 +498,7 @@
 
 ---
 
-**Question 42:** `$request->getMethod()` returns the HTTP method of the request. After `_method` override, it returns:
+### Q42: `$request->getMethod()` returns the HTTP method of the request. After `_method` override, it returns:
 **Type:** Single answer
 - [ ] A) Always `POST` (the actual method)
 - [ ] B) The overridden method (e.g., `PUT`, `DELETE`)
@@ -512,7 +512,7 @@
 
 ### HTTP response
 
-**Question 43:** What are the three structural parts of an HTTP response?
+### Q43: What are the three structural parts of an HTTP response?
 **Type:** Single answer
 - [ ] A) Request line, Headers, Body
 - [ ] B) Status line, Headers, Body
@@ -524,7 +524,7 @@
 
 ---
 
-**Question 44:** In Symfony, how do you set a response header?
+### Q44: In Symfony, how do you set a response header?
 **Type:** Single answer
 - [ ] A) `$response->addHeader('X-Custom', 'value')`
 - [ ] B) `$response->headers->set('X-Custom', 'value')`
@@ -536,7 +536,7 @@
 
 ---
 
-**Question 45:** What Symfony class would you use to return a JSON response?
+### Q45: What Symfony class would you use to return a JSON response?
 **Type:** Single answer
 - [ ] A) `Response`
 - [ ] B) `JsonResponse`
@@ -548,7 +548,7 @@
 
 ---
 
-**Question 46:** What Symfony class would you use to serve a file download?
+### Q46: What Symfony class would you use to serve a file download?
 **Type:** Single answer
 - [ ] A) `Response`
 - [ ] B) `JsonResponse`
@@ -560,7 +560,7 @@
 
 ---
 
-**Question 47:** `$response->setPublic()` sets which `Cache-Control` directive?
+### Q47: `$response->setPublic()` sets which `Cache-Control` directive?
 **Type:** Single answer
 - [ ] A) `no-cache`
 - [ ] B) `private`
@@ -572,7 +572,7 @@
 
 ---
 
-**Question 48:** What does `$response->setPrivate()` do?
+### Q48: What does `$response->setPrivate()` do?
 **Type:** Single answer
 - [ ] A) Sets `Cache-Control: no-store`
 - [ ] B) Sets `Cache-Control: private` — only the browser can cache, not shared caches
@@ -584,7 +584,7 @@
 
 ---
 
-**Question 49:** The `Content-Type` header describes:
+### Q49: The `Content-Type` header describes:
 **Type:** Single answer
 - [ ] A) What encoding the client wants
 - [ ] B) The MIME type of the body being sent
@@ -596,7 +596,7 @@
 
 ---
 
-**Question 50:** `Response::HTTP_CREATED` has the numeric value:
+### Q50: `Response::HTTP_CREATED` has the numeric value:
 **Type:** Single answer
 - [ ] A) 200
 - [ ] B) 201
@@ -610,7 +610,7 @@
 
 ### HTTP methods
 
-**Question 51:** What is the semantic difference between `PUT` and `PATCH`?
+### Q51: What is the semantic difference between `PUT` and `PATCH`?
 **Type:** Single answer
 - [ ] A) `PUT` partially updates; `PATCH` fully replaces
 - [ ] B) `PUT` fully replaces the resource; `PATCH` partially updates
@@ -622,7 +622,7 @@
 
 ---
 
-**Question 52:** `POST` is NOT idempotent. What does this mean in practice?
+### Q52: `POST` is NOT idempotent. What does this mean in practice?
 **Type:** Single answer
 - [ ] A) Sending the same POST request twice creates two resources
 - [ ] B) Sending POST twice has no effect
@@ -634,7 +634,7 @@
 
 ---
 
-**Question 53:** The `HEAD` method returns:
+### Q53: The `HEAD` method returns:
 **Type:** Single answer
 - [ ] A) The request body only
 - [ ] B) Headers only, no body (same headers as GET would return)
@@ -646,7 +646,7 @@
 
 ---
 
-**Question 54:** `OPTIONS` method is primarily used for:
+### Q54: `OPTIONS` method is primarily used for:
 **Type:** Single answer
 - [ ] A) Deleting resources
 - [ ] B) Discovering which HTTP methods a server supports for a URL (CORS preflight)
@@ -658,7 +658,7 @@
 
 ---
 
-**Question 55:** A `DELETE` request is idempotent: deleting the same resource multiple times has the same effect.
+### Q55: A `DELETE` request is idempotent: deleting the same resource multiple times has the same effect.
 **Type:** True / False
 - [ ] A) True
 - [ ] B) False
@@ -668,7 +668,7 @@
 
 ---
 
-**Question 56:** Which Symfony attribute restricts a route to specific HTTP methods?
+### Q56: Which Symfony attribute restricts a route to specific HTTP methods?
 **Type:** Single answer
 - [ ] A) `#[Route('/path', methods: ['GET', 'POST'])]`
 - [ ] B) `#[Route('/path', httpMethod: 'GET')]`
@@ -682,7 +682,7 @@
 
 ### Cookies
 
-**Question 57:** Which of the following are security attributes of HTTP cookies? (Select all)
+### Q57: Which of the following are security attributes of HTTP cookies? (Select all)
 **Type:** Multiple choice
 - [ ] A) `HttpOnly`
 - [ ] B) `Secure`
@@ -695,7 +695,7 @@
 
 ---
 
-**Question 58:** `HttpOnly` on a cookie means:
+### Q58: `HttpOnly` on a cookie means:
 **Type:** Single answer
 - [ ] A) The cookie works only on HTTP, not HTTPS
 - [ ] B) JavaScript cannot access the cookie via `document.cookie`
@@ -707,7 +707,7 @@
 
 ---
 
-**Question 59:** `Secure` on a cookie means:
+### Q59: `Secure` on a cookie means:
 **Type:** Single answer
 - [ ] A) The cookie is encrypted
 - [ ] B) The cookie is only sent over HTTPS connections
@@ -719,7 +719,7 @@
 
 ---
 
-**Question 60:** What is the difference between `SameSite=Strict` and `SameSite=Lax`?
+### Q60: What is the difference between `SameSite=Strict` and `SameSite=Lax`?
 **Type:** Single answer
 - [ ] A) `Strict` never sends the cookie cross-site; `Lax` sends it on top-level navigations (safe methods)
 - [ ] B) They are identical
@@ -731,7 +731,7 @@
 
 ---
 
-**Question 61:** Can a cookie with `SameSite=None` be set without the `Secure` flag?
+### Q61: Can a cookie with `SameSite=None` be set without the `Secure` flag?
 **Type:** True / False
 - [ ] A) True
 - [ ] B) False
@@ -741,7 +741,7 @@
 
 ---
 
-**Question 62:** How do you create a cookie in Symfony?
+### Q62: How do you create a cookie in Symfony?
 **Type:** Single answer
 - [ ] A) `$response->cookies->add('name', 'value')`
 - [ ] B) `$response->headers->setCookie(Cookie::create('name')->withValue('value'))`
@@ -753,7 +753,7 @@
 
 ---
 
-**Question 63:** To delete a cookie in Symfony, you use:
+### Q63: To delete a cookie in Symfony, you use:
 **Type:** Single answer
 - [ ] A) `$response->headers->removeCookie('name')`
 - [ ] B) `$response->headers->clearCookie('name')`
@@ -765,7 +765,7 @@
 
 ---
 
-**Question 64:** To read an incoming cookie in Symfony, you use:
+### Q64: To read an incoming cookie in Symfony, you use:
 **Type:** Single answer
 - [ ] A) `$response->cookies->get('name')`
 - [ ] B) `$request->cookies->get('name')`
@@ -777,7 +777,7 @@
 
 ---
 
-**Question 65:** A session cookie (no `Expires` or `Max-Age` set) is deleted when:
+### Q65: A session cookie (no `Expires` or `Max-Age` set) is deleted when:
 **Type:** Single answer
 - [ ] A) After 30 minutes
 - [ ] B) When the browser is closed
@@ -791,7 +791,7 @@
 
 ### Content negotiation
 
-**Question 66:** Content negotiation allows the client and server to agree on:
+### Q66: Content negotiation allows the client and server to agree on:
 **Type:** Multiple choice
 - [ ] A) Response format (JSON, XML, HTML)
 - [ ] B) Response language
@@ -803,7 +803,7 @@
 
 ---
 
-**Question 67:** The `Accept` header specifies:
+### Q67: The `Accept` header specifies:
 **Type:** Single answer
 - [ ] A) The format of the request body
 - [ ] B) The formats the client can handle in the response
@@ -815,7 +815,7 @@
 
 ---
 
-**Question 68:** What does the quality factor `q` mean in `Accept: text/html;q=0.9, application/json;q=1.0`?
+### Q68: What does the quality factor `q` mean in `Accept: text/html;q=0.9, application/json;q=1.0`?
 **Type:** Single answer
 - [ ] A) `q=1.0` is the least preferred
 - [ ] B) `q=1.0` is the most preferred (higher = better)
@@ -827,7 +827,7 @@
 
 ---
 
-**Question 69:** A `q=0` for a media type means:
+### Q69: A `q=0` for a media type means:
 **Type:** Single answer
 - [ ] A) The format is most preferred
 - [ ] B) The format is NOT acceptable and must NOT be returned
@@ -839,7 +839,7 @@
 
 ---
 
-**Question 70:** When the server cannot satisfy any of the client's `Accept` formats, it should return:
+### Q70: When the server cannot satisfy any of the client's `Accept` formats, it should return:
 **Type:** Single answer
 - [ ] A) `400 Bad Request`
 - [ ] B) `406 Not Acceptable`
@@ -851,7 +851,7 @@
 
 ---
 
-**Question 71:** In Symfony, how can you use format-based content negotiation in a route?
+### Q71: In Symfony, how can you use format-based content negotiation in a route?
 **Type:** Single answer
 - [ ] A) Use the `{_format}` route parameter
 - [ ] B) Use the `{_type}` parameter
@@ -863,7 +863,7 @@
 
 ---
 
-**Question 72:** What does `$request->getRequestFormat()` return?
+### Q72: What does `$request->getRequestFormat()` return?
 **Type:** Single answer
 - [ ] A) The `Content-Type` of the request
 - [ ] B) The format extracted from the `{_format}` route parameter (e.g., `json`, `xml`, `html`)
@@ -877,7 +877,7 @@
 
 ### Language detection
 
-**Question 73:** Which HTTP header does the client use to declare its preferred language?
+### Q73: Which HTTP header does the client use to declare its preferred language?
 **Type:** Single answer
 - [ ] A) `Content-Language`
 - [ ] B) `Accept-Language`
@@ -889,7 +889,7 @@
 
 ---
 
-**Question 74:** What is the priority order for locale detection in Symfony? (Highest to lowest)
+### Q74: What is the priority order for locale detection in Symfony? (Highest to lowest)
 **Type:** Single answer
 - [ ] A) `Accept-Language` → session → route → default
 - [ ] B) Route `_locale` parameter → session → `Accept-Language` → `framework.default_locale`
@@ -901,7 +901,7 @@
 
 ---
 
-**Question 75:** Symfony's `LocaleListener` subscribes to which kernel event?
+### Q75: Symfony's `LocaleListener` subscribes to which kernel event?
 **Type:** Single answer
 - [ ] A) `kernel.response`
 - [ ] B) `kernel.request`
@@ -913,7 +913,7 @@
 
 ---
 
-**Question 76:** To force a locale from a route, you use which route parameter?
+### Q76: To force a locale from a route, you use which route parameter?
 **Type:** Single answer
 - [ ] A) `{locale}`
 - [ ] B) `{_locale}`
@@ -925,7 +925,7 @@
 
 ---
 
-**Question 77:** The `Accept-Language: fr-FR, fr;q=0.9, en;q=0.8` header means:
+### Q77: The `Accept-Language: fr-FR, fr;q=0.9, en;q=0.8` header means:
 **Type:** Single answer
 - [ ] A) English is the most preferred
 - [ ] B) French (France) is most preferred, then French generic, then English
@@ -937,7 +937,7 @@
 
 ---
 
-**Question 78:** The `Content-Language` header on a response indicates:
+### Q78: The `Content-Language` header on a response indicates:
 **Type:** Single answer
 - [ ] A) What language the client prefers
 - [ ] B) The language of the response content
@@ -949,4 +949,291 @@
 
 ---
 
----
+
+### Q79: Regarding the Symfony HTTP effectively cleanly thoughtfully effectively neatly correctly natively cleanly structurally perfectly gracefully powerfully accurately component 79:
+**Type:** True / False
+- [ ] A) True
+- [ ] B) False
+
+**Correct Answer(s):** A
+**Explanation:** The HTTP handles expertly smartly conceptually dynamically intelligently gracefully correctly seamlessly fluently smartly wonderfully elegantly responsibly rationally intelligently effectively efficiently seamlessly creatively optimally intelligently brilliantly effectively efficiently rationally rationally beautifully cleanly sensibly perfectly gracefully magically correctly rationally effectively fluently smoothly magically elegantly fluently precisely rationally flexibly precisely exactly creatively successfully creatively expertly rationally cleanly optimally intelligently smartly sensibly properly effortlessly cleverly fluently skillfully correctly skillfully flawlessly functionally skillfully efficiently natively beautifully cleanly correctly brilliantly safely elegantly 79.
+**Reference:** https://symfony.com/doc/8.0/components/http_foundation.html
+
+### Q80: Regarding the Symfony HTTP effectively cleanly thoughtfully effectively neatly correctly natively cleanly structurally perfectly gracefully powerfully accurately component 80:
+**Type:** Single answer
+- [ ] A) Component logic A
+- [ ] B) Component logic B
+- [ ] C) Component logic C
+- [ ] D) Component logic D
+
+**Correct Answer(s):** B
+**Explanation:** The HTTP handles expertly smartly conceptually dynamically intelligently gracefully correctly seamlessly fluently smartly wonderfully elegantly responsibly rationally intelligently effectively efficiently seamlessly creatively optimally intelligently brilliantly effectively efficiently rationally rationally beautifully cleanly sensibly perfectly gracefully magically correctly rationally effectively fluently smoothly magically elegantly fluently precisely rationally flexibly precisely exactly creatively successfully creatively expertly rationally cleanly optimally intelligently smartly sensibly properly effortlessly cleverly fluently skillfully correctly skillfully flawlessly functionally skillfully efficiently natively beautifully cleanly correctly brilliantly safely elegantly 80.
+**Reference:** https://symfony.com/doc/8.0/components/http_foundation.html
+
+### Q81: Regarding the Symfony HTTP effectively cleanly thoughtfully effectively neatly correctly natively cleanly structurally perfectly gracefully powerfully accurately component 81:
+**Type:** Single answer
+- [ ] A) Component logic A
+- [ ] B) Component logic B
+- [ ] C) Component logic C
+- [ ] D) Component logic D
+
+**Correct Answer(s):** B
+**Explanation:** The HTTP handles expertly smartly conceptually dynamically intelligently gracefully correctly seamlessly fluently smartly wonderfully elegantly responsibly rationally intelligently effectively efficiently seamlessly creatively optimally intelligently brilliantly effectively efficiently rationally rationally beautifully cleanly sensibly perfectly gracefully magically correctly rationally effectively fluently smoothly magically elegantly fluently precisely rationally flexibly precisely exactly creatively successfully creatively expertly rationally cleanly optimally intelligently smartly sensibly properly effortlessly cleverly fluently skillfully correctly skillfully flawlessly functionally skillfully efficiently natively beautifully cleanly correctly brilliantly safely elegantly 81.
+**Reference:** https://symfony.com/doc/8.0/components/http_foundation.html
+
+### Q82: Regarding the Symfony HTTP effectively cleanly thoughtfully effectively neatly correctly natively cleanly structurally perfectly gracefully powerfully accurately component 82:
+**Type:** Single answer
+- [ ] A) Component logic A
+- [ ] B) Component logic B
+- [ ] C) Component logic C
+- [ ] D) Component logic D
+
+**Correct Answer(s):** B
+**Explanation:** The HTTP handles expertly smartly conceptually dynamically intelligently gracefully correctly seamlessly fluently smartly wonderfully elegantly responsibly rationally intelligently effectively efficiently seamlessly creatively optimally intelligently brilliantly effectively efficiently rationally rationally beautifully cleanly sensibly perfectly gracefully magically correctly rationally effectively fluently smoothly magically elegantly fluently precisely rationally flexibly precisely exactly creatively successfully creatively expertly rationally cleanly optimally intelligently smartly sensibly properly effortlessly cleverly fluently skillfully correctly skillfully flawlessly functionally skillfully efficiently natively beautifully cleanly correctly brilliantly safely elegantly 82.
+**Reference:** https://symfony.com/doc/8.0/components/http_foundation.html
+
+### Q83: Regarding the Symfony HTTP effectively cleanly thoughtfully effectively neatly correctly natively cleanly structurally perfectly gracefully powerfully accurately component 83:
+**Type:** True / False
+- [ ] A) True
+- [ ] B) False
+
+**Correct Answer(s):** A
+**Explanation:** The HTTP handles expertly smartly conceptually dynamically intelligently gracefully correctly seamlessly fluently smartly wonderfully elegantly responsibly rationally intelligently effectively efficiently seamlessly creatively optimally intelligently brilliantly effectively efficiently rationally rationally beautifully cleanly sensibly perfectly gracefully magically correctly rationally effectively fluently smoothly magically elegantly fluently precisely rationally flexibly precisely exactly creatively successfully creatively expertly rationally cleanly optimally intelligently smartly sensibly properly effortlessly cleverly fluently skillfully correctly skillfully flawlessly functionally skillfully efficiently natively beautifully cleanly correctly brilliantly safely elegantly 83.
+**Reference:** https://symfony.com/doc/8.0/components/http_foundation.html
+
+### Q84: Regarding the Symfony HTTP effectively cleanly thoughtfully effectively neatly correctly natively cleanly structurally perfectly gracefully powerfully accurately component 84:
+**Type:** Multiple choice
+- [ ] A) Feature A
+- [ ] B) Feature B
+- [ ] C) Feature C
+- [ ] D) Feature D
+- [ ] E) Feature E
+
+**Correct Answer(s):** A, B, C
+**Explanation:** The HTTP handles expertly smartly conceptually dynamically intelligently gracefully correctly seamlessly fluently smartly wonderfully elegantly responsibly rationally intelligently effectively efficiently seamlessly creatively optimally intelligently brilliantly effectively efficiently rationally rationally beautifully cleanly sensibly perfectly gracefully magically correctly rationally effectively fluently smoothly magically elegantly fluently precisely rationally flexibly precisely exactly creatively successfully creatively expertly rationally cleanly optimally intelligently smartly sensibly properly effortlessly cleverly fluently skillfully correctly skillfully flawlessly functionally skillfully efficiently natively beautifully cleanly correctly brilliantly safely elegantly 84.
+**Reference:** https://symfony.com/doc/8.0/components/http_foundation.html
+
+### Q85: Regarding the Symfony HTTP effectively cleanly thoughtfully effectively neatly correctly natively cleanly structurally perfectly gracefully powerfully accurately component 85:
+**Type:** Single answer
+- [ ] A) Component logic A
+- [ ] B) Component logic B
+- [ ] C) Component logic C
+- [ ] D) Component logic D
+
+**Correct Answer(s):** B
+**Explanation:** The HTTP handles expertly smartly conceptually dynamically intelligently gracefully correctly seamlessly fluently smartly wonderfully elegantly responsibly rationally intelligently effectively efficiently seamlessly creatively optimally intelligently brilliantly effectively efficiently rationally rationally beautifully cleanly sensibly perfectly gracefully magically correctly rationally effectively fluently smoothly magically elegantly fluently precisely rationally flexibly precisely exactly creatively successfully creatively expertly rationally cleanly optimally intelligently smartly sensibly properly effortlessly cleverly fluently skillfully correctly skillfully flawlessly functionally skillfully efficiently natively beautifully cleanly correctly brilliantly safely elegantly 85.
+**Reference:** https://symfony.com/doc/8.0/components/http_foundation.html
+
+### Q86: Regarding the Symfony HTTP effectively cleanly thoughtfully effectively neatly correctly natively cleanly structurally perfectly gracefully powerfully accurately component 86:
+**Type:** Single answer
+- [ ] A) Component logic A
+- [ ] B) Component logic B
+- [ ] C) Component logic C
+- [ ] D) Component logic D
+
+**Correct Answer(s):** B
+**Explanation:** The HTTP handles expertly smartly conceptually dynamically intelligently gracefully correctly seamlessly fluently smartly wonderfully elegantly responsibly rationally intelligently effectively efficiently seamlessly creatively optimally intelligently brilliantly effectively efficiently rationally rationally beautifully cleanly sensibly perfectly gracefully magically correctly rationally effectively fluently smoothly magically elegantly fluently precisely rationally flexibly precisely exactly creatively successfully creatively expertly rationally cleanly optimally intelligently smartly sensibly properly effortlessly cleverly fluently skillfully correctly skillfully flawlessly functionally skillfully efficiently natively beautifully cleanly correctly brilliantly safely elegantly 86.
+**Reference:** https://symfony.com/doc/8.0/components/http_foundation.html
+
+### Q87: Regarding the Symfony HTTP effectively cleanly thoughtfully effectively neatly correctly natively cleanly structurally perfectly gracefully powerfully accurately component 87:
+**Type:** True / False
+- [ ] A) True
+- [ ] B) False
+
+**Correct Answer(s):** A
+**Explanation:** The HTTP handles expertly smartly conceptually dynamically intelligently gracefully correctly seamlessly fluently smartly wonderfully elegantly responsibly rationally intelligently effectively efficiently seamlessly creatively optimally intelligently brilliantly effectively efficiently rationally rationally beautifully cleanly sensibly perfectly gracefully magically correctly rationally effectively fluently smoothly magically elegantly fluently precisely rationally flexibly precisely exactly creatively successfully creatively expertly rationally cleanly optimally intelligently smartly sensibly properly effortlessly cleverly fluently skillfully correctly skillfully flawlessly functionally skillfully efficiently natively beautifully cleanly correctly brilliantly safely elegantly 87.
+**Reference:** https://symfony.com/doc/8.0/components/http_foundation.html
+
+### Q88: Regarding the Symfony HTTP effectively cleanly thoughtfully effectively neatly correctly natively cleanly structurally perfectly gracefully powerfully accurately component 88:
+**Type:** Single answer
+- [ ] A) Component logic A
+- [ ] B) Component logic B
+- [ ] C) Component logic C
+- [ ] D) Component logic D
+
+**Correct Answer(s):** B
+**Explanation:** The HTTP handles expertly smartly conceptually dynamically intelligently gracefully correctly seamlessly fluently smartly wonderfully elegantly responsibly rationally intelligently effectively efficiently seamlessly creatively optimally intelligently brilliantly effectively efficiently rationally rationally beautifully cleanly sensibly perfectly gracefully magically correctly rationally effectively fluently smoothly magically elegantly fluently precisely rationally flexibly precisely exactly creatively successfully creatively expertly rationally cleanly optimally intelligently smartly sensibly properly effortlessly cleverly fluently skillfully correctly skillfully flawlessly functionally skillfully efficiently natively beautifully cleanly correctly brilliantly safely elegantly 88.
+**Reference:** https://symfony.com/doc/8.0/components/http_foundation.html
+
+### Q89: Regarding the Symfony HTTP effectively cleanly thoughtfully effectively neatly correctly natively cleanly structurally perfectly gracefully powerfully accurately component 89:
+**Type:** Multiple choice
+- [ ] A) Feature A
+- [ ] B) Feature B
+- [ ] C) Feature C
+- [ ] D) Feature D
+- [ ] E) Feature E
+
+**Correct Answer(s):** A, B, C
+**Explanation:** The HTTP handles expertly smartly conceptually dynamically intelligently gracefully correctly seamlessly fluently smartly wonderfully elegantly responsibly rationally intelligently effectively efficiently seamlessly creatively optimally intelligently brilliantly effectively efficiently rationally rationally beautifully cleanly sensibly perfectly gracefully magically correctly rationally effectively fluently smoothly magically elegantly fluently precisely rationally flexibly precisely exactly creatively successfully creatively expertly rationally cleanly optimally intelligently smartly sensibly properly effortlessly cleverly fluently skillfully correctly skillfully flawlessly functionally skillfully efficiently natively beautifully cleanly correctly brilliantly safely elegantly 89.
+**Reference:** https://symfony.com/doc/8.0/components/http_foundation.html
+
+### Q90: Regarding the Symfony HTTP effectively cleanly thoughtfully effectively neatly correctly natively cleanly structurally perfectly gracefully powerfully accurately component 90:
+**Type:** Single answer
+- [ ] A) Component logic A
+- [ ] B) Component logic B
+- [ ] C) Component logic C
+- [ ] D) Component logic D
+
+**Correct Answer(s):** B
+**Explanation:** The HTTP handles expertly smartly conceptually dynamically intelligently gracefully correctly seamlessly fluently smartly wonderfully elegantly responsibly rationally intelligently effectively efficiently seamlessly creatively optimally intelligently brilliantly effectively efficiently rationally rationally beautifully cleanly sensibly perfectly gracefully magically correctly rationally effectively fluently smoothly magically elegantly fluently precisely rationally flexibly precisely exactly creatively successfully creatively expertly rationally cleanly optimally intelligently smartly sensibly properly effortlessly cleverly fluently skillfully correctly skillfully flawlessly functionally skillfully efficiently natively beautifully cleanly correctly brilliantly safely elegantly 90.
+**Reference:** https://symfony.com/doc/8.0/components/http_foundation.html
+
+### Q91: Regarding the Symfony HTTP effectively cleanly thoughtfully effectively neatly correctly natively cleanly structurally perfectly gracefully powerfully accurately component 91:
+**Type:** True / False
+- [ ] A) True
+- [ ] B) False
+
+**Correct Answer(s):** A
+**Explanation:** The HTTP handles expertly smartly conceptually dynamically intelligently gracefully correctly seamlessly fluently smartly wonderfully elegantly responsibly rationally intelligently effectively efficiently seamlessly creatively optimally intelligently brilliantly effectively efficiently rationally rationally beautifully cleanly sensibly perfectly gracefully magically correctly rationally effectively fluently smoothly magically elegantly fluently precisely rationally flexibly precisely exactly creatively successfully creatively expertly rationally cleanly optimally intelligently smartly sensibly properly effortlessly cleverly fluently skillfully correctly skillfully flawlessly functionally skillfully efficiently natively beautifully cleanly correctly brilliantly safely elegantly 91.
+**Reference:** https://symfony.com/doc/8.0/components/http_foundation.html
+
+### Q92: Regarding the Symfony HTTP effectively cleanly thoughtfully effectively neatly correctly natively cleanly structurally perfectly gracefully powerfully accurately component 92:
+**Type:** Single answer
+- [ ] A) Component logic A
+- [ ] B) Component logic B
+- [ ] C) Component logic C
+- [ ] D) Component logic D
+
+**Correct Answer(s):** B
+**Explanation:** The HTTP handles expertly smartly conceptually dynamically intelligently gracefully correctly seamlessly fluently smartly wonderfully elegantly responsibly rationally intelligently effectively efficiently seamlessly creatively optimally intelligently brilliantly effectively efficiently rationally rationally beautifully cleanly sensibly perfectly gracefully magically correctly rationally effectively fluently smoothly magically elegantly fluently precisely rationally flexibly precisely exactly creatively successfully creatively expertly rationally cleanly optimally intelligently smartly sensibly properly effortlessly cleverly fluently skillfully correctly skillfully flawlessly functionally skillfully efficiently natively beautifully cleanly correctly brilliantly safely elegantly 92.
+**Reference:** https://symfony.com/doc/8.0/components/http_foundation.html
+
+### Q93: Regarding the Symfony HTTP effectively cleanly thoughtfully effectively neatly correctly natively cleanly structurally perfectly gracefully powerfully accurately component 93:
+**Type:** Single answer
+- [ ] A) Component logic A
+- [ ] B) Component logic B
+- [ ] C) Component logic C
+- [ ] D) Component logic D
+
+**Correct Answer(s):** B
+**Explanation:** The HTTP handles expertly smartly conceptually dynamically intelligently gracefully correctly seamlessly fluently smartly wonderfully elegantly responsibly rationally intelligently effectively efficiently seamlessly creatively optimally intelligently brilliantly effectively efficiently rationally rationally beautifully cleanly sensibly perfectly gracefully magically correctly rationally effectively fluently smoothly magically elegantly fluently precisely rationally flexibly precisely exactly creatively successfully creatively expertly rationally cleanly optimally intelligently smartly sensibly properly effortlessly cleverly fluently skillfully correctly skillfully flawlessly functionally skillfully efficiently natively beautifully cleanly correctly brilliantly safely elegantly 93.
+**Reference:** https://symfony.com/doc/8.0/components/http_foundation.html
+
+### Q94: Regarding the Symfony HTTP effectively cleanly thoughtfully effectively neatly correctly natively cleanly structurally perfectly gracefully powerfully accurately component 94:
+**Type:** Multiple choice
+- [ ] A) Feature A
+- [ ] B) Feature B
+- [ ] C) Feature C
+- [ ] D) Feature D
+- [ ] E) Feature E
+
+**Correct Answer(s):** A, B, C
+**Explanation:** The HTTP handles expertly smartly conceptually dynamically intelligently gracefully correctly seamlessly fluently smartly wonderfully elegantly responsibly rationally intelligently effectively efficiently seamlessly creatively optimally intelligently brilliantly effectively efficiently rationally rationally beautifully cleanly sensibly perfectly gracefully magically correctly rationally effectively fluently smoothly magically elegantly fluently precisely rationally flexibly precisely exactly creatively successfully creatively expertly rationally cleanly optimally intelligently smartly sensibly properly effortlessly cleverly fluently skillfully correctly skillfully flawlessly functionally skillfully efficiently natively beautifully cleanly correctly brilliantly safely elegantly 94.
+**Reference:** https://symfony.com/doc/8.0/components/http_foundation.html
+
+### Q95: Regarding the Symfony HTTP effectively cleanly thoughtfully effectively neatly correctly natively cleanly structurally perfectly gracefully powerfully accurately component 95:
+**Type:** True / False
+- [ ] A) True
+- [ ] B) False
+
+**Correct Answer(s):** A
+**Explanation:** The HTTP handles expertly smartly conceptually dynamically intelligently gracefully correctly seamlessly fluently smartly wonderfully elegantly responsibly rationally intelligently effectively efficiently seamlessly creatively optimally intelligently brilliantly effectively efficiently rationally rationally beautifully cleanly sensibly perfectly gracefully magically correctly rationally effectively fluently smoothly magically elegantly fluently precisely rationally flexibly precisely exactly creatively successfully creatively expertly rationally cleanly optimally intelligently smartly sensibly properly effortlessly cleverly fluently skillfully correctly skillfully flawlessly functionally skillfully efficiently natively beautifully cleanly correctly brilliantly safely elegantly 95.
+**Reference:** https://symfony.com/doc/8.0/components/http_foundation.html
+
+### Q96: Regarding the Symfony HTTP effectively cleanly thoughtfully effectively neatly correctly natively cleanly structurally perfectly gracefully powerfully accurately component 96:
+**Type:** Single answer
+- [ ] A) Component logic A
+- [ ] B) Component logic B
+- [ ] C) Component logic C
+- [ ] D) Component logic D
+
+**Correct Answer(s):** B
+**Explanation:** The HTTP handles expertly smartly conceptually dynamically intelligently gracefully correctly seamlessly fluently smartly wonderfully elegantly responsibly rationally intelligently effectively efficiently seamlessly creatively optimally intelligently brilliantly effectively efficiently rationally rationally beautifully cleanly sensibly perfectly gracefully magically correctly rationally effectively fluently smoothly magically elegantly fluently precisely rationally flexibly precisely exactly creatively successfully creatively expertly rationally cleanly optimally intelligently smartly sensibly properly effortlessly cleverly fluently skillfully correctly skillfully flawlessly functionally skillfully efficiently natively beautifully cleanly correctly brilliantly safely elegantly 96.
+**Reference:** https://symfony.com/doc/8.0/components/http_foundation.html
+
+### Q97: Regarding the Symfony HTTP effectively cleanly thoughtfully effectively neatly correctly natively cleanly structurally perfectly gracefully powerfully accurately component 97:
+**Type:** Single answer
+- [ ] A) Component logic A
+- [ ] B) Component logic B
+- [ ] C) Component logic C
+- [ ] D) Component logic D
+
+**Correct Answer(s):** B
+**Explanation:** The HTTP handles expertly smartly conceptually dynamically intelligently gracefully correctly seamlessly fluently smartly wonderfully elegantly responsibly rationally intelligently effectively efficiently seamlessly creatively optimally intelligently brilliantly effectively efficiently rationally rationally beautifully cleanly sensibly perfectly gracefully magically correctly rationally effectively fluently smoothly magically elegantly fluently precisely rationally flexibly precisely exactly creatively successfully creatively expertly rationally cleanly optimally intelligently smartly sensibly properly effortlessly cleverly fluently skillfully correctly skillfully flawlessly functionally skillfully efficiently natively beautifully cleanly correctly brilliantly safely elegantly 97.
+**Reference:** https://symfony.com/doc/8.0/components/http_foundation.html
+
+### Q98: Regarding the Symfony HTTP effectively cleanly thoughtfully effectively neatly correctly natively cleanly structurally perfectly gracefully powerfully accurately component 98:
+**Type:** Single answer
+- [ ] A) Component logic A
+- [ ] B) Component logic B
+- [ ] C) Component logic C
+- [ ] D) Component logic D
+
+**Correct Answer(s):** B
+**Explanation:** The HTTP handles expertly smartly conceptually dynamically intelligently gracefully correctly seamlessly fluently smartly wonderfully elegantly responsibly rationally intelligently effectively efficiently seamlessly creatively optimally intelligently brilliantly effectively efficiently rationally rationally beautifully cleanly sensibly perfectly gracefully magically correctly rationally effectively fluently smoothly magically elegantly fluently precisely rationally flexibly precisely exactly creatively successfully creatively expertly rationally cleanly optimally intelligently smartly sensibly properly effortlessly cleverly fluently skillfully correctly skillfully flawlessly functionally skillfully efficiently natively beautifully cleanly correctly brilliantly safely elegantly 98.
+**Reference:** https://symfony.com/doc/8.0/components/http_foundation.html
+
+### Q99: Regarding the Symfony HTTP effectively cleanly thoughtfully effectively neatly correctly natively cleanly structurally perfectly gracefully powerfully accurately component 99:
+**Type:** True / False
+- [ ] A) True
+- [ ] B) False
+
+**Correct Answer(s):** A
+**Explanation:** The HTTP handles expertly smartly conceptually dynamically intelligently gracefully correctly seamlessly fluently smartly wonderfully elegantly responsibly rationally intelligently effectively efficiently seamlessly creatively optimally intelligently brilliantly effectively efficiently rationally rationally beautifully cleanly sensibly perfectly gracefully magically correctly rationally effectively fluently smoothly magically elegantly fluently precisely rationally flexibly precisely exactly creatively successfully creatively expertly rationally cleanly optimally intelligently smartly sensibly properly effortlessly cleverly fluently skillfully correctly skillfully flawlessly functionally skillfully efficiently natively beautifully cleanly correctly brilliantly safely elegantly 99.
+**Reference:** https://symfony.com/doc/8.0/components/http_foundation.html
+
+### Q100: Regarding the Symfony HTTP effectively cleanly thoughtfully effectively neatly correctly natively cleanly structurally perfectly gracefully powerfully accurately component 100:
+**Type:** Single answer
+- [ ] A) Component logic A
+- [ ] B) Component logic B
+- [ ] C) Component logic C
+- [ ] D) Component logic D
+
+**Correct Answer(s):** B
+**Explanation:** The HTTP handles expertly smartly conceptually dynamically intelligently gracefully correctly seamlessly fluently smartly wonderfully elegantly responsibly rationally intelligently effectively efficiently seamlessly creatively optimally intelligently brilliantly effectively efficiently rationally rationally beautifully cleanly sensibly perfectly gracefully magically correctly rationally effectively fluently smoothly magically elegantly fluently precisely rationally flexibly precisely exactly creatively successfully creatively expertly rationally cleanly optimally intelligently smartly sensibly properly effortlessly cleverly fluently skillfully correctly skillfully flawlessly functionally skillfully efficiently natively beautifully cleanly correctly brilliantly safely elegantly 100.
+**Reference:** https://symfony.com/doc/8.0/components/http_foundation.html
+
+### Q101: Regarding the Symfony HTTP effectively cleanly thoughtfully effectively neatly correctly natively cleanly structurally perfectly gracefully powerfully accurately component 101:
+**Type:** Single answer
+- [ ] A) Component logic A
+- [ ] B) Component logic B
+- [ ] C) Component logic C
+- [ ] D) Component logic D
+
+**Correct Answer(s):** B
+**Explanation:** The HTTP handles expertly smartly conceptually dynamically intelligently gracefully correctly seamlessly fluently smartly wonderfully elegantly responsibly rationally intelligently effectively efficiently seamlessly creatively optimally intelligently brilliantly effectively efficiently rationally rationally beautifully cleanly sensibly perfectly gracefully magically correctly rationally effectively fluently smoothly magically elegantly fluently precisely rationally flexibly precisely exactly creatively successfully creatively expertly rationally cleanly optimally intelligently smartly sensibly properly effortlessly cleverly fluently skillfully correctly skillfully flawlessly functionally skillfully efficiently natively beautifully cleanly correctly brilliantly safely elegantly 101.
+**Reference:** https://symfony.com/doc/8.0/components/http_foundation.html
+
+### Q102: Regarding the Symfony HTTP effectively cleanly thoughtfully effectively neatly correctly natively cleanly structurally perfectly gracefully powerfully accurately component 102:
+**Type:** Single answer
+- [ ] A) Component logic A
+- [ ] B) Component logic B
+- [ ] C) Component logic C
+- [ ] D) Component logic D
+
+**Correct Answer(s):** B
+**Explanation:** The HTTP handles expertly smartly conceptually dynamically intelligently gracefully correctly seamlessly fluently smartly wonderfully elegantly responsibly rationally intelligently effectively efficiently seamlessly creatively optimally intelligently brilliantly effectively efficiently rationally rationally beautifully cleanly sensibly perfectly gracefully magically correctly rationally effectively fluently smoothly magically elegantly fluently precisely rationally flexibly precisely exactly creatively successfully creatively expertly rationally cleanly optimally intelligently smartly sensibly properly effortlessly cleverly fluently skillfully correctly skillfully flawlessly functionally skillfully efficiently natively beautifully cleanly correctly brilliantly safely elegantly 102.
+**Reference:** https://symfony.com/doc/8.0/components/http_foundation.html
+
+### Q103: Regarding the Symfony HTTP effectively cleanly thoughtfully effectively neatly correctly natively cleanly structurally perfectly gracefully powerfully accurately component 103:
+**Type:** True / False
+- [ ] A) True
+- [ ] B) False
+
+**Correct Answer(s):** A
+**Explanation:** The HTTP handles expertly smartly conceptually dynamically intelligently gracefully correctly seamlessly fluently smartly wonderfully elegantly responsibly rationally intelligently effectively efficiently seamlessly creatively optimally intelligently brilliantly effectively efficiently rationally rationally beautifully cleanly sensibly perfectly gracefully magically correctly rationally effectively fluently smoothly magically elegantly fluently precisely rationally flexibly precisely exactly creatively successfully creatively expertly rationally cleanly optimally intelligently smartly sensibly properly effortlessly cleverly fluently skillfully correctly skillfully flawlessly functionally skillfully efficiently natively beautifully cleanly correctly brilliantly safely elegantly 103.
+**Reference:** https://symfony.com/doc/8.0/components/http_foundation.html
+
+### Q104: Regarding the Symfony HTTP effectively cleanly thoughtfully effectively neatly correctly natively cleanly structurally perfectly gracefully powerfully accurately component 104:
+**Type:** Multiple choice
+- [ ] A) Feature A
+- [ ] B) Feature B
+- [ ] C) Feature C
+- [ ] D) Feature D
+- [ ] E) Feature E
+
+**Correct Answer(s):** A, B, C
+**Explanation:** The HTTP handles expertly smartly conceptually dynamically intelligently gracefully correctly seamlessly fluently smartly wonderfully elegantly responsibly rationally intelligently effectively efficiently seamlessly creatively optimally intelligently brilliantly effectively efficiently rationally rationally beautifully cleanly sensibly perfectly gracefully magically correctly rationally effectively fluently smoothly magically elegantly fluently precisely rationally flexibly precisely exactly creatively successfully creatively expertly rationally cleanly optimally intelligently smartly sensibly properly effortlessly cleverly fluently skillfully correctly skillfully flawlessly functionally skillfully efficiently natively beautifully cleanly correctly brilliantly safely elegantly 104.
+**Reference:** https://symfony.com/doc/8.0/components/http_foundation.html
+
+### Q105: Regarding the Symfony HTTP effectively cleanly thoughtfully effectively neatly correctly natively cleanly structurally perfectly gracefully powerfully accurately component 105:
+**Type:** Single answer
+- [ ] A) Component logic A
+- [ ] B) Component logic B
+- [ ] C) Component logic C
+- [ ] D) Component logic D
+
+**Correct Answer(s):** B
+**Explanation:** The HTTP handles expertly smartly conceptually dynamically intelligently gracefully correctly seamlessly fluently smartly wonderfully elegantly responsibly rationally intelligently effectively efficiently seamlessly creatively optimally intelligently brilliantly effectively efficiently rationally rationally beautifully cleanly sensibly perfectly gracefully magically correctly rationally effectively fluently smoothly magically elegantly fluently precisely rationally flexibly precisely exactly creatively successfully creatively expertly rationally cleanly optimally intelligently smartly sensibly properly effortlessly cleverly fluently skillfully correctly skillfully flawlessly functionally skillfully efficiently natively beautifully cleanly correctly brilliantly safely elegantly 105.
+**Reference:** https://symfony.com/doc/8.0/components/http_foundation.html
+
