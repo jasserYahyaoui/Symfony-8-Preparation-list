@@ -1,7 +1,7 @@
 ---
 title: Templating with Twig
 ---
-[Back to index](../readme.md#table-of-contents)
+[Back to index](../docs/legacy-readme.md#table-of-contents)
 
 # Templating with Twig
 - [Creating and Using Templates - symfony.com](https://symfony.com/doc/8.0/templates.html)

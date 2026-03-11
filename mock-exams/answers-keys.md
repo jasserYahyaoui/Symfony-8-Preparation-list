@@ -1,0 +1,154 @@
+# Answers Keys for Mock Exams
+
+## Mock Exam 1
+- **Q1:** B *(Source: data-validation.md)*
+- **Q2:** C *(Source: symfony-architecture.md)*
+- **Q3:** C *(Source: forms.md)*
+- **Q4:** A, B, C *(Source: forms.md)*
+- **Q5:** B *(Source: automated-tests.md)*
+- **Q6:** A *(Source: data-validation.md)*
+- **Q7:** B *(Source: data-validation.md)*
+- **Q8:** A, B, C *(Source: forms.md)*
+- **Q9:** A *(Source: routing.md)*
+- **Q10:** B *(Source: routing.md)*
+- **Q11:** B *(Source: miscellaneous.md)*
+- **Q12:** D *(Source: automated-tests.md)*
+- **Q13:** B *(Source: http.md)*
+- **Q14:** B *(Source: dependency-injection.md)*
+- **Q15:** A *(Source: templating-with-twig.md)*
+- **Q16:** B *(Source: console.md)*
+- **Q17:** A *(Source: automated-tests.md)*
+- **Q18:** C *(Source: symfony-architecture.md)*
+- **Q19:** C *(Source: symfony-architecture.md)*
+- **Q20:** B *(Source: http-caching.md)*
+- **Q21:** A *(Source: forms.md)*
+- **Q22:** A, B, C, D, E *(Source: messenger.md)*
+- **Q23:** C *(Source: automated-tests.md)*
+- **Q24:** A *(Source: routing.md)*
+- **Q25:** A *(Source: routing.md)*
+- **Q26:** A *(Source: messenger.md)*
+- **Q27:** A, B, C *(Source: security.md)*
+- **Q28:** B *(Source: symfony-architecture.md)*
+- **Q29:** A *(Source: php.md)*
+- **Q30:** B *(Source: symfony-architecture.md)*
+- **Q31:** B *(Source: controllers.md)*
+- **Q32:** B *(Source: symfony-architecture.md)*
+- **Q33:** B *(Source: http-caching.md)*
+- **Q34:** B *(Source: security.md)*
+- **Q35:** B *(Source: controllers.md)*
+- **Q36:** C *(Source: automated-tests.md)*
+- **Q37:** B *(Source: routing.md)*
+- **Q38:** A, B, C *(Source: data-validation.md)*
+- **Q39:** A *(Source: symfony-architecture.md)*
+- **Q40:** A *(Source: routing.md)*
+- **Q41:** A *(Source: data-validation.md)*
+- **Q42:** B *(Source: dependency-injection.md)*
+- **Q43:** A *(Source: php.md)*
+- **Q44:** B *(Source: data-validation.md)*
+- **Q45:** A, B, C *(Source: forms.md)*
+- **Q46:** A *(Source: automated-tests.md)*
+- **Q47:** B *(Source: miscellaneous.md)*
+- **Q48:** B *(Source: http-caching.md)*
+- **Q49:** B *(Source: data-validation.md)*
+- **Q50:** C *(Source: security.md)*
+- **Q51:** A *(Source: data-validation.md)*
+- **Q52:** B *(Source: symfony-architecture.md)*
+- **Q53:** A *(Source: templating-with-twig.md)*
+- **Q54:** B *(Source: dependency-injection.md)*
+- **Q55:** A *(Source: php.md)*
+- **Q56:** B *(Source: automated-tests.md)*
+- **Q57:** B *(Source: messenger.md)*
+- **Q58:** B *(Source: forms.md)*
+- **Q59:** A *(Source: messenger.md)*
+- **Q60:** A *(Source: automated-tests.md)*
+- **Q61:** A *(Source: automated-tests.md)*
+- **Q62:** B *(Source: security.md)*
+- **Q63:** A *(Source: dependency-injection.md)*
+- **Q64:** A, B, C *(Source: security.md)*
+- **Q65:** B *(Source: php.md)*
+- **Q66:** C *(Source: symfony-architecture.md)*
+- **Q67:** A, B, C *(Source: forms.md)*
+- **Q68:** A *(Source: miscellaneous.md)*
+- **Q69:** C *(Source: dependency-injection.md)*
+- **Q70:** D *(Source: symfony-architecture.md)*
+- **Q71:** B *(Source: controllers.md)*
+- **Q72:** B *(Source: routing.md)*
+- **Q73:** B *(Source: php.md)*
+- **Q74:** A *(Source: messenger.md)*
+- **Q75:** A *(Source: console.md)*
+## Mock Exam 2
+- **Q1:** A *(Source: automated-tests.md)*
+- **Q2:** A *(Source: messenger.md)*
+- **Q3:** B *(Source: forms.md)*
+- **Q4:** A, B, C *(Source: security.md)*
+- **Q5:** B *(Source: routing.md)*
+- **Q6:** A *(Source: data-validation.md)*
+- **Q7:** A *(Source: forms.md)*
+- **Q8:** B *(Source: templating-with-twig.md)*
+- **Q9:** A, B, C *(Source: messenger.md)*
+- **Q10:** A, B, D *(Source: routing.md)*
+- **Q11:** A *(Source: php.md)*
+- **Q12:** D *(Source: symfony-architecture.md)*
+- **Q13:** B *(Source: http.md)*
+- **Q14:** B *(Source: forms.md)*
+- **Q15:** B *(Source: templating-with-twig.md)*
+- **Q16:** B *(Source: php.md)*
+- **Q17:** B *(Source: dependency-injection.md)*
+- **Q18:** A *(Source: php.md)*
+- **Q19:** C *(Source: templating-with-twig.md)*
+- **Q20:** B *(Source: miscellaneous.md)*
+- **Q21:** C *(Source: routing.md)*
+- **Q22:** B *(Source: forms.md)*
+- **Q23:** A *(Source: controllers.md)*
+- **Q24:** B *(Source: forms.md)*
+- **Q25:** B *(Source: miscellaneous.md)*
+- **Q26:** A *(Source: http-caching.md)*
+- **Q27:** B *(Source: routing.md)*
+- **Q28:** A *(Source: http.md)*
+- **Q29:** B *(Source: data-validation.md)*
+- **Q30:** B *(Source: console.md)*
+- **Q31:** B *(Source: http-caching.md)*
+- **Q32:** A *(Source: automated-tests.md)*
+- **Q33:** B *(Source: controllers.md)*
+- **Q34:** A *(Source: miscellaneous.md)*
+- **Q35:** B *(Source: templating-with-twig.md)*
+- **Q36:** D *(Source: automated-tests.md)*
+- **Q37:** B *(Source: miscellaneous.md)*
+- **Q38:** B *(Source: forms.md)*
+- **Q39:** A *(Source: forms.md)*
+- **Q40:** A *(Source: controllers.md)*
+- **Q41:** B *(Source: messenger.md)*
+- **Q42:** A *(Source: http.md)*
+- **Q43:** B *(Source: templating-with-twig.md)*
+- **Q44:** A *(Source: controllers.md)*
+- **Q45:** B *(Source: dependency-injection.md)*
+- **Q46:** B *(Source: forms.md)*
+- **Q47:** C *(Source: templating-with-twig.md)*
+- **Q48:** B *(Source: console.md)*
+- **Q49:** B *(Source: dependency-injection.md)*
+- **Q50:** A *(Source: http.md)*
+- **Q51:** B *(Source: templating-with-twig.md)*
+- **Q52:** A *(Source: php.md)*
+- **Q53:** B *(Source: http.md)*
+- **Q54:** B *(Source: miscellaneous.md)*
+- **Q55:** B *(Source: http-caching.md)*
+- **Q56:** A, B, C *(Source: console.md)*
+- **Q57:** A *(Source: forms.md)*
+- **Q58:** B *(Source: routing.md)*
+- **Q59:** B *(Source: symfony-architecture.md)*
+- **Q60:** A *(Source: automated-tests.md)*
+- **Q61:** A *(Source: automated-tests.md)*
+- **Q62:** A *(Source: controllers.md)*
+- **Q63:** B *(Source: messenger.md)*
+- **Q64:** A, B *(Source: controllers.md)*
+- **Q65:** C *(Source: automated-tests.md)*
+- **Q66:** A *(Source: php.md)*
+- **Q67:** B *(Source: forms.md)*
+- **Q68:** B *(Source: routing.md)*
+- **Q69:** C *(Source: automated-tests.md)*
+- **Q70:** A, B, C, E *(Source: php.md)*
+- **Q71:** B *(Source: miscellaneous.md)*
+- **Q72:** A *(Source: symfony-architecture.md)*
+- **Q73:** B *(Source: security.md)*
+- **Q74:** B *(Source: miscellaneous.md)*
+- **Q75:** B *(Source: controllers.md)*

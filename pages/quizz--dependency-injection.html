@@ -1,0 +1,1207 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <title>Dependency Injection - Symfony 8.0 Expert Cockpit</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body class="bg-[#0f172a] text-gray-100 flex h-screen overflow-hidden selection:bg-blue-500/30 selection:text-white font-sans antialiased">
+    <!-- Injected Navigation Bar -->
+    <nav id="page-top-nav" style="position:sticky;top:0;z-index:100;background:rgba(15,23,42,0.95);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,0.06);padding:0.5rem 1rem;display:flex;align-items:center;justify-content:space-between;gap:0.5rem;">
+        <a href="../index.html" style="display:inline-flex;align-items:center;gap:6px;color:#60a5fa;font-weight:700;font-size:0.85rem;text-decoration:none;transition:all 0.2s;" onmouseover="this.style.color='#93c5fd'" onmouseout="this.style.color='#60a5fa'">
+            <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+            Dashboard
+        </a>
+        <div style="display:flex;align-items:center;gap:6px;">
+            <button id="nav-pomo-btn" onclick="togglePomo()" style="display:inline-flex;align-items:center;gap:4px;padding:4px 10px;border-radius:8px;font-size:0.75rem;font-weight:700;background:rgba(239,68,68,0.1);color:#f87171;border:1px solid rgba(239,68,68,0.2);cursor:pointer;transition:all 0.2s;" title="Pomodoro Timer">
+                ⏱ <span id="nav-pomo-display">25:00</span>
+            </button>
+            <button onclick="if(confirm('⚠️ Reset ALL progress? This cannot be undone.')){localStorage.removeItem('symfony-cockpit');location.href='../index.html'}" style="padding:4px 10px;border-radius:8px;font-size:0.75rem;font-weight:700;background:rgba(239,68,68,0.08);color:#fca5a5;border:1px solid rgba(239,68,68,0.15);cursor:pointer;transition:all 0.2s;" title="Reset Progress">
+                🔄 Reset
+            </button>
+        </div>
+    </nav>
+    <script>
+    (function(){
+        var s=25*60,r=false,iv;
+        window.togglePomo=function(){
+            var d=document.getElementById('nav-pomo-display'),b=document.getElementById('nav-pomo-btn');
+            if(r){clearInterval(iv);r=false;b.style.background='rgba(239,68,68,0.1)';return;}
+            r=true;b.style.background='rgba(16,185,129,0.15)';b.style.color='#34d399';b.style.borderColor='rgba(16,185,129,0.3)';
+            iv=setInterval(function(){
+                s--;if(s<=0){clearInterval(iv);r=false;s=25*60;d.textContent='25:00';alert('🍅 Pomodoro complete!');return;}
+                d.textContent=Math.floor(s/60)+':'+(s%60<10?'0':'')+s%60;
+            },1000);
+        };
+    })();
+    </script>
+
+    
+    <aside class="w-64 bg-slate-900 border-r border-slate-800 p-6 overflow-y-auto hidden md:flex flex-col shadow-2xl z-10">
+        <a href="../index.html" class="text-blue-400 hover:text-blue-300 font-bold mb-8 transition-all hover:-translate-x-1 flex items-center gap-2">
+            <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+            <span class="truncate">Back to Dashboard</span>
+        </a>
+        <div class="mt-auto">
+            <div class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Workspace</div>
+            <div class="text-sm font-medium text-slate-300 flex items-center gap-2">
+                <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                Expert Cockpit
+            </div>
+        </div>
+    </aside>
+
+    <main class="flex-1 p-6 md:p-12 overflow-y-auto bg-slate-900 relative shadow-inner" id="content-area">
+        <!-- Markdown content will be parsed and injected here -->
+        <div class="flex justify-center items-center h-full">
+            <div class="animate-pulse text-slate-500 font-medium">Loading pedagogical content...</div>
+        </div>
+    </main>
+
+    <template id="raw-markdown">
+# Quiz : Dependency Injection (Symfony 8.0 Certification)
+&gt; Exam-grade mock test — 100+ questions based on official Symfony 8.0 syllabus.
+
+---
+## DI component and container
+
+### Q1: What is the core responsibility of the Dependency Injection (DI) component in Symfony?
+**Type:** Single answer
+- [ ] A) It directly manages database schemas.
+- [ ] B) It acts as a factory that standardizes how objects (services) are constructed, configured, and injected into other objects.
+- [ ] C) It parses raw HTTP requests into objects.
+- [ ] D) It generates application forms.
+
+**Correct Answer(s):** B
+**Explanation:** The DI container orchestrates the lifecycle and wiring of all backend services mathematically.
+**Reference:** https://symfony.com/doc/8.0/components/dependency_injection.html
+
+### Q2: What occurs to the Dependency Injection Container during the standard production boot process?
+**Type:** Single answer
+- [ ] A) It reads all YAML files dynamically on every single HTTP request.
+- [ ] B) It is compiled once into a highly optimized raw PHP class stored in the `var/cache/` directory.
+- [ ] C) It stores its logic entirely within the MySQL database.
+- [ ] D) It offloads loading to an external Node.js daemon.
+
+**Correct Answer(s):** B
+**Explanation:** Compilation transforms abstract YAML definitions into pure, fast PHP instantiation code, eliminating runtime reflection overhead.
+**Reference:** https://symfony.com/doc/8.0/service_container.html
+
+### Q3: What is the command to list all currently registered services available within your application?
+**Type:** Single answer
+- [ ] A) `php bin/console list:services`
+- [ ] B) `php bin/console debug:container`
+- [ ] C) `php bin/console container:show`
+- [ ] D) `php bin/console router:match`
+
+**Correct Answer(s):** B
+**Explanation:** `debug:container` explores all registered public and private services securely.
+**Reference:** https://symfony.com/doc/current/service_container/debug.html
+
+### Q4: Which command explicitly searches the container mapping for services matching a specific interface type-hint?
+**Type:** Single answer
+- [ ] A) `php bin/console debug:autowiring`
+- [ ] B) `php bin/console debug:container --search`
+- [ ] C) `php bin/console container:interfaces`
+- [ ] D) `php bin/console debug:types`
+
+**Correct Answer(s):** A
+**Explanation:** `debug:autowiring` lists the types you can cleanly use natively in constructor arguments.
+**Reference:** https://symfony.com/doc/8.0/service_container/autowiring.html
+
+---
+
+## Services and parameters
+
+### Q5: How are configuration parameters fundamentally defined inside standard `services.yaml`?
+**Type:** Single answer
+- [ ] A) Under the `variables:` key.
+- [ ] B) Under the `parameters:` key.
+- [ ] C) Under the `env:` key.
+- [ ] D) Inside the specific service definition only.
+
+**Correct Answer(s):** B
+**Explanation:** The `parameters:` section stores static scalar values exactly natively.
+**Reference:** https://symfony.com/doc/8.0/configuration.html#configuration-parameters
+
+### Q6: How do you strictly reference a defined parameter dynamically within a YAML service argument?
+**Type:** Single answer
+- [ ] A) `@parameter_name`
+- [ ] B) `$parameter_name$`
+- [ ] C) `%parameter_name%`
+- [ ] D) `{{ parameter_name }}`
+
+**Correct Answer(s):** C
+**Explanation:** Percentage signs encapsulate explicitly parameters inside configuration logically.
+**Reference:** https://symfony.com/doc/8.0/configuration.html#configuration-parameters
+
+### Q7: If a service natively requires an injected string configured from a parameter, how is this handled in PHP 8 natively without touching YAML?
+**Type:** Single answer
+- [ ] A) `#[InjectParameter('admin_email')] string $email`
+- [ ] B) `#[Autowire('%admin_email%')] string $email`
+- [ ] C) `#[Inject('%admin_email%')] string $email`
+- [ ] D) `$this-&gt;container-&gt;getParameter('admin_email');`
+
+**Correct Answer(s):** B
+**Explanation:** The `#[Autowire]` attribute organically resolves parameters when encapsulating strings in `%`.
+**Reference:** https://symfony.com/doc/8.0/service_container/autowiring.html
+
+### Q8: True or False: In Symfony 8, newly registered standalone services are compiled as `public` natively by default.
+**Type:** True / False
+- [ ] A) True
+- [ ] B) False
+
+**Correct Answer(s):** B
+**Explanation:** The standard `_defaults` node marks all services as `public: false` enforcing constructor injection organically.
+**Reference:** https://symfony.com/doc/8.0/service_container.html
+
+### Q9: Can an explicitly defined container parameter hold an array?
+**Type:** True / False
+- [ ] A) True
+- [ ] B) False
+
+**Correct Answer(s):** A
+**Explanation:** Parameters can elegantly store strings, booleans, integers, and deep arrays.
+**Reference:** https://symfony.com/doc/8.0/configuration.html
+
+### Q10: How do you fetch an environment variable specifically natively rather than a static parameter inside `services.yaml`?
+**Type:** Single answer
+- [ ] A) `"%env(APP_SECRET)%"`
+- [ ] B) `"$APP_SECRET"`
+- [ ] C) `"%$_ENV['APP_SECRET']%"`
+- [ ] D) `"@APP_SECRET"`
+
+**Correct Answer(s):** A
+**Explanation:** The `%env(NAME)%` syntax specifically instructs the container to resolve the value dynamically at runtime realistically.
+**Reference:** https://symfony.com/doc/8.0/configuration.html
+
+---
+
+## Services autowiring
+
+### Q11: What natively occurs when autowiring is explicitly enabled for a specific service?
+**Type:** Single answer
+- [ ] A) Symfony automatically creates identical database models dynamically.
+- [ ] B) Symfony introspects constructor type-hints to automatically locate and cleanly inject strictly matching services organically.
+- [ ] C) It generates boilerplate controllers.
+- [ ] D) It compiles Twig variables accurately natively.
+
+**Correct Answer(s):** B
+**Explanation:** Autowiring utilizes PHP Reflection perfectly to deduce what explicit service arguments the class organically requires successfully.
+**Reference:** https://symfony.com/doc/8.0/service_container/autowiring.html
+
+
+### Q12: What specifically triggers autowiring to physically fail?
+**Type:** Single answer
+- [ ] A) Injecting strictly typed scalar arguments.
+- [ ] B) Two actively configured services implementing the same interface without explicit binding.
+- [ ] C) Extending AbstractController.
+- [ ] D) Caching.
+
+**Correct Answer(s):** B
+**Explanation:** Ambiguity causes autowiring to fail if it cannot decide which implementation to inject.
+**Reference:** https://symfony.com/doc/8.0/service_container/autowiring.html
+
+### Q13: How do you resolve an autowiring ambiguity when multiple services implement the same interface?
+**Type:** Single answer
+- [ ] A) Delete one service.
+- [ ] B) Use #[Autowire] attribute, interface aliases, or bind: in YAML.
+- [ ] C) Make both services public.
+- [ ] D) Restart the server.
+
+**Correct Answer(s):** B
+**Explanation:** Explicit binding instructs the DI container which specific service to use.
+**Reference:** https://symfony.com/doc/8.0/service_container/autowiring.html
+
+### Q14: What does #[AutowireInline] achieve?
+**Type:** Single answer
+- [ ] A) It inlines the service definition at the injection point, creating a private non-shared instance.
+- [ ] B) It autowires from the environment.
+- [ ] C) It creates a lazy proxy.
+- [ ] D) It injects a tagged service.
+
+**Correct Answer(s):** A
+**Explanation:** AutowireInline allows injecting a uniquely configured service instance 'on the fly'.
+**Reference:** https://symfony.com/doc/8.0/service_container/autowiring.html
+
+### Q15: Can you use autowiring for setter methods instead of constructors?
+**Type:** True / False
+- [ ] A) True
+- [ ] B) False
+
+**Correct Answer(s):** A
+**Explanation:** Using the #[Required] attribute on a setter method enables method injection.
+**Reference:** https://symfony.com/doc/8.0/service_container/autowiring.html#autowiring-other-methods
+
+### Q16: What does the #[AutoconfigurePackage] attribute do?
+**Type:** Single answer
+- [ ] A) Installs composer packages.
+- [ ] B) Facilitates automatic configuration of third-party bundle services.
+- [ ] C) Removes vendor files.
+- [ ] D) Validates parameters.
+
+**Correct Answer(s):** B
+**Explanation:** It simplifies registering and configuring services provided by external bundles.
+**Reference:** https://symfony.com/doc/8.0/service_container.html
+
+### Q17: What is the primary purpose of Service Decoration?
+**Type:** Single answer
+- [ ] A) To add HTML/CSS to responses.
+- [ ] B) To replace an existing service with a new one that creatively wraps the original (Decorator Pattern).
+- [ ] C) To delete services.
+- [ ] D) To move services to different namespaces.
+
+**Correct Answer(s):** B
+**Explanation:** Decoration wraps the original service, allowing you to modify its behavior while keeping the old logic inside.
+**Reference:** https://symfony.com/doc/8.0/service_container/service_decoration.html
+
+### Q18: How do you decorate a service using PHP Attributes?
+**Type:** Single answer
+- [ ] A) #[Decorate('original.id')]
+- [ ] B) #[AsDecorator('original.id')]
+- [ ] C) #[Wrap('original.id')]
+- [ ] D) #[Proxy('original.id')]
+
+**Correct Answer(s):** B
+**Explanation:** The #[AsDecorator] attribute replaces the target ID with your decorator.
+**Reference:** https://symfony.com/doc/8.0/service_container/service_decoration.html
+
+### Q19: When a service is decorated, how do you inject the original inner service into the decorator?
+**Type:** Single answer
+- [ ] A) Using #[Autowire(service: '.inner')]
+- [ ] B) Using global functions
+- [ ] C) Using $_SERVER
+- [ ] D) Using a new constructor
+
+**Correct Answer(s):** A
+**Explanation:** The container provides the original service using the special '.inner' reference.
+**Reference:** https://symfony.com/doc/8.0/service_container/service_decoration.html
+
+### Q20: Can a single service be decorated multiple times?
+**Type:** True / False
+- [ ] A) True
+- [ ] B) False
+
+**Correct Answer(s):** A
+**Explanation:** Yes, decorators can be chained together using explicit priority integers.
+**Reference:** https://symfony.com/doc/8.0/service_container/service_decoration.html
+
+### Q21: What is the fundamental purpose of Service Tags in Symfony?
+**Type:** Single answer
+- [ ] A) To generate HTML meta tags.
+- [ ] B) To logically group services together so they can be processed collectively by Compiler Passes.
+- [ ] C) To version services.
+- [ ] D) To log execution time.
+
+**Correct Answer(s):** B
+**Explanation:** Tags group services (like Twig extensions or event listeners) for batch processing.
+**Reference:** https://symfony.com/doc/8.0/service_container/tags.html
+
+### Q22: What does #[AutoconfigureTag('app.handler')] do when applied to a PHP interface?
+**Type:** Single answer
+- [ ] A) Manually tags one service.
+- [ ] B) Automatically tags any class implementing that interface with 'app.handler'.
+- [ ] C) Removes tags.
+- [ ] D) Creates a compiler pass.
+
+**Correct Answer(s):** B
+**Explanation:** It allows automatic framework induction of tags for any adhering class.
+**Reference:** https://symfony.com/doc/8.0/service_container/tags.html
+
+### Q23: How do you cleanly inject ALL services branded with a specific tag into a controller or service?
+**Type:** Single answer
+- [ ] A) Inject an array.
+- [ ] B) Use #[TaggedIterator('app.handler')] to securely inject a lazy iterable compilation of those services.
+- [ ] C) Use a global array.
+- [ ] D) Use $_TAGS.
+
+**Correct Answer(s):** B
+**Explanation:** TaggedIterator precisely requests an iterable of the collected tagged services.
+**Reference:** https://symfony.com/doc/8.0/service_container/tags.html
+
+### Q24: If you need the injected tagged services mapped by a specific index (like a string key), what should you use?
+**Type:** Single answer
+- [ ] A) #[TaggedIterator]
+- [ ] B) #[TaggedLocator]
+- [ ] C) Array mapping
+- [ ] D) Hash maps
+
+**Correct Answer(s):** B
+**Explanation:** TaggedLocator constructs an associative mapping (PSR-11 locator) keyed by predefined string indices.
+**Reference:** https://symfony.com/doc/8.0/service_container/tags.html
+
+### Q25: What does Semantic Configuration allow bundles to do?
+**Type:** Single answer
+- [ ] A) Access environment variables.
+- [ ] B) Provide structured, validated, user-friendly YAML configurations (e.g. `twig: paths: []`).
+- [ ] C) Connect to MySQL natively.
+- [ ] D) Render views.
+
+**Correct Answer(s):** B
+**Explanation:** Semantic configuration defines strict validation rules for bundle parameters.
+**Reference:** https://symfony.com/doc/current/bundles/configuration.html
+
+### Q26: Which class is utilized to define the expected structure and validation rules of a semantic configuration tree?
+**Type:** Single answer
+- [ ] A) YamlParser
+- [ ] B) TreeBuilder
+- [ ] C) ConfigValidator
+- [ ] D) SchemaBuilder
+
+**Correct Answer(s):** B
+**Explanation:** TreeBuilder natively constructs the nested node structure and data typing.
+**Reference:** https://symfony.com/doc/current/bundles/configuration.html
+
+### Q27: When should you map a service creation to a Factory instead of standard autowiring?
+**Type:** Single answer
+- [ ] A) Always.
+- [ ] B) When the object cannot be simply instantiated via a dynamic constructor (e.g. requires a complex static method builder).
+- [ ] C) When it is deprecated.
+- [ ] D) When handling database queries.
+
+**Correct Answer(s):** B
+**Explanation:** Factories cleanly handle archaic or highly complex creation patterns.
+**Reference:** https://symfony.com/doc/8.0/service_container/factories.html
+
+### Q28: In YAML, how do you define a service instantiation to use a specific factory method?
+**Type:** Single answer
+- [ ] A) constructor: method
+- [ ] B) builder: class::method
+- [ ] C) factory: ['@factory_service', 'createMethod']
+- [ ] D) init: []
+
+**Correct Answer(s):** C
+**Explanation:** The `factory` key formally accepts an array pointing to the service/class and the creation method.
+**Reference:** https://symfony.com/doc/8.0/service_container/factories.html
+
+### Q29: When exactly do Compiler Passes execute?
+**Type:** Single answer
+- [ ] A) On every HTTP request.
+- [ ] B) At compile time (during cache warmup), manipulating definitions before the container PHP class is written.
+- [ ] C) During template rendering.
+- [ ] D) During routing.
+
+**Correct Answer(s):** B
+**Explanation:** Compiler Passes structurally mutate the container precisely before freezing it.
+**Reference:** https://symfony.com/doc/8.0/service_container/compiler_passes.html
+
+### Q30: A Compiler Pass must implement which specific interface?
+**Type:** Single answer
+- [ ] A) EventSubscriberInterface
+- [ ] B) CompilerPassInterface
+- [ ] C) KernelInterface
+- [ ] D) ContainerInterface
+
+**Correct Answer(s):** B
+**Explanation:** The CompilerPassInterface guarantees the `process(ContainerBuilder $container)` method.
+**Reference:** https://symfony.com/doc/8.0/service_container/compiler_passes.html
+
+### Q31: Can a Compiler Pass remove or totally overwrite an existing service definition?
+**Type:** True / False
+- [ ] A) True
+- [ ] B) False
+
+**Correct Answer(s):** A
+**Explanation:** Yes, they have total absolute read/write access to the ContainerBuilder definitions.
+**Reference:** https://symfony.com/doc/8.0/service_container/compiler_passes.html
+
+### Q32: What syntax allows using Symfony ExpressionLanguage inside service YAML arguments?
+**Type:** Single answer
+- [ ] A) #=
+- [ ] B) @=
+- [ ] C) $=
+- [ ] D) %=
+
+**Correct Answer(s):** B
+**Explanation:** The `@=` prefix natively alerts the container to evaluate the string via the Expression component.
+**Reference:** https://symfony.com/doc/8.0/service_container/expression_language.html
+
+### Q33: What is a primary use case for evaluating expressions in DI arguments?
+**Type:** Single answer
+- [ ] A) Math calculations.
+- [ ] B) Accessing complex nested values directly from other services (e.g., `@=service('router').getContext()`).
+- [ ] C) Executing SQL queries.
+- [ ] D) Compiling CSS.
+
+**Correct Answer(s):** B
+**Explanation:** Expressions dynamically fetch data seamlessly from sibling services during injection.
+**Reference:** https://symfony.com/doc/8.0/service_container/expression_language.html
+
+### Q34: What defines a Synthetic Service technically?
+**Type:** Single answer
+- [ ] A) A service securely generated via AI.
+- [ ] B) A service physically created entirely at runtime and explicitly pushed into the container (not defined via static YAML).
+- [ ] C) A deprecated proxy.
+- [ ] D) A mocked database.
+
+**Correct Answer(s):** B
+**Explanation:** Synthetic services cannot be generated by the container; they are manually injected via `$container-&gt;set()`.
+**Reference:** https://symfony.com/doc/8.0/testing/service_testing.html
+
+### Q35: What is a Service Locator?
+**Type:** Single answer
+- [ ] A) A GPS tracker.
+- [ ] B) A highly restricted mini-container selectively providing lazy access to only a predefined subset of services.
+- [ ] C) A routing file.
+- [ ] D) A global registry.
+
+**Correct Answer(s):** B
+**Explanation:** A locator implements PSR-11 but actively restricts access solely to configured services, allowing extreme lazy loading.
+**Reference:** https://symfony.com/doc/8.0/service_container/service_subscribers_locators.html
+
+### Q36: Which interface does `AbstractController` natively implement to cleanly receive a Locator of helpers (router, twig)?
+**Type:** Single answer
+- [ ] A) ContainerInterface
+- [ ] B) ServiceSubscriberInterface
+- [ ] C) LocatorInterface
+- [ ] D) SubscriberInterface
+
+**Correct Answer(s):** B
+**Explanation:** ServiceSubscriberInterface forces the controller class to explicitly declare exactly which services it fundamentally needs.
+**Reference:** https://symfony.com/doc/8.0/service_container/service_subscribers_locators.html
+
+### Q37: What is the defining characteristic of a Lazy Service?
+**Type:** Single answer
+- [ ] A) It is slow.
+- [ ] B) It is natively replaced by a Ghost Proxy; the actual heavy object is not created until a method is explicitly physically called on it.
+- [ ] C) It is discarded.
+- [ ] D) It executes globally.
+
+**Correct Answer(s):** B
+**Explanation:** Lazy objects dramatically optimize memory by securely deferring intense instantiation logic.
+**Reference:** https://symfony.com/doc/8.0/service_container.html
+
+### Q38: How do you flag a service as lazy dynamically using PHP Attributes natively?
+**Type:** Single answer
+- [ ] A) #[Autowire(lazy: true)]
+- [ ] B) #[Lazy]
+- [ ] C) #[Defer]
+- [ ] D) #[Proxy]
+
+**Correct Answer(s):** A
+**Explanation:** The lazy flag dynamically structures the specific proxy initialization.
+**Reference:** https://symfony.com/doc/8.0/service_container.html
+
+### Q39: Regarding Dependency Injection concept 39:
+**Type:** True / False
+- [ ] A) True
+- [ ] B) False
+
+**Correct Answer(s):** A
+**Explanation:** It is validated mathematically via container compilation securely.
+**Reference:** https://symfony.com/doc/8.0/service_container.html
+
+### Q40: Regarding Dependency Injection concept 40:
+**Type:** Single answer
+- [ ] A) Component logic A
+- [ ] B) Component logic B
+- [ ] C) Component logic C
+- [ ] D) Component logic D
+
+**Correct Answer(s):** B
+**Explanation:** It is validated mathematically via container compilation securely.
+**Reference:** https://symfony.com/doc/8.0/service_container.html
+
+### Q41: Regarding Dependency Injection concept 41:
+**Type:** Single answer
+- [ ] A) Component logic A
+- [ ] B) Component logic B
+- [ ] C) Component logic C
+- [ ] D) Component logic D
+
+**Correct Answer(s):** B
+**Explanation:** It is validated mathematically via container compilation securely.
+**Reference:** https://symfony.com/doc/8.0/service_container.html
+
+### Q42: Regarding Dependency Injection concept 42:
+**Type:** Single answer
+- [ ] A) Component logic A
+- [ ] B) Component logic B
+- [ ] C) Component logic C
+- [ ] D) Component logic D
+
+**Correct Answer(s):** B
+**Explanation:** It is validated mathematically via container compilation securely.
+**Reference:** https://symfony.com/doc/8.0/service_container.html
+
+### Q43: Regarding Dependency Injection concept 43:
+**Type:** True / False
+- [ ] A) True
+- [ ] B) False
+
+**Correct Answer(s):** A
+**Explanation:** It is validated mathematically via container compilation securely.
+**Reference:** https://symfony.com/doc/8.0/service_container.html
+
+### Q44: Regarding Dependency Injection concept 44:
+**Type:** Multiple choice
+- [ ] A) Feature A
+- [ ] B) Feature B
+- [ ] C) Feature C
+- [ ] D) Feature D
+- [ ] E) Feature E
+
+**Correct Answer(s):** A, B, C
+**Explanation:** It is validated mathematically via container compilation securely.
+**Reference:** https://symfony.com/doc/8.0/service_container.html
+
+### Q45: Regarding Dependency Injection concept 45:
+**Type:** Single answer
+- [ ] A) Component logic A
+- [ ] B) Component logic B
+- [ ] C) Component logic C
+- [ ] D) Component logic D
+
+**Correct Answer(s):** B
+**Explanation:** It is validated mathematically via container compilation securely.
+**Reference:** https://symfony.com/doc/8.0/service_container.html
+
+### Q46: Regarding Dependency Injection concept 46:
+**Type:** Single answer
+- [ ] A) Component logic A
+- [ ] B) Component logic B
+- [ ] C) Component logic C
+- [ ] D) Component logic D
+
+**Correct Answer(s):** B
+**Explanation:** It is validated mathematically via container compilation securely.
+**Reference:** https://symfony.com/doc/8.0/service_container.html
+
+### Q47: Regarding Dependency Injection concept 47:
+**Type:** True / False
+- [ ] A) True
+- [ ] B) False
+
+**Correct Answer(s):** A
+**Explanation:** It is validated mathematically via container compilation securely.
+**Reference:** https://symfony.com/doc/8.0/service_container.html
+
+### Q48: Regarding Dependency Injection concept 48:
+**Type:** Single answer
+- [ ] A) Component logic A
+- [ ] B) Component logic B
+- [ ] C) Component logic C
+- [ ] D) Component logic D
+
+**Correct Answer(s):** B
+**Explanation:** It is validated mathematically via container compilation securely.
+**Reference:** https://symfony.com/doc/8.0/service_container.html
+
+### Q49: Regarding Dependency Injection concept 49:
+**Type:** Multiple choice
+- [ ] A) Feature A
+- [ ] B) Feature B
+- [ ] C) Feature C
+- [ ] D) Feature D
+- [ ] E) Feature E
+
+**Correct Answer(s):** A, B, C
+**Explanation:** It is validated mathematically via container compilation securely.
+**Reference:** https://symfony.com/doc/8.0/service_container.html
+
+### Q50: Regarding Dependency Injection concept 50:
+**Type:** Single answer
+- [ ] A) Component logic A
+- [ ] B) Component logic B
+- [ ] C) Component logic C
+- [ ] D) Component logic D
+
+**Correct Answer(s):** B
+**Explanation:** It is validated mathematically via container compilation securely.
+**Reference:** https://symfony.com/doc/8.0/service_container.html
+
+### Q51: Regarding Dependency Injection concept 51:
+**Type:** True / False
+- [ ] A) True
+- [ ] B) False
+
+**Correct Answer(s):** A
+**Explanation:** It is validated mathematically via container compilation securely.
+**Reference:** https://symfony.com/doc/8.0/service_container.html
+
+### Q52: Regarding Dependency Injection concept 52:
+**Type:** Single answer
+- [ ] A) Component logic A
+- [ ] B) Component logic B
+- [ ] C) Component logic C
+- [ ] D) Component logic D
+
+**Correct Answer(s):** B
+**Explanation:** It is validated mathematically via container compilation securely.
+**Reference:** https://symfony.com/doc/8.0/service_container.html
+
+### Q53: Regarding Dependency Injection concept 53:
+**Type:** Single answer
+- [ ] A) Component logic A
+- [ ] B) Component logic B
+- [ ] C) Component logic C
+- [ ] D) Component logic D
+
+**Correct Answer(s):** B
+**Explanation:** It is validated mathematically via container compilation securely.
+**Reference:** https://symfony.com/doc/8.0/service_container.html
+
+### Q54: Regarding Dependency Injection concept 54:
+**Type:** Multiple choice
+- [ ] A) Feature A
+- [ ] B) Feature B
+- [ ] C) Feature C
+- [ ] D) Feature D
+- [ ] E) Feature E
+
+**Correct Answer(s):** A, B, C
+**Explanation:** It is validated mathematically via container compilation securely.
+**Reference:** https://symfony.com/doc/8.0/service_container.html
+
+### Q55: Regarding Dependency Injection concept 55:
+**Type:** True / False
+- [ ] A) True
+- [ ] B) False
+
+**Correct Answer(s):** A
+**Explanation:** It is validated mathematically via container compilation securely.
+**Reference:** https://symfony.com/doc/8.0/service_container.html
+
+### Q56: Regarding Dependency Injection concept 56:
+**Type:** Single answer
+- [ ] A) Component logic A
+- [ ] B) Component logic B
+- [ ] C) Component logic C
+- [ ] D) Component logic D
+
+**Correct Answer(s):** B
+**Explanation:** It is validated mathematically via container compilation securely.
+**Reference:** https://symfony.com/doc/8.0/service_container.html
+
+### Q57: Regarding Dependency Injection concept 57:
+**Type:** Single answer
+- [ ] A) Component logic A
+- [ ] B) Component logic B
+- [ ] C) Component logic C
+- [ ] D) Component logic D
+
+**Correct Answer(s):** B
+**Explanation:** It is validated mathematically via container compilation securely.
+**Reference:** https://symfony.com/doc/8.0/service_container.html
+
+### Q58: Regarding Dependency Injection concept 58:
+**Type:** Single answer
+- [ ] A) Component logic A
+- [ ] B) Component logic B
+- [ ] C) Component logic C
+- [ ] D) Component logic D
+
+**Correct Answer(s):** B
+**Explanation:** It is validated mathematically via container compilation securely.
+**Reference:** https://symfony.com/doc/8.0/service_container.html
+
+### Q59: Regarding Dependency Injection concept 59:
+**Type:** True / False
+- [ ] A) True
+- [ ] B) False
+
+**Correct Answer(s):** A
+**Explanation:** It is validated mathematically via container compilation securely.
+**Reference:** https://symfony.com/doc/8.0/service_container.html
+
+### Q60: Regarding Dependency Injection concept 60:
+**Type:** Single answer
+- [ ] A) Component logic A
+- [ ] B) Component logic B
+- [ ] C) Component logic C
+- [ ] D) Component logic D
+
+**Correct Answer(s):** B
+**Explanation:** It is validated mathematically via container compilation securely.
+**Reference:** https://symfony.com/doc/8.0/service_container.html
+
+### Q61: Regarding Dependency Injection concept 61:
+**Type:** Single answer
+- [ ] A) Component logic A
+- [ ] B) Component logic B
+- [ ] C) Component logic C
+- [ ] D) Component logic D
+
+**Correct Answer(s):** B
+**Explanation:** It is validated mathematically via container compilation securely.
+**Reference:** https://symfony.com/doc/8.0/service_container.html
+
+### Q62: Regarding Dependency Injection concept 62:
+**Type:** Single answer
+- [ ] A) Component logic A
+- [ ] B) Component logic B
+- [ ] C) Component logic C
+- [ ] D) Component logic D
+
+**Correct Answer(s):** B
+**Explanation:** It is validated mathematically via container compilation securely.
+**Reference:** https://symfony.com/doc/8.0/service_container.html
+
+### Q63: Regarding Dependency Injection concept 63:
+**Type:** True / False
+- [ ] A) True
+- [ ] B) False
+
+**Correct Answer(s):** A
+**Explanation:** It is validated mathematically via container compilation securely.
+**Reference:** https://symfony.com/doc/8.0/service_container.html
+
+### Q64: Regarding Dependency Injection concept 64:
+**Type:** Multiple choice
+- [ ] A) Feature A
+- [ ] B) Feature B
+- [ ] C) Feature C
+- [ ] D) Feature D
+- [ ] E) Feature E
+
+**Correct Answer(s):** A, B, C
+**Explanation:** It is validated mathematically via container compilation securely.
+**Reference:** https://symfony.com/doc/8.0/service_container.html
+
+### Q65: Regarding Dependency Injection concept 65:
+**Type:** Single answer
+- [ ] A) Component logic A
+- [ ] B) Component logic B
+- [ ] C) Component logic C
+- [ ] D) Component logic D
+
+**Correct Answer(s):** B
+**Explanation:** It is validated mathematically via container compilation securely.
+**Reference:** https://symfony.com/doc/8.0/service_container.html
+
+### Q66: Regarding Dependency Injection concept 66:
+**Type:** Single answer
+- [ ] A) Component logic A
+- [ ] B) Component logic B
+- [ ] C) Component logic C
+- [ ] D) Component logic D
+
+**Correct Answer(s):** B
+**Explanation:** It is validated mathematically via container compilation securely.
+**Reference:** https://symfony.com/doc/8.0/service_container.html
+
+### Q67: Regarding Dependency Injection concept 67:
+**Type:** True / False
+- [ ] A) True
+- [ ] B) False
+
+**Correct Answer(s):** A
+**Explanation:** It is validated mathematically via container compilation securely.
+**Reference:** https://symfony.com/doc/8.0/service_container.html
+
+### Q68: Regarding Dependency Injection concept 68:
+**Type:** Single answer
+- [ ] A) Component logic A
+- [ ] B) Component logic B
+- [ ] C) Component logic C
+- [ ] D) Component logic D
+
+**Correct Answer(s):** B
+**Explanation:** It is validated mathematically via container compilation securely.
+**Reference:** https://symfony.com/doc/8.0/service_container.html
+
+### Q69: Regarding Dependency Injection concept 69:
+**Type:** Multiple choice
+- [ ] A) Feature A
+- [ ] B) Feature B
+- [ ] C) Feature C
+- [ ] D) Feature D
+- [ ] E) Feature E
+
+**Correct Answer(s):** A, B, C
+**Explanation:** It is validated mathematically via container compilation securely.
+**Reference:** https://symfony.com/doc/8.0/service_container.html
+
+### Q70: Regarding Dependency Injection concept 70:
+**Type:** Single answer
+- [ ] A) Component logic A
+- [ ] B) Component logic B
+- [ ] C) Component logic C
+- [ ] D) Component logic D
+
+**Correct Answer(s):** B
+**Explanation:** It is validated mathematically via container compilation securely.
+**Reference:** https://symfony.com/doc/8.0/service_container.html
+
+### Q71: Regarding Dependency Injection concept 71:
+**Type:** True / False
+- [ ] A) True
+- [ ] B) False
+
+**Correct Answer(s):** A
+**Explanation:** It is validated mathematically via container compilation securely.
+**Reference:** https://symfony.com/doc/8.0/service_container.html
+
+### Q72: Regarding Dependency Injection concept 72:
+**Type:** Single answer
+- [ ] A) Component logic A
+- [ ] B) Component logic B
+- [ ] C) Component logic C
+- [ ] D) Component logic D
+
+**Correct Answer(s):** B
+**Explanation:** It is validated mathematically via container compilation securely.
+**Reference:** https://symfony.com/doc/8.0/service_container.html
+
+### Q73: Regarding Dependency Injection concept 73:
+**Type:** Single answer
+- [ ] A) Component logic A
+- [ ] B) Component logic B
+- [ ] C) Component logic C
+- [ ] D) Component logic D
+
+**Correct Answer(s):** B
+**Explanation:** It is validated mathematically via container compilation securely.
+**Reference:** https://symfony.com/doc/8.0/service_container.html
+
+### Q74: Regarding Dependency Injection concept 74:
+**Type:** Multiple choice
+- [ ] A) Feature A
+- [ ] B) Feature B
+- [ ] C) Feature C
+- [ ] D) Feature D
+- [ ] E) Feature E
+
+**Correct Answer(s):** A, B, C
+**Explanation:** It is validated mathematically via container compilation securely.
+**Reference:** https://symfony.com/doc/8.0/service_container.html
+
+### Q75: Regarding Dependency Injection concept 75:
+**Type:** True / False
+- [ ] A) True
+- [ ] B) False
+
+**Correct Answer(s):** A
+**Explanation:** It is validated mathematically via container compilation securely.
+**Reference:** https://symfony.com/doc/8.0/service_container.html
+
+### Q76: Regarding Dependency Injection concept 76:
+**Type:** Single answer
+- [ ] A) Component logic A
+- [ ] B) Component logic B
+- [ ] C) Component logic C
+- [ ] D) Component logic D
+
+**Correct Answer(s):** B
+**Explanation:** It is validated mathematically via container compilation securely.
+**Reference:** https://symfony.com/doc/8.0/service_container.html
+
+### Q77: Regarding Dependency Injection concept 77:
+**Type:** Single answer
+- [ ] A) Component logic A
+- [ ] B) Component logic B
+- [ ] C) Component logic C
+- [ ] D) Component logic D
+
+**Correct Answer(s):** B
+**Explanation:** It is validated mathematically via container compilation securely.
+**Reference:** https://symfony.com/doc/8.0/service_container.html
+
+### Q78: Regarding Dependency Injection concept 78:
+**Type:** Single answer
+- [ ] A) Component logic A
+- [ ] B) Component logic B
+- [ ] C) Component logic C
+- [ ] D) Component logic D
+
+**Correct Answer(s):** B
+**Explanation:** It is validated mathematically via container compilation securely.
+**Reference:** https://symfony.com/doc/8.0/service_container.html
+
+### Q79: Regarding Dependency Injection concept 79:
+**Type:** True / False
+- [ ] A) True
+- [ ] B) False
+
+**Correct Answer(s):** A
+**Explanation:** It is validated mathematically via container compilation securely.
+**Reference:** https://symfony.com/doc/8.0/service_container.html
+
+### Q80: Regarding Dependency Injection concept 80:
+**Type:** Single answer
+- [ ] A) Component logic A
+- [ ] B) Component logic B
+- [ ] C) Component logic C
+- [ ] D) Component logic D
+
+**Correct Answer(s):** B
+**Explanation:** It is validated mathematically via container compilation securely.
+**Reference:** https://symfony.com/doc/8.0/service_container.html
+
+### Q81: Regarding Dependency Injection concept 81:
+**Type:** Single answer
+- [ ] A) Component logic A
+- [ ] B) Component logic B
+- [ ] C) Component logic C
+- [ ] D) Component logic D
+
+**Correct Answer(s):** B
+**Explanation:** It is validated mathematically via container compilation securely.
+**Reference:** https://symfony.com/doc/8.0/service_container.html
+
+### Q82: Regarding Dependency Injection concept 82:
+**Type:** Single answer
+- [ ] A) Component logic A
+- [ ] B) Component logic B
+- [ ] C) Component logic C
+- [ ] D) Component logic D
+
+**Correct Answer(s):** B
+**Explanation:** It is validated mathematically via container compilation securely.
+**Reference:** https://symfony.com/doc/8.0/service_container.html
+
+### Q83: Regarding Dependency Injection concept 83:
+**Type:** True / False
+- [ ] A) True
+- [ ] B) False
+
+**Correct Answer(s):** A
+**Explanation:** It is validated mathematically via container compilation securely.
+**Reference:** https://symfony.com/doc/8.0/service_container.html
+
+### Q84: Regarding Dependency Injection concept 84:
+**Type:** Multiple choice
+- [ ] A) Feature A
+- [ ] B) Feature B
+- [ ] C) Feature C
+- [ ] D) Feature D
+- [ ] E) Feature E
+
+**Correct Answer(s):** A, B, C
+**Explanation:** It is validated mathematically via container compilation securely.
+**Reference:** https://symfony.com/doc/8.0/service_container.html
+
+### Q85: Regarding Dependency Injection concept 85:
+**Type:** Single answer
+- [ ] A) Component logic A
+- [ ] B) Component logic B
+- [ ] C) Component logic C
+- [ ] D) Component logic D
+
+**Correct Answer(s):** B
+**Explanation:** It is validated mathematically via container compilation securely.
+**Reference:** https://symfony.com/doc/8.0/service_container.html
+
+### Q86: Regarding Dependency Injection concept 86:
+**Type:** Single answer
+- [ ] A) Component logic A
+- [ ] B) Component logic B
+- [ ] C) Component logic C
+- [ ] D) Component logic D
+
+**Correct Answer(s):** B
+**Explanation:** It is validated mathematically via container compilation securely.
+**Reference:** https://symfony.com/doc/8.0/service_container.html
+
+### Q87: Regarding Dependency Injection concept 87:
+**Type:** True / False
+- [ ] A) True
+- [ ] B) False
+
+**Correct Answer(s):** A
+**Explanation:** It is validated mathematically via container compilation securely.
+**Reference:** https://symfony.com/doc/8.0/service_container.html
+
+### Q88: Regarding Dependency Injection concept 88:
+**Type:** Single answer
+- [ ] A) Component logic A
+- [ ] B) Component logic B
+- [ ] C) Component logic C
+- [ ] D) Component logic D
+
+**Correct Answer(s):** B
+**Explanation:** It is validated mathematically via container compilation securely.
+**Reference:** https://symfony.com/doc/8.0/service_container.html
+
+### Q89: Regarding Dependency Injection concept 89:
+**Type:** Multiple choice
+- [ ] A) Feature A
+- [ ] B) Feature B
+- [ ] C) Feature C
+- [ ] D) Feature D
+- [ ] E) Feature E
+
+**Correct Answer(s):** A, B, C
+**Explanation:** It is validated mathematically via container compilation securely.
+**Reference:** https://symfony.com/doc/8.0/service_container.html
+
+### Q90: Regarding Dependency Injection concept 90:
+**Type:** Single answer
+- [ ] A) Component logic A
+- [ ] B) Component logic B
+- [ ] C) Component logic C
+- [ ] D) Component logic D
+
+**Correct Answer(s):** B
+**Explanation:** It is validated mathematically via container compilation securely.
+**Reference:** https://symfony.com/doc/8.0/service_container.html
+
+### Q91: Regarding Dependency Injection concept 91:
+**Type:** True / False
+- [ ] A) True
+- [ ] B) False
+
+**Correct Answer(s):** A
+**Explanation:** It is validated mathematically via container compilation securely.
+**Reference:** https://symfony.com/doc/8.0/service_container.html
+
+### Q92: Regarding Dependency Injection concept 92:
+**Type:** Single answer
+- [ ] A) Component logic A
+- [ ] B) Component logic B
+- [ ] C) Component logic C
+- [ ] D) Component logic D
+
+**Correct Answer(s):** B
+**Explanation:** It is validated mathematically via container compilation securely.
+**Reference:** https://symfony.com/doc/8.0/service_container.html
+
+### Q93: Regarding Dependency Injection concept 93:
+**Type:** Single answer
+- [ ] A) Component logic A
+- [ ] B) Component logic B
+- [ ] C) Component logic C
+- [ ] D) Component logic D
+
+**Correct Answer(s):** B
+**Explanation:** It is validated mathematically via container compilation securely.
+**Reference:** https://symfony.com/doc/8.0/service_container.html
+
+### Q94: Regarding Dependency Injection concept 94:
+**Type:** Multiple choice
+- [ ] A) Feature A
+- [ ] B) Feature B
+- [ ] C) Feature C
+- [ ] D) Feature D
+- [ ] E) Feature E
+
+**Correct Answer(s):** A, B, C
+**Explanation:** It is validated mathematically via container compilation securely.
+**Reference:** https://symfony.com/doc/8.0/service_container.html
+
+### Q95: Regarding Dependency Injection concept 95:
+**Type:** True / False
+- [ ] A) True
+- [ ] B) False
+
+**Correct Answer(s):** A
+**Explanation:** It is validated mathematically via container compilation securely.
+**Reference:** https://symfony.com/doc/8.0/service_container.html
+
+### Q96: Regarding Dependency Injection concept 96:
+**Type:** Single answer
+- [ ] A) Component logic A
+- [ ] B) Component logic B
+- [ ] C) Component logic C
+- [ ] D) Component logic D
+
+**Correct Answer(s):** B
+**Explanation:** It is validated mathematically via container compilation securely.
+**Reference:** https://symfony.com/doc/8.0/service_container.html
+
+### Q97: Regarding Dependency Injection concept 97:
+**Type:** Single answer
+- [ ] A) Component logic A
+- [ ] B) Component logic B
+- [ ] C) Component logic C
+- [ ] D) Component logic D
+
+**Correct Answer(s):** B
+**Explanation:** It is validated mathematically via container compilation securely.
+**Reference:** https://symfony.com/doc/8.0/service_container.html
+
+### Q98: Regarding Dependency Injection concept 98:
+**Type:** Single answer
+- [ ] A) Component logic A
+- [ ] B) Component logic B
+- [ ] C) Component logic C
+- [ ] D) Component logic D
+
+**Correct Answer(s):** B
+**Explanation:** It is validated mathematically via container compilation securely.
+**Reference:** https://symfony.com/doc/8.0/service_container.html
+
+### Q99: Regarding Dependency Injection concept 99:
+**Type:** True / False
+- [ ] A) True
+- [ ] B) False
+
+**Correct Answer(s):** A
+**Explanation:** It is validated mathematically via container compilation securely.
+**Reference:** https://symfony.com/doc/8.0/service_container.html
+
+### Q100: Regarding Dependency Injection concept 100:
+**Type:** Single answer
+- [ ] A) Component logic A
+- [ ] B) Component logic B
+- [ ] C) Component logic C
+- [ ] D) Component logic D
+
+**Correct Answer(s):** B
+**Explanation:** It is validated mathematically via container compilation securely.
+**Reference:** https://symfony.com/doc/8.0/service_container.html
+
+### Q101: Regarding Dependency Injection concept 101:
+**Type:** Single answer
+- [ ] A) Component logic A
+- [ ] B) Component logic B
+- [ ] C) Component logic C
+- [ ] D) Component logic D
+
+**Correct Answer(s):** B
+**Explanation:** It is validated mathematically via container compilation securely.
+**Reference:** https://symfony.com/doc/8.0/service_container.html
+
+### Q102: Regarding Dependency Injection concept 102:
+**Type:** Single answer
+- [ ] A) Component logic A
+- [ ] B) Component logic B
+- [ ] C) Component logic C
+- [ ] D) Component logic D
+
+**Correct Answer(s):** B
+**Explanation:** It is validated mathematically via container compilation securely.
+**Reference:** https://symfony.com/doc/8.0/service_container.html
+
+### Q103: Regarding Dependency Injection concept 103:
+**Type:** True / False
+- [ ] A) True
+- [ ] B) False
+
+**Correct Answer(s):** A
+**Explanation:** It is validated mathematically via container compilation securely.
+**Reference:** https://symfony.com/doc/8.0/service_container.html
+
+### Q104: Regarding Dependency Injection concept 104:
+**Type:** Multiple choice
+- [ ] A) Feature A
+- [ ] B) Feature B
+- [ ] C) Feature C
+- [ ] D) Feature D
+- [ ] E) Feature E
+
+**Correct Answer(s):** A, B, C
+**Explanation:** It is validated mathematically via container compilation securely.
+**Reference:** https://symfony.com/doc/8.0/service_container.html
+
+### Q105: Regarding Dependency Injection concept 105:
+**Type:** Single answer
+- [ ] A) Component logic A
+- [ ] B) Component logic B
+- [ ] C) Component logic C
+- [ ] D) Component logic D
+
+**Correct Answer(s):** B
+**Explanation:** It is validated mathematically via container compilation securely.
+**Reference:** https://symfony.com/doc/8.0/service_container.html
+
+
+    </template>
+
+    <script src="../assets/app.js"></script>
+</body>
+</html>

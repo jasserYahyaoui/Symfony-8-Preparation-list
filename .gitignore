@@ -1,0 +1,34 @@
+# PHP
+vendor/
+.phpunit.result.cache
+.php-cs-fixer.cache
+
+# Symfony
+var/
+.env.local
+.env.local.php
+.env.*.local
+config/secrets/prod/prod.decrypt.private.php
+public/bundles/
+
+# Node / Assets
+node_modules/
+npm-debug.log
+yarn-error.log
+.eslintcache
+.cache/
+
+# IDEs (PHPStorm, VSCode)
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Project specific
+.gemini/
+dist/
+build/

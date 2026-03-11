@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <title>Routing - Symfony 8.0 Expert Cockpit</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body class="bg-[#0f172a] text-gray-100 flex h-screen overflow-hidden selection:bg-blue-500/30 selection:text-white font-sans antialiased">
+    <!-- Injected Navigation Bar -->
+    <nav id="page-top-nav" style="position:sticky;top:0;z-index:100;background:rgba(15,23,42,0.95);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,0.06);padding:0.5rem 1rem;display:flex;align-items:center;justify-content:space-between;gap:0.5rem;">
+        <a href="../index.html" style="display:inline-flex;align-items:center;gap:6px;color:#60a5fa;font-weight:700;font-size:0.85rem;text-decoration:none;transition:all 0.2s;" onmouseover="this.style.color='#93c5fd'" onmouseout="this.style.color='#60a5fa'">
+            <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+            Dashboard
+        </a>
+        <div style="display:flex;align-items:center;gap:6px;">
+            <button id="nav-pomo-btn" onclick="togglePomo()" style="display:inline-flex;align-items:center;gap:4px;padding:4px 10px;border-radius:8px;font-size:0.75rem;font-weight:700;background:rgba(239,68,68,0.1);color:#f87171;border:1px solid rgba(239,68,68,0.2);cursor:pointer;transition:all 0.2s;" title="Pomodoro Timer">
+                ⏱ <span id="nav-pomo-display">25:00</span>
+            </button>
+            <button onclick="if(confirm('⚠️ Reset ALL progress? This cannot be undone.')){localStorage.removeItem('symfony-cockpit');location.href='../index.html'}" style="padding:4px 10px;border-radius:8px;font-size:0.75rem;font-weight:700;background:rgba(239,68,68,0.08);color:#fca5a5;border:1px solid rgba(239,68,68,0.15);cursor:pointer;transition:all 0.2s;" title="Reset Progress">
+                🔄 Reset
+            </button>
+        </div>
+    </nav>
+    <script>
+    (function(){
+        var s=25*60,r=false,iv;
+        window.togglePomo=function(){
+            var d=document.getElementById('nav-pomo-display'),b=document.getElementById('nav-pomo-btn');
+            if(r){clearInterval(iv);r=false;b.style.background='rgba(239,68,68,0.1)';return;}
+            r=true;b.style.background='rgba(16,185,129,0.15)';b.style.color='#34d399';b.style.borderColor='rgba(16,185,129,0.3)';
+            iv=setInterval(function(){
+                s--;if(s<=0){clearInterval(iv);r=false;s=25*60;d.textContent='25:00';alert('🍅 Pomodoro complete!');return;}
+                d.textContent=Math.floor(s/60)+':'+(s%60<10?'0':'')+s%60;
+            },1000);
+        };
+    })();
+    </script>
+
+    
+    <aside class="w-64 bg-slate-900 border-r border-slate-800 p-6 overflow-y-auto hidden md:flex flex-col shadow-2xl z-10">
+        <a href="../index.html" class="text-blue-400 hover:text-blue-300 font-bold mb-8 transition-all hover:-translate-x-1 flex items-center gap-2">
+            <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+            <span class="truncate">Back to Dashboard</span>
+        </a>
+        <div class="mt-auto">
+            <div class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Workspace</div>
+            <div class="text-sm font-medium text-slate-300 flex items-center gap-2">
+                <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                Expert Cockpit
+            </div>
+        </div>
+    </aside>
+
+    <main class="flex-1 p-6 md:p-12 overflow-y-auto bg-slate-900 relative shadow-inner" id="content-area">
+        <!-- Markdown content will be parsed and injected here -->
+        <div class="flex justify-center items-center h-full">
+            <div class="animate-pulse text-slate-500 font-medium">Loading pedagogical content...</div>
+        </div>
+    </main>
+
+    <template id="raw-markdown">
+# Flashcards : Routing (Symfony 8.0)
+&gt; High-density deck — 5-15+ cards per sub-heading. Every configuration option, attribute syntax, and edge case covered.
+
+---
+
+### Routing component
+
+**Q: What is the Symfony Routing component's single responsibility?**
+**A:** Map an incoming URL (path + method + host + etc.) to a controller callable. The result is stored in `$request-&gt;attributes` as `_controller`, `_route`, `_route_params`.
+**Code Snippet:** N/A
+
+---
+
+**Q: What loaders does Symfony support for route configuration?**
+**A:** PHP Attributes (default), YAML, XML, and PHP closures/fluent API. All can be mixed, configured per-resource in `config/routes.yaml`.
+**Code Snippet:**
+```yaml
+# config/routes.yaml
+controllers:
+    resource:
+        path: ../src/Controller/
+        namespace: App\Controller
+    type: attribute
+```
+
+---
+
+**Q: What is the `_controller` value format for the route `defaults` in YAML?**
+**A:** A string in the format `App\Controller\MyController::methodName` (FQCN::method), or a service ID with `::` method.
+**Code Snippet:**
+```yaml
+home:
+    path: /
+    defaults:
+        _controller: App\Controller\HomeController::index
+```
+
+---
+
+**Q: How does Symfony load all routes defined via PHP Attributes from a directory?**
+**A:** By configuring a resource/directory import in `config/routes.yaml` with `type: attribute`.
+**Code Snippet:**
+```yaml
+controllers:
+    resource:
+        path: ../src/Controller/
+        namespace: App\Controller
+    type: attribute
+```
+
+---
+
+**Q: How do you debug all registered routes in a Symfony project?**
+**A:** Use `php bin/console debug:router` (or `router:debug`). Filter with `--name` or `--path`. Use `--show-controllers` to see matched controller.
+**Code Snippet:**
+```bash
+php bin/console debug:router
+php bin/console debug:router product_show
+php bin/console debug:router --path=/products
+php bin/console router:match /products/42
+```
+
+---
+
+**Q: What does `php bin/console router:match /products/42` do?**
+**A:** Simulates route matching for the given URL, showing which route matches and what parameters are extracted. Useful for debugging routing conflicts.
+**Code Snippet:**
+```bash
+php bin/console router:match /products/42
+php bin/console router:match /products/42 --method=POST
+```
+
+---
+
+### Configuration (YAML and Attributes)
+
+**Q: What is the minimum `#[Route]` attribute configuration required on a controller method?**
+**A:** At minimum, `path:` (the URL pattern). Name and methods are optional but strongly recommended.
+**Code Snippet:**
+```php
+#[Route('/products')]               // minimal
+#[Route('/products', name: 'product_list', methods: ['GET'])]  // recommended
+public function list(): Response { ... }
+```
+
+---
+
+**Q: Where can the `#[Route]` attribute be placed in Symfony 8?**
+**A:** On a **controller method** (most common) or on the **controller class** (adds a prefix to all method routes in that class).
+**Code Snippet:**
+```php
+#[Route('/products')]               // Class prefix
+class ProductController {
+    #[Route('/', name: 'product_list')]      // → /products/
+    public function list() {}
+    #[Route('/{id}', name: 'product_show')] // → /products/{id}
+    public function show(int $id) {}
+}
+```
+
+---
+
+**Q: How do you define a route that matches multiple HTTP methods?**
+**A:** Pass an array to `methods:` in `#[Route]`.
+**Code Snippet:**
+```php
+#[Route('/api/product/{id}', methods: ['GET', 'HEAD'])]
+public function show(int $id): Response { ... }
+```
+
+---
+
+**Q: How do you define the same path for multiple HTTP methods that call different actions?**
+**A:** Use separate `#[Route]` definitions with different `methods:` values and different `name:`.
+**Code Snippet:**
+```php
+#[Route('/api/products/{id}', name: 'product_show',   methods: ['GET'])]
+public function show(int $id): Response {}
+
+#[Route('/api/products/{id}', name: 'product_update', methods: ['PUT'])]
+public function update(int $id, Request $request): Response {}
+
+#[Route('/api/products/{id}', name: 'product_delete', methods: ['DELETE'])]
+public function delete(int $id): Response {}
+```
+
+---
+
+**Q: How do you define a YAML route with multiple methods?**
+**A:** Use the `methods:` key with an array.
+**Code Snippet:**
+```yaml
+api_product_show:
+    path: /api/products/{id}
+    controller: App\Controller\ProductController::show
+    methods: [GET, HEAD]
+```
+
+---
+
+**Q: What is the `condition:` option in a route definition?**
+**A:** An ExpressionLanguage expression that must evaluate to `true` for the route to match. Checked after path/method/host matching.
+**Code Snippet:**
+```yaml
+api_route:
+    path: /api/resource
+    controller: App\Controller\ApiController::action
+    condition: "context.getMethod() in ['GET', 'POST'] and request.headers.get('Accept') matches '/application\\/json/i'"
+```
+```php
+#[Route('/api', condition: "request.headers.get('Accept') matches '/json/i'")]
+```
+
+---
+
+### Route parameters
+
+**Q: How do you define a required route parameter and access it in the controller?**
+**A:** Use `{paramName}` in the path. Symfony injects it as a controller argument matching the parameter name (or reads from `$request-&gt;attributes`).
+**Code Snippet:**
+```php
+#[Route('/products/{id}', name: 'product_show')]
+public function show(int $id): Response {
+    // $id is automatically cast to int
+}
+```
+
+---
+
+**Q: How do you define an optional route parameter with a default value?**
+**A:** Set a `defaults:` for the parameter. Declare it with a default value in the controller method signature.
+**Code Snippet:**
+```php
+#[Route('/blog/{page}', name: 'blog_list', defaults: ['page' =&gt; 1])]
+public function list(int $page): Response { ... }
+// /blog/ → page=1, /blog/3 → page=3
+```
+
+---
+
+**Q: How do you add a regex requirement to a route parameter?**
+**A:** Use the `requirements:` option in the attribute or YAML.
+**Code Snippet:**
+```php
+#[Route('/products/{id}', requirements: ['id' =&gt; '\d+'])]
+public function show(int $id): Response { ... }
+// Only matches if id is numeric — /products/abc will 404
+```
+```yaml
+product_show:
+    path: /products/{id}
+    requirements:
+        id: \d+
+```
+
+---
+
+**Q: How do you add requirements directly inline in the route parameter syntax?**
+**A:** Use `{name&lt;regex&gt;}` in the path string — a shortcut for `requirements`.
+**Code Snippet:**
+```php
+#[Route('/products/{id&lt;\d+&gt;}', name: 'product_show')]
+```
+
+---
+
+**Q: How do you make a route parameter that is a slug (only a-z, 0-9, dashes)?**
+**A:** Add a regex requirement `[a-z0-9-]+` to the parameter.
+**Code Snippet:**
+```php
+#[Route('/articles/{slug&lt;[a-z0-9-]+&gt;}', name: 'article_show')]
+public function show(string $slug): Response { ... }
+```
+
+---
+
+**Q: What is the `{_locale}` special parameter and what does Symfony do with it automatically?**
+**A:** Symfony recognises `_locale` as the application locale. When present in the route, it automatically calls `$request-&gt;setLocale()` with the matched value.
+**Code Snippet:**
+```php
+#[Route('/{_locale}/products', name: 'product_list', requirements: ['_locale' =&gt; 'en|fr|de'])]
+public function list(): Response { ... }
+```
+
+---
+
+**Q: What is the `{_format}` special parameter?**
+**A:** Sets `$request-&gt;setRequestFormat()` automatically. Allows content-negotiation via URL (e.g., `/products.json` vs `/products.html`).
+**Code Snippet:**
+```php
+#[Route('/products.{_format}', defaults: ['_format' =&gt; 'html'], requirements: ['_format' =&gt; 'html|json'])]
+public function list(Request $request): Response {
+    if ('json' === $request-&gt;getRequestFormat()) {
+        return $this-&gt;json($data);
+    }
+    return $this-&gt;render('product/list.html.twig', $data);
+}
+```
+
+---
+
+### URL generation
+
+**Q: How do you generate a URL from a route name in a controller?**
+**A:** Use `$this-&gt;generateUrl('route_name', $params)` (relative) or `$this-&gt;generateUrl('route_name', $params, UrlGeneratorInterface::ABSOLUTE_URL)` (absolute).
+**Code Snippet:**
+```php
+$url = $this-&gt;generateUrl('product_show', ['id' =&gt; 42]);
+// /products/42
+
+$absoluteUrl = $this-&gt;generateUrl(
+    'product_show',
+    ['id' =&gt; 42],
+    UrlGeneratorInterface::ABSOLUTE_URL
+);
+// https://example.com/products/42
+```
+
+---
+
+**Q: How do you generate a URL from inside a service (not a controller)?**
+**A:** Inject `RouterInterface` or `UrlGeneratorInterface` and call `generate()`.
+**Code Snippet:**
+```php
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+
+class NotificationService {
+    public function __construct(private UrlGeneratorInterface $router) {}
+
+    public function getConfirmUrl(int $userId): string {
+        return $this-&gt;router-&gt;generate(
+            'user_confirm_email',
+            ['id' =&gt; $userId],
+            UrlGeneratorInterface::ABSOLUTE_URL
+        );
+    }
+}
+```
+
+---
+
+**Q: What are the four `UrlGeneratorInterface` reference type constants?**
+**A:**
+- `ABSOLUTE_PATH` (default = 0) → `/path/to/resource`
+- `ABSOLUTE_URL` (1) → `https://host/path/to/resource`
+- `RELATIVE_PATH` (2) → `../../resource`
+- `NETWORK_PATH` (3) → `//host/path/to/resource`
+**Code Snippet:**
+```php
+$this-&gt;router-&gt;generate('route', [], UrlGeneratorInterface::ABSOLUTE_URL);
+$this-&gt;router-&gt;generate('route', [], UrlGeneratorInterface::NETWORK_PATH);
+```
+
+---
+
+**Q: How do you append query string parameters when generating a URL?**
+**A:** Any params that are NOT part of the route pattern are appended as query string.
+**Code Snippet:**
+```php
+$url = $this-&gt;generateUrl('product_list', ['page' =&gt; 2, 'sort' =&gt; 'price']);
+// /products?page=2&sort=price
+```
+
+---
+
+### Redirect configuration
+
+**Q: How do you configure a permanent redirect between routes directly in `routes.yaml` without a controller?**
+**A:** Use the `RedirectController` bundle controller with `permanent: true`.
+**Code Snippet:**
+```yaml
+old_blog:
+    path: /old-blog/{page}
+    controller: Symfony\Bundle\FrameworkBundle\Controller\RedirectController
+    defaults:
+        route: blog_list
+        permanent: true  # 301
+```
+
+---
+
+**Q: How do you redirect from HTTP to HTTPS at the routing/firewall level?**
+**A:** Use `access_control` with `requires_channel: https` in `security.yaml`. Alternatively set it in the `defaults` of the route.
+**Code Snippet:**
+```yaml
+# security.yaml
+access_control:
+    - { path: ^/, requires_channel: https }
+```
+
+---
+
+### Sub-domain based routing
+
+**Q: How do you restrict a route to a specific subdomain using the `host:` option?**
+**A:** Add the `host:` parameter to the route with an expression (can include `{subdomain}` placeholders).
+**Code Snippet:**
+```php
+#[Route('/dashboard', host: 'admin.{domain}', defaults: ['domain' =&gt; 'example.com'], requirements: ['domain' =&gt; '.+'])]
+public function dashboard(): Response { ... }
+```
+```yaml
+admin_dashboard:
+    path: /dashboard
+    host: admin.{domain}
+    defaults:
+        domain: example.com
+```
+
+---
+
+**Q: How do you group routes under the same host/subdomain?**
+**A:** Import them in `routes.yaml` and add the `host:` option at the import level (applies to all routes in the imported file).
+**Code Snippet:**
+```yaml
+admin_routes:
+    resource: '../src/Controller/Admin/'
+    type: attribute
+    host: 'admin.{domain}'
+    defaults:
+        domain: example.com
+```
+
+---
+
+**Q: Can a route host pattern include a dynamic variable? How is it accessed?**
+**A:** Yes — `host: '{subdomain}.example.com'` binds `subdomain` as a route parameter injected into the controller just like path parameters.
+**Code Snippet:**
+```php
+#[Route('/profile', host: '{subdomain}.example.com')]
+public function profile(string $subdomain): Response { ... }
+```
+
+---
+
+### Conditional request matching
+
+**Q: What can you use in the `condition:` route option to inspect the request?**
+**A:** Symfony ExpressionLanguage with access to `context` (`RequestContext`) and `request` (`Request` object). Useful for header inspection, IP checks, custom logic.
+**Code Snippet:**
+```yaml
+api_mobile:
+    path: /home
+    condition: "request.headers.get('User-Agent') matches '/iPhone/i'"
+    controller: App\Controller\MobileController::home
+```
+
+---
+
+**Q: What is the performance trade-off of using `condition:` on routes?**
+**A:** Route conditions are evaluated at match time (not compile time). If many routes have conditions, each request must evaluate them. Cache cannot fully optimize them.
+**Code Snippet:** N/A
+
+---
+
+### HTTP methods
+
+**Q: What HTTP status does Symfony return when a path matches but the method does not?**
+**A:** `405 Method Not Allowed`, and includes an `Allow` header listing the permitted methods.
+**Code Snippet:**
+```bash
+# Route only has GET defined, client sends DELETE:
+# → 405 Method Not Allowed
+# → Allow: GET
+```
+
+---
+
+**Q: How do you override the HTTP method for HTML forms (which only support GET/POST)?**
+**A:** Add a hidden `_method` field with value `DELETE`, `PUT`, or `PATCH`. Enable `http_method_override` in `framework.yaml`.
+**Code Snippet:**
+```twig
+&lt;form method="POST" action="{{ path('product_delete', {id: product.id}) }}"&gt;
+    &lt;input type="hidden" name="_method" value="DELETE"&gt;
+    &lt;button type="submit"&gt;Delete&lt;/button&gt;
+&lt;/form&gt;
+```
+```yaml
+# framework.yaml
+framework:
+    http_method_override: true
+```
+
+---
+
+### Locale guessing
+
+**Q: How does Symfony determine the locale on a per-request basis from routing?**
+**A:** From the `_locale` route parameter (highest priority). If not set, falls back to `Accept-Language` (if `LocaleListener` is configured), then `default_locale` from `framework.yaml`.
+**Code Snippet:**
+```php
+#[Route('/{_locale}/news', requirements: ['_locale' =&gt; 'en|fr|de'])]
+public function news(): Response { ... }
+```
+
+---
+
+**Q: What service/subscriber is responsible for setting the locale from the request?**
+**A:** `LocaleListener` (event subscriber subscribed to `kernel.request`). It reads `_locale` from route attributes and calls `$request-&gt;setLocale()`.
+**Code Snippet:** N/A
+
+---
+
+**Q: How do you persist the locale across requests in a session-based application?**
+**A:** Save the locale to the session in a listener subscribed to `kernel.request`, and restore it. Or use a dedicated `LocaleSubscriber` pattern.
+**Code Snippet:**
+```php
+public function onKernelRequest(RequestEvent $event): void {
+    $request = $event-&gt;getRequest();
+    if (!$request-&gt;hasPreviousSession()) return;
+    $locale = $request-&gt;attributes-&gt;get('_locale')
+        ?? $request-&gt;getSession()-&gt;get('_locale', 'en');
+    $request-&gt;setLocale($locale);
+    $request-&gt;getSession()-&gt;set('_locale', $locale);
+}
+```
+
+---
+
+### Route debugging
+
+**Q: What does `php bin/console debug:router --show-aliases` show?**
+**A:** Shows route aliases — alternative names that point to the same route.
+**Code Snippet:**
+```bash
+php bin/console debug:router --show-aliases
+```
+
+---
+
+**Q: How do you verify whether a specific URL matches any route from the CLI?**
+**A:** Use `php bin/console router:match &lt;url&gt; [--method=METHOD]`.
+**Code Snippet:**
+```bash
+php bin/console router:match /products/42 --method=GET
+php bin/console router:match /products/new --method=POST
+```
+
+---
+
+**Q: What does `debug:router --format=json` produce?**
+**A:** Outputs all routes in JSON format, useful for tooling or programmatic analysis.
+**Code Snippet:**
+```bash
+php bin/console debug:router --format=json &gt; routes.json
+```
+
+---
+
+    </template>
+
+    <script src="../assets/app.js"></script>
+</body>
+</html>

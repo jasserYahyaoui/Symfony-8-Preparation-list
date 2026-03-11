@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <title>Automated Tests - Symfony 8.0 Expert Cockpit</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body class="bg-[#0f172a] text-gray-100 flex h-screen overflow-hidden selection:bg-blue-500/30 selection:text-white font-sans antialiased">
+    <!-- Injected Navigation Bar -->
+    <nav id="page-top-nav" style="position:sticky;top:0;z-index:100;background:rgba(15,23,42,0.95);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,0.06);padding:0.5rem 1rem;display:flex;align-items:center;justify-content:space-between;gap:0.5rem;">
+        <a href="../index.html" style="display:inline-flex;align-items:center;gap:6px;color:#60a5fa;font-weight:700;font-size:0.85rem;text-decoration:none;transition:all 0.2s;" onmouseover="this.style.color='#93c5fd'" onmouseout="this.style.color='#60a5fa'">
+            <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+            Dashboard
+        </a>
+        <div style="display:flex;align-items:center;gap:6px;">
+            <button id="nav-pomo-btn" onclick="togglePomo()" style="display:inline-flex;align-items:center;gap:4px;padding:4px 10px;border-radius:8px;font-size:0.75rem;font-weight:700;background:rgba(239,68,68,0.1);color:#f87171;border:1px solid rgba(239,68,68,0.2);cursor:pointer;transition:all 0.2s;" title="Pomodoro Timer">
+                ⏱ <span id="nav-pomo-display">25:00</span>
+            </button>
+            <button onclick="if(confirm('⚠️ Reset ALL progress? This cannot be undone.')){localStorage.removeItem('symfony-cockpit');location.href='../index.html'}" style="padding:4px 10px;border-radius:8px;font-size:0.75rem;font-weight:700;background:rgba(239,68,68,0.08);color:#fca5a5;border:1px solid rgba(239,68,68,0.15);cursor:pointer;transition:all 0.2s;" title="Reset Progress">
+                🔄 Reset
+            </button>
+        </div>
+    </nav>
+    <script>
+    (function(){
+        var s=25*60,r=false,iv;
+        window.togglePomo=function(){
+            var d=document.getElementById('nav-pomo-display'),b=document.getElementById('nav-pomo-btn');
+            if(r){clearInterval(iv);r=false;b.style.background='rgba(239,68,68,0.1)';return;}
+            r=true;b.style.background='rgba(16,185,129,0.15)';b.style.color='#34d399';b.style.borderColor='rgba(16,185,129,0.3)';
+            iv=setInterval(function(){
+                s--;if(s<=0){clearInterval(iv);r=false;s=25*60;d.textContent='25:00';alert('🍅 Pomodoro complete!');return;}
+                d.textContent=Math.floor(s/60)+':'+(s%60<10?'0':'')+s%60;
+            },1000);
+        };
+    })();
+    </script>
+
+    
+    <aside class="w-64 bg-slate-900 border-r border-slate-800 p-6 overflow-y-auto hidden md:flex flex-col shadow-2xl z-10">
+        <a href="../index.html" class="text-blue-400 hover:text-blue-300 font-bold mb-8 transition-all hover:-translate-x-1 flex items-center gap-2">
+            <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+            <span class="truncate">Back to Dashboard</span>
+        </a>
+        <div class="mt-auto">
+            <div class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Workspace</div>
+            <div class="text-sm font-medium text-slate-300 flex items-center gap-2">
+                <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                Expert Cockpit
+            </div>
+        </div>
+    </aside>
+
+    <main class="flex-1 p-6 md:p-12 overflow-y-auto bg-slate-900 relative shadow-inner" id="content-area">
+        <!-- Markdown content will be parsed and injected here -->
+        <div class="flex justify-center items-center h-full">
+            <div class="animate-pulse text-slate-500 font-medium">Loading pedagogical content...</div>
+        </div>
+    </main>
+
+    <template id="raw-markdown">
+# Flashcards : Automated Tests (Symfony 8.0)
+&gt; Exhaustive deck — updated with PHPUnit assertions. Doctrine-specific items removed. All official exam sub-topics covered.
+
+---
+
+### Unit tests with PHPUnit
+
+**Q: What is the difference between a unit test and a functional test in Symfony?**
+**A:** A **unit test** tests a single class/function in isolation, with mocked dependencies —  no Symfony kernel, no HTTP, no database. A **functional test** boots the Symfony kernel, makes HTTP requests via a client, and tests the whole application stack.
+**Code Snippet:**
+```php
+// Unit test: no kernel, no HTTP
+class DiscountCalculatorTest extends TestCase {
+    public function testApplyDiscount(): void {
+        $calc = new DiscountCalculator();
+        self::assertSame(90.0, $calc-&gt;apply(100.0, 10));
+    }
+}
+```
+
+---
+
+**Q: What base class should all plain unit tests extend?**
+**A:** `PHPUnit\Framework\TestCase`. No Symfony-specific base needed. Use `KernelTestCase` only when you need the DI container.
+**Code Snippet:**
+```php
+use PHPUnit\Framework\TestCase;
+
+class ProductTest extends TestCase {
+    public function testFullName(): void {
+        $product = new Product('Widget', 'Pro');
+        self::assertSame('Widget Pro', $product-&gt;getFullName());
+    }
+}
+```
+
+---
+
+**Q: How do you create a mock of an interface/class in PHPUnit?**
+**A:** Use `$this-&gt;createMock(ClassName::class)` or `$this-&gt;createStub()`. Configure return values with `method()` + `willReturn()`. Expectations with `expects()`.
+**Code Snippet:**
+```php
+$mailer = $this-&gt;createMock(MailerInterface::class);
+$mailer-&gt;expects($this-&gt;once())
+    -&gt;method('send')
+    -&gt;with($this-&gt;isInstanceOf(Email::class));
+
+$service = new OrderService($mailer);
+$service-&gt;placeOrder($order);
+```
+
+---
+
+**Q: What is the difference between `createMock()` and `createStub()` in PHPUnit?**
+**A:** `createMock()` — verifies method call expectations (spy/mock behavior). `createStub()` — only controls return values, no call count expectations (pure stub). Use stubs when you only care about what the dependency returns, not how many times it's called.
+**Code Snippet:**
+```php
+$stub = $this-&gt;createStub(PriceCalculator::class);
+$stub-&gt;method('calculate')-&gt;willReturn(99.99);
+```
+
+---
+
+**Q: What is a data provider in PHPUnit and how do you use it?**
+**A:** A static method (or attribute) that returns an iterable of argument arrays. PHPUnit runs the test once per data set. Use `#[DataProvider('methodName')]` attribute.
+**Code Snippet:**
+```php
+#[DataProvider('providePrices')]
+public function testDiscount(float $price, float $expected): void {
+    self::assertSame($expected, (new Calculator())-&gt;apply10pct($price));
+}
+
+public static function providePrices(): array {
+    return [
+        'standard' =&gt; [100.0, 90.0],
+        'zero' =&gt; [0.0, 0.0],
+    ];
+}
+```
+
+---
+
+### Functional tests with PHPUnit
+
+**Q: What base class do Symfony functional tests extend and what does it provide?**
+**A:** `Symfony\Bundle\FrameworkBundle\Test\WebTestCase`. It provides `static::createClient()` to create a `KernelBrowser` and boots the Symfony kernel automatically.
+**Code Snippet:**
+```php
+class ProductControllerTest extends WebTestCase {
+    public function testProductList(): void {
+        $client = static::createClient();
+        $crawler = $client-&gt;request('GET', '/products');
+        self::assertResponseIsSuccessful();
+        self::assertSelectorExists('table.products');
+    }
+}
+```
+
+---
+
+**Q: How do you set up test environment configuration in Symfony?**
+**A:** A `config/packages/test/` directory can override any package config for the `test` environment. Use `.env.test` or `.env.test.local` for environment variables.
+**Code Snippet:**
+```yaml
+# config/packages/test/framework.yaml
+framework:
+    test: true
+    session:
+        storage_factory_id: session.storage.factory.mock_file
+```
+
+---
+
+**Q: What is `KernelTestCase` vs `WebTestCase`?**
+**A:** `KernelTestCase` boots the kernel for DI container access, but does NOT create an HTTP client (no request/response simulation). `WebTestCase extends KernelTestCase` and adds `createClient()` for HTTP simulation.
+**Code Snippet:**
+```php
+// KernelTestCase: test a service directly
+class OrderServiceTest extends KernelTestCase {
+    public function testProcess(): void {
+        $service = static::getContainer()-&gt;get(OrderService::class);
+        // ...
+    }
+}
+```
+
+---
+
+### Client object
+
+**Q: How do you use the test client to make an HTTP request and what does it return?**
+**A:** `$client-&gt;request(method, url, parameters, files, server, content)`. Returns a `Crawler` object for the response body. Response is accessible via `$client-&gt;getResponse()`.
+**Code Snippet:**
+```php
+$crawler = $client-&gt;request('GET', '/api/products');
+self::assertResponseStatusCodeSame(200);
+
+$crawler = $client-&gt;request('POST', '/login', [
+    '_username' =&gt; 'admin',
+    '_password' =&gt; 'secret',
+    '_csrf_token' =&gt; $token,
+]);
+```
+
+---
+
+**Q: How do you simulate an authenticated user in a functional test?**
+**A:** Use `$client-&gt;loginUser($user)` to log in a `UserInterface` object without going through the full authentication form.
+**Code Snippet:**
+```php
+$user = static::getContainer()-&gt;get(UserRepository::class)-&gt;findOneBy(['email' =&gt; 'admin@example.com']);
+$client-&gt;loginUser($user);
+$client-&gt;request('GET', '/admin/dashboard');
+self::assertResponseIsSuccessful();
+```
+
+---
+
+**Q: How do you submit a form in a functional test?**
+**A:** Use `$crawler-&gt;selectButton('Submit')-&gt;form()` to get a `Form` object, fill in fields, then `$client-&gt;submit($form)`.
+**Code Snippet:**
+```php
+$crawler = $client-&gt;request('GET', '/contact');
+$form = $crawler-&gt;selectButton('Send')-&gt;form([
+    'contact[name]' =&gt; 'John',
+    'contact[email]' =&gt; 'john@example.com',
+    'contact[message]' =&gt; 'Hello!',
+]);
+$client-&gt;submit($form);
+self::assertResponseRedirects('/contact/success');
+```
+
+---
+
+### Crawler object (CssSelector and DomCrawler components)
+
+**Q: How do you select DOM nodes using the Crawler object?**
+**A:** Use `$crawler-&gt;filter('css selector')` for CSS selectors or `$crawler-&gt;filterXPath('xpath')` for XPath. Returns a new Crawler limited to matching nodes.
+**Code Snippet:**
+```php
+$h1 = $crawler-&gt;filter('h1')-&gt;text();
+$rows = $crawler-&gt;filter('table.products tr');
+$count = $rows-&gt;count();
+
+$link = $crawler-&gt;filter('a[href="/products"]')-&gt;link();
+$client-&gt;click($link);
+```
+
+---
+
+**Q: What methods does the Crawler provide for navigating the DOM?**
+**A:** `filter()`, `filterXPath()`, `first()`, `last()`, `eq(n)`, `children()`, `parents()`, `nextAll()`, `previousAll()`, `closest()`, `selectLink()`, `selectButton()`, `links()`, `text()`, `html()`, `attr('name')`.
+**Code Snippet:**
+```php
+$secondRow = $crawler-&gt;filter('tr')-&gt;eq(1);
+$href = $crawler-&gt;filter('a.read-more')-&gt;attr('href');
+$allLinks = $crawler-&gt;filter('nav a')-&gt;links(); // array of Link objects
+```
+
+---
+
+**Q: What is the `CssSelector` component and what does it do?**
+**A:** It converts CSS selectors into XPath expressions. This is how the `Crawler::filter()` method works internally — CSS is translated to XPath for DOM querying.
+**Code Snippet:** N/A *(internal component — no direct usage required by exam)*
+
+---
+
+### Profiler object (WebProfiler bundle)
+
+**Q: How do you access the Profiler in a functional test to assert on internal data?**
+**A:** Enable the profiler, make a request, then call `$client-&gt;getProfile()` to get the profiler for that request. Access collectors via `$profile-&gt;getCollector('name')`.
+**Code Snippet:**
+```php
+$client-&gt;enableProfiler();
+$client-&gt;request('POST', '/order');
+$profile = $client-&gt;getProfile();
+
+// Check email count:
+$mailerProfile = $profile-&gt;getCollector('mailer');
+self::assertSame(1, $mailerProfile-&gt;getMessageCount());
+```
+
+---
+
+**Q: What is the `db` data collector in the Profiler and what does it expose?**
+**A:** Records Doctrine queries (query count, time). In tests: `$profile-&gt;getCollector('db')-&gt;getQueryCount()`. Note: Doctrine is OUT OF SCOPE for exam, but the Profiler infrastructure itself is in scope.
+**Code Snippet:** N/A *(Doctrine queries excluded from exam scope)*
+
+---
+
+### Framework objects access
+
+**Q: How do you retrieve a service from the container in a `KernelTestCase` test?**
+**A:** Use `static::getContainer()-&gt;get(ServiceClass::class)`. The test container exposes all services including private ones (unlike the production container).
+**Code Snippet:**
+```php
+$service = static::getContainer()-&gt;get(OrderService::class);
+// Note: in production, private services are not accessible via get()
+// The test container makes them accessible for testing purposes
+```
+
+---
+
+**Q: How do you replace a real service with a mock in an integration/functional test?**
+**A:** Use `static::getContainer()-&gt;set(ServiceClass::class, $mock)` after creating the client/kernel. The service must be declared `synthetic: true` or be public in the test environment.
+**Code Snippet:**
+```php
+$mock = $this-&gt;createMock(PaymentGateway::class);
+$mock-&gt;method('charge')-&gt;willReturn(true);
+static::getContainer()-&gt;set(PaymentGateway::class, $mock);
+```
+
+---
+
+### Client configuration
+
+**Q: How do you configure the test client to not follow redirects automatically?**
+**A:** Pass `['followRedirects' =&gt; false]` or call `$client-&gt;followRedirects(false)`. Then check `assertResponseRedirects()` and manually follow with `$client-&gt;followRedirect()`.
+**Code Snippet:**
+```php
+$client-&gt;followRedirects(false);
+$client-&gt;request('POST', '/register', [/* ... */]);
+self::assertResponseRedirects('/dashboard');
+$client-&gt;followRedirect(); // manual follow
+```
+
+---
+
+**Q: How do you set custom request headers for a test client request?**
+**A:** Pass server vars in the format `HTTP_HEADER_NAME` as the 5th argument to `request()`.
+**Code Snippet:**
+```php
+$client-&gt;request(
+    'GET', '/api/me',
+    [], [], // parameters, files
+    ['HTTP_AUTHORIZATION' =&gt; 'Bearer '.$apiToken, 'HTTP_ACCEPT' =&gt; 'application/json']
+);
+```
+
+---
+
+### Request and response objects introspection
+
+**Q: How do you access the Response object after a client request?**
+**A:** `$client-&gt;getResponse()`. It is a standard Symfony `Response` object.
+**Code Snippet:**
+```php
+$client-&gt;request('GET', '/api/products');
+$response = $client-&gt;getResponse();
+self::assertSame(200, $response-&gt;getStatusCode());
+$data = json_decode($response-&gt;getContent(), true);
+```
+
+---
+
+**Q: How do you access the internal Request object of the last test request?**
+**A:** `$client-&gt;getRequest()` returns the Symfony `Request` object that was processed.
+**Code Snippet:**
+```php
+$request = $client-&gt;getRequest();
+self::assertSame('application/json', $request-&gt;headers-&gt;get('Accept'));
+```
+
+---
+
+### PHPUnit assertions
+
+**Q: What are the 6 most important Symfony-specific assertion methods in `WebTestCase`/`KernelTestCase`?**
+**A:**
+1. `assertResponseIsSuccessful()` — 2xx status
+2. `assertResponseStatusCodeSame(200)` — exact code
+3. `assertResponseRedirects('/url', 302)` — redirect
+4. `assertSelectorTextContains('h1', 'Expected')` — DOM text
+5. `assertSelectorExists('.alert-success')` — element exists
+6. `assertPageTitleContains('My Page')` — title check
+**Code Snippet:**
+```php
+self::assertResponseIsSuccessful();
+self::assertResponseStatusCodeSame(201);
+self::assertSelectorTextContains('h1', 'Products');
+self::assertSelectorExists('.flash-success');
+```
+
+---
+
+**Q: List 8 essential PHPUnit assertion methods for unit tests.**
+**A:**
+1. `assertTrue($val)` / `assertFalse($val)`
+2. `assertSame($expected, $actual)` — strict equality + same type
+3. `assertEquals($expected, $actual)` — loose equality
+4. `assertNull($val)` / `assertNotNull($val)`
+5. `assertCount($n, $array)`
+6. `assertInstanceOf(ClassName::class, $obj)`
+7. `assertStringContainsString('needle', 'haystack')`
+8. `assertThrows(Exception::class, fn() =&gt; $risky())`
+**Code Snippet:**
+```php
+self::assertSame(42, $result);
+self::assertCount(3, $items);
+self::assertInstanceOf(Order::class, $order);
+self::assertStringContainsString('hello', $greeting);
+```
+
+---
+
+**Q: What is the difference between `assertSame()` and `assertEquals()` in PHPUnit?**
+**A:** `assertSame()` uses `===` (strict: value AND type must match, objects must be same instance). `assertEquals()` uses `==` (loose: `'1'` equals `1`). Always prefer `assertSame()` to avoid subtle bugs.
+**Code Snippet:**
+```php
+self::assertSame(1, 1);      // pass
+self::assertSame(1, '1');    // FAIL (different types)
+self::assertEquals(1, '1'); // pass (loose)
+```
+
+---
+
+**Q: How do you test that a specific exception is thrown using PHPUnit?**
+**A:** Use `$this-&gt;expectException(ExceptionClass::class)` before the code that should throw. Optionally chain `expectExceptionMessage()`.
+**Code Snippet:**
+```php
+$this-&gt;expectException(\InvalidArgumentException::class);
+$this-&gt;expectExceptionMessage('Value must be positive');
+new Product(-5); // should throw
+```
+
+---
+
+### Handling legacy deprecated code
+
+**Q: What is `SYMFONY_DEPRECATIONS_HELPER` and what does it do in tests?**
+**A:** An environment variable that configures how PHPUnit handles deprecation warnings. Setting it to `max[self]=0` means any deprecation from your own code fails the test.
+**Code Snippet:**
+```bash
+SYMFONY_DEPRECATIONS_HELPER=max[self]=0 php bin/phpunit
+```
+```xml
+&lt;!-- phpunit.xml.dist --&gt;
+&lt;php&gt;
+    &lt;env name="SYMFONY_DEPRECATIONS_HELPER" value="max[self]=0"/&gt;
+&lt;/php&gt;
+```
+
+---
+
+    </template>
+
+    <script src="../assets/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <title>Forms - Symfony 8.0 Expert Cockpit</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body class="bg-[#0f172a] text-gray-100 flex h-screen overflow-hidden selection:bg-blue-500/30 selection:text-white font-sans antialiased">
+    <!-- Injected Navigation Bar -->
+    <nav id="page-top-nav" style="position:sticky;top:0;z-index:100;background:rgba(15,23,42,0.95);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,0.06);padding:0.5rem 1rem;display:flex;align-items:center;justify-content:space-between;gap:0.5rem;">
+        <a href="../index.html" style="display:inline-flex;align-items:center;gap:6px;color:#60a5fa;font-weight:700;font-size:0.85rem;text-decoration:none;transition:all 0.2s;" onmouseover="this.style.color='#93c5fd'" onmouseout="this.style.color='#60a5fa'">
+            <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+            Dashboard
+        </a>
+        <div style="display:flex;align-items:center;gap:6px;">
+            <button id="nav-pomo-btn" onclick="togglePomo()" style="display:inline-flex;align-items:center;gap:4px;padding:4px 10px;border-radius:8px;font-size:0.75rem;font-weight:700;background:rgba(239,68,68,0.1);color:#f87171;border:1px solid rgba(239,68,68,0.2);cursor:pointer;transition:all 0.2s;" title="Pomodoro Timer">
+                ⏱ <span id="nav-pomo-display">25:00</span>
+            </button>
+            <button onclick="if(confirm('⚠️ Reset ALL progress? This cannot be undone.')){localStorage.removeItem('symfony-cockpit');location.href='../index.html'}" style="padding:4px 10px;border-radius:8px;font-size:0.75rem;font-weight:700;background:rgba(239,68,68,0.08);color:#fca5a5;border:1px solid rgba(239,68,68,0.15);cursor:pointer;transition:all 0.2s;" title="Reset Progress">
+                🔄 Reset
+            </button>
+        </div>
+    </nav>
+    <script>
+    (function(){
+        var s=25*60,r=false,iv;
+        window.togglePomo=function(){
+            var d=document.getElementById('nav-pomo-display'),b=document.getElementById('nav-pomo-btn');
+            if(r){clearInterval(iv);r=false;b.style.background='rgba(239,68,68,0.1)';return;}
+            r=true;b.style.background='rgba(16,185,129,0.15)';b.style.color='#34d399';b.style.borderColor='rgba(16,185,129,0.3)';
+            iv=setInterval(function(){
+                s--;if(s<=0){clearInterval(iv);r=false;s=25*60;d.textContent='25:00';alert('🍅 Pomodoro complete!');return;}
+                d.textContent=Math.floor(s/60)+':'+(s%60<10?'0':'')+s%60;
+            },1000);
+        };
+    })();
+    </script>
+
+    
+    <aside class="w-64 bg-slate-900 border-r border-slate-800 p-6 overflow-y-auto hidden md:flex flex-col shadow-2xl z-10">
+        <a href="../index.html" class="text-blue-400 hover:text-blue-300 font-bold mb-8 transition-all hover:-translate-x-1 flex items-center gap-2">
+            <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+            <span class="truncate">Back to Dashboard</span>
+        </a>
+        <div class="mt-auto">
+            <div class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Workspace</div>
+            <div class="text-sm font-medium text-slate-300 flex items-center gap-2">
+                <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                Expert Cockpit
+            </div>
+        </div>
+    </aside>
+
+    <main class="flex-1 p-6 md:p-12 overflow-y-auto bg-slate-900 relative shadow-inner" id="content-area">
+        <!-- Markdown content will be parsed and injected here -->
+        <div class="flex justify-center items-center h-full">
+            <div class="animate-pulse text-slate-500 font-medium">Loading pedagogical content...</div>
+        </div>
+    </main>
+
+    <template id="raw-markdown">
+# Flashcards : Forms (Symfony 8.0)
+&gt; High-density deck — 5-15+ cards per sub-heading. Every API, option, event, and edge case covered.
+
+---
+
+### Creating forms
+
+**Q: What is the primary way to create a form in a Symfony controller?**
+**A:** Call `$this-&gt;createForm(FormType::class, $dataObject, $options)` in a controller extending `AbstractController`. Returns a `FormInterface`.
+**Code Snippet:**
+```php
+$form = $this-&gt;createForm(ProductType::class, $product, [
+    'method' =&gt; 'POST',
+    'action' =&gt; $this-&gt;generateUrl('product_create'),
+]);
+```
+
+---
+
+**Q: How do you create a form in a service (not a controller)?**
+**A:** Inject `FormFactoryInterface` and call `$factory-&gt;create(FormType::class, $data, $options)`.
+**Code Snippet:**
+```php
+use Symfony\Component\Form\FormFactoryInterface;
+
+class RegistrationService {
+    public function __construct(private FormFactoryInterface $formFactory) {}
+    public function buildForm(User $user): FormInterface {
+        return $this-&gt;formFactory-&gt;create(UserRegistrationType::class, $user);
+    }
+}
+```
+
+---
+
+**Q: What does `$form-&gt;handleRequest($request)` do?**
+**A:** Binds incoming request data to the form (only if the request method matches the form method AND the form was submitted). Does NOT validate.
+**Code Snippet:**
+```php
+$form-&gt;handleRequest($request);
+// Now check: isSubmitted() AND isValid()
+```
+
+---
+
+**Q: What is `$form-&gt;submit($data, $clearMissing)` and when would you prefer it over `handleRequest()`?**
+**A:** Programmatically submits the form with the given data array. `$clearMissing = false` enables partial updates (PATCH semantics — only submitted fields are changed). Useful in APIs.
+**Code Snippet:**
+```php
+// For PATCH (partial update):
+$form-&gt;submit($request-&gt;request-&gt;all(), false);
+```
+
+---
+
+**Q: What is `$form-&gt;isSubmitted()` vs `$form-&gt;isValid()`?**
+**A:** `isSubmitted()` — data was bound from the request. `isValid()` — the form is submitted AND passes all validation constraints. **Always check both.**
+**Code Snippet:**
+```php
+if ($form-&gt;isSubmitted() && $form-&gt;isValid()) {
+    $data = $form-&gt;getData(); // The validated data
+}
+```
+
+---
+
+**Q: How do you retrieve the typed data object from a submitted valid form?**
+**A:** `$form-&gt;getData()` returns the data class instance (the second argument of `createForm()`) with mapped field values.
+**Code Snippet:**
+```php
+/** @var Product $product */
+$product = $form-&gt;getData();
+```
+
+---
+
+**Q: What does the `data_class` option do in a form type?**
+**A:** Declares the PHP class the form maps to. Data is mapped from/to an instance of this class. Without it, the form returns an associative array.
+**Code Snippet:**
+```php
+public function configureOptions(OptionsResolver $resolver): void {
+    $resolver-&gt;setDefaults(['data_class' =&gt; Product::class]);
+}
+```
+
+---
+
+### Handling forms
+
+**Q: What is the standard form controller pattern (new + create actions)?**
+**A:** One controller action handles both GET (show the empty form) and POST (handle submission). If the form is valid, redirect; else re-render with errors.
+**Code Snippet:**
+```php
+#[Route('/products/new', name: 'product_new', methods: ['GET','POST'])]
+public function new(Request $request): Response {
+    $product = new Product();
+    $form = $this-&gt;createForm(ProductType::class, $product);
+    $form-&gt;handleRequest($request);
+    if ($form-&gt;isSubmitted() && $form-&gt;isValid()) {
+        // persist $product
+        return $this-&gt;redirectToRoute('product_list');
+    }
+    return $this-&gt;render('product/new.html.twig', ['form' =&gt; $form]);
+}
+```
+
+---
+
+**Q: What is `$form-&gt;createView()` and when is it called?**
+**A:** Converts a `FormInterface` into a `FormView` tree (plain data for Twig rendering). Called before passing to the template. Since Symfony 6, passing `$form` directly to Twig is also accepted.
+**Code Snippet:**
+```php
+// Explicit (old style — still works):
+return $this-&gt;render('form.html.twig', ['form' =&gt; $form-&gt;createView()]);
+// Modern (since Symfony 6):
+return $this-&gt;render('form.html.twig', ['form' =&gt; $form]);
+```
+
+---
+
+### Built-in form types
+
+**Q: What are the 10 most important built-in Symfony form field types?**
+**A:**
+1. `TextType` — `&lt;input type="text"&gt;`
+2. `EmailType` — `&lt;input type="email"&gt;`
+3. `PasswordType` — `&lt;input type="password"&gt;`
+4. `TextareaType` — `&lt;textarea&gt;`
+5. `IntegerType` / `NumberType` — numeric inputs
+6. `CheckboxType` — `&lt;input type="checkbox"&gt;`
+7. `ChoiceType` — `&lt;select&gt;` or radio/checkbox group
+8. `DateType` / `DateTimeType` — date fields
+9. `FileType` — `&lt;input type="file"&gt;`
+10. `HiddenType` — `&lt;input type="hidden"&gt;`
+**Code Snippet:**
+```php
+$builder
+    -&gt;add('name', TextType::class, ['label' =&gt; 'Product Name'])
+    -&gt;add('price', NumberType::class, ['scale' =&gt; 2])
+    -&gt;add('category', ChoiceType::class, ['choices' =&gt; $categories])
+    -&gt;add('save', SubmitType::class);
+```
+
+---
+
+**Q: What is the difference between `ChoiceType` with `expanded: false` vs `expanded: true`?**
+**A:** `expanded: false` (default) → `&lt;select&gt;` dropdown. `expanded: true` → radio buttons (single choice) or checkboxes (multiple choice).
+**Code Snippet:**
+```php
+-&gt;add('status', ChoiceType::class, [
+    'choices' =&gt; ['Active' =&gt; 'active', 'Draft' =&gt; 'draft'],
+    'expanded' =&gt; false,   // &lt;select&gt;
+    'multiple' =&gt; false,   // single value
+])
+-&gt;add('tags', ChoiceType::class, [
+    'choices' =&gt; $tagsChoices,
+    'expanded' =&gt; true,    // checkboxes
+    'multiple' =&gt; true,    // array of selected values
+])
+```
+
+---
+
+**Q: What is `CollectionType` and what options control adding/removing items?**
+**A:** Renders a list of sub-forms (e.g., a list of addresses). Key options: `allow_add: true`, `allow_delete: true`, `entry_type:` (the sub-form type), `by_reference: false` (required for collections relying on `add*`/`remove*` methods).
+**Code Snippet:**
+```php
+-&gt;add('addresses', CollectionType::class, [
+    'entry_type'   =&gt; AddressType::class,
+    'allow_add'    =&gt; true,
+    'allow_delete' =&gt; true,
+    'by_reference' =&gt; false,
+])
+```
+
+---
+
+**Q: What does `by_reference: false` do in a form collection?**
+**A:** Forces the form to call the setter on the parent object (adder/remover methods like `addAddress()`/`removeAddress()`) rather than modifying the collection in-place by reference. Required for proper Doctrine collection tracking.
+**Code Snippet:** N/A
+
+---
+
+**Q: What is `EntityType` and how does it differ from `ChoiceType`?**
+**A:** `EntityType` extends `ChoiceType` but automatically queries a repository for choices. Requires Doctrine (`doctrine/orm`). `ChoiceType` works with plain arrays. ⚠️ Doctrine is out of exam scope — but `EntityType` may appear conceptually.
+**Code Snippet:**
+```php
+-&gt;add('category', EntityType::class, [
+    'class' =&gt; Category::class,
+    'choice_label' =&gt; 'name',
+])
+```
+
+---
+
+### Custom form types
+
+**Q: How do you create a custom form type in Symfony?**
+**A:** Create a class extending `AbstractType`. Override `buildForm()` to add fields and `configureOptions()` to set defaults.
+**Code Snippet:**
+```php
+class AddressType extends AbstractType {
+    public function buildForm(FormBuilderInterface $builder, array $options): void {
+        $builder
+            -&gt;add('street', TextType::class)
+            -&gt;add('city', TextType::class)
+            -&gt;add('postcode', TextType::class, ['constraints' =&gt; [new Assert\NotBlank()]]);
+    }
+    public function configureOptions(OptionsResolver $resolver): void {
+        $resolver-&gt;setDefaults(['data_class' =&gt; Address::class]);
+    }
+}
+```
+
+---
+
+**Q: What is the purpose of `getParent()` in a custom form type?**
+**A:** Returns the parent type whose behaviors are inherited. Default is `FormType`. Changing it (e.g., to `ChoiceType`) lets you build specialized choice types.
+**Code Snippet:**
+```php
+class YesNoType extends AbstractType {
+    public function getParent(): string { return ChoiceType::class; }
+    public function configureOptions(OptionsResolver $resolver): void {
+        $resolver-&gt;setDefaults(['choices' =&gt; ['Yes' =&gt; true, 'No' =&gt; false]]);
+    }
+}
+```
+
+---
+
+**Q: What is `getBlockPrefix()` in a form type and what is it used for?**
+**A:** Returns a string prefix used to identify the form type in Twig theming. Defaults to the class name in snake_case (without `_type`). Used in block names like `address_widget`, `address_label`.
+**Code Snippet:**
+```php
+public function getBlockPrefix(): string { return 'address'; }
+// Twig will look for: {% block address_widget %}, {% block address_row %}
+```
+
+---
+
+### Form rendering with Twig
+
+**Q: What are the main Twig functions used to render a form?**
+**A:** `form(form)` — render entire form. `form_start(form)` — `&lt;form&gt;` tag. `form_end(form)` — closing tag + remaining fields. `form_row(form.fieldName)` — label + widget + errors. `form_widget(form.fieldName)` — widget only. `form_label(form.fieldName)` — label only. `form_errors(form)` — errors only.
+**Code Snippet:**
+```twig
+{{ form_start(form) }}
+    {{ form_row(form.name) }}
+    {{ form_row(form.email, {'label': 'Your Email', 'attr': {'class': 'form-control'}}) }}
+    &lt;button type="submit"&gt;Save&lt;/button&gt;
+{{ form_end(form) }}
+```
+
+---
+
+**Q: How do you add a CSS class or HTML attribute to a form field widget?**
+**A:** Pass `'attr'` option (for rendering) in `form_widget()` or in the form type's `buildForm()`. Use `'label_attr'` for label attributes.
+**Code Snippet:**
+```twig
+{{ form_widget(form.email, {'attr': {'class': 'form-control', 'placeholder': 'Email'}}) }}
+```
+```php
+// Or in form type:
+-&gt;add('email', EmailType::class, ['attr' =&gt; ['class' =&gt; 'form-control', 'autofocus' =&gt; true]])
+```
+
+---
+
+**Q: What does `form_end(form)` render beyond just the closing `&lt;/form&gt;` tag?**
+**A:** It also renders any **unrendered fields** (including hidden fields like the CSRF token) automatically. Never call it without calling `form_start` first.
+**Code Snippet:**
+```twig
+{{ form_start(form) }}
+    {{ form_row(form.name) }}
+    {# form_end renders _token and any other unrendered fields: #}
+{{ form_end(form) }}
+```
+
+---
+
+**Q: How do you render form-level errors (not field-level) in Twig?**
+**A:** Use `form_errors(form)` with the root `form` variable, not a specific field.
+**Code Snippet:**
+```twig
+{{ form_errors(form) }}   {# Global errors (e.g., CSRF failure, UniqueEntity) #}
+{{ form_errors(form.email) }}  {# Field-specific errors #}
+```
+
+---
+
+### Form theming
+
+**Q: What is form theming in Symfony and how does it work?**
+**A:** Custom Twig templates that override the HTML rendering of form elements by defining specific `{% block %}` blocks. Symfony ships with several built-in themes (Bootstrap 5, Foundation, etc.).
+**Code Snippet:**
+```yaml
+# twig.yaml
+twig:
+    form_themes:
+        - 'bootstrap_5_layout.html.twig'
+        - 'form/my_custom_theme.html.twig'
+```
+
+---
+
+**Q: How do you apply a custom theme to a single form (not globally)?**
+**A:** Use the `{% form_theme %}` Twig tag in the template.
+**Code Snippet:**
+```twig
+{% form_theme form 'form/my_custom_theme.html.twig' %}
+{{ form_start(form) }}
+...
+```
+
+---
+
+**Q: What block naming convention does form theming follow?**
+**A:** `{block_prefix}_{type}` where `type` is: `widget`, `label`, `row`, `errors`. E.g., `text_widget`, `textarea_row`, `choice_label`. Override a built-in block to change rendering for all fields of that type.
+**Code Snippet:**
+```twig
+{# Override all text field widgets: #}
+{% block text_widget %}
+    &lt;input class="my-input {{ block('widget_attributes') }}" {{ block('widget_attributes') }} value="{{ value }}"&gt;
+{% endblock %}
+```
+
+---
+
+**Q: What built-in form themes ship with Symfony?**
+**A:**
+- `form_div_layout.html.twig` — default (divs)
+- `form_table_layout.html.twig` — table layout
+- `bootstrap_3_layout.html.twig`
+- `bootstrap_4_layout.html.twig`
+- `bootstrap_5_layout.html.twig`
+- `foundation_6_layout.html.twig`
+**Code Snippet:**
+```yaml
+twig:
+    form_themes: ['bootstrap_5_layout.html.twig']
+```
+
+---
+
+### CSRF protection
+
+**Q: How is CSRF protection applied to Symfony forms automatically?**
+**A:** The `CsrfExtension` adds a hidden `_token` field to every form. The token is validated on `handleRequest()`. No extra code needed.
+**Code Snippet:** N/A
+
+---
+
+**Q: How do you disable CSRF protection for a specific form?**
+**A:** Set `csrf_protection: false` in the form options.
+**Code Snippet:**
+```php
+$form = $this-&gt;createForm(ApiType::class, $data, ['csrf_protection' =&gt; false]);
+```
+
+---
+
+**Q: What option controls the CSRF token ID for a form type?**
+**A:** `csrf_token_id:` in `configureOptions()`. Defaults to the block prefix. Changing it allows multiple forms on the same page to have different tokens.
+**Code Snippet:**
+```php
+$resolver-&gt;setDefaults([
+    'csrf_token_id' =&gt; 'product_delete',
+]);
+```
+
+---
+
+**Q: How do you manually validate a CSRF token in a controller (outside a form)?**
+**A:** Use `$this-&gt;isCsrfTokenValid($tokenId, $submittedToken)` from `AbstractController`.
+**Code Snippet:**
+```php
+if (!$this-&gt;isCsrfTokenValid('delete_product', $request-&gt;request-&gt;get('_token'))) {
+    throw new InvalidCsrfTokenException();
+}
+```
+
+---
+
+### File upload
+
+**Q: Which form field type handles file uploads?**
+**A:** `FileType`. Renders `&lt;input type="file"&gt;`. The mapped value is an `UploadedFile` instance on submit.
+**Code Snippet:**
+```php
+-&gt;add('avatar', FileType::class, [
+    'label' =&gt; 'Avatar (image file)',
+    'mapped' =&gt; false,    // Don't map to entity – handle manually
+    'required' =&gt; false,
+    'constraints' =&gt; [
+        new Assert\File(['mimeTypes' =&gt; ['image/jpeg', 'image/png']])
+    ],
+])
+```
+
+---
+
+**Q: Why do you often use `mapped: false` with `FileType`?**
+**A:** The entity typically stores the filename (string), not the `UploadedFile`. Using `mapped: false` means the file is not automatically mapped to the entity — you handle the `UploadedFile` separately in the controller.
+**Code Snippet:**
+```php
+$avatarFile = $form-&gt;get('avatar')-&gt;getData();
+if ($avatarFile instanceof UploadedFile) {
+    $filename = uniqid().'.'.$avatarFile-&gt;guessExtension();
+    $avatarFile-&gt;move($this-&gt;getParameter('avatars_dir'), $filename);
+    $user-&gt;setAvatar($filename);
+}
+```
+
+---
+
+**Q: What multipart encoding must a form use for file uploads?**
+**A:** `enctype="multipart/form-data"`. When using `form_start()` with a `FileType` field, Symfony adds this automatically.
+**Code Snippet:**
+```twig
+{# Symfony adds enctype automatically when FileType is present: #}
+{{ form_start(form) }}
+{# Results in: &lt;form method="post" enctype="multipart/form-data"&gt; #}
+```
+
+---
+
+### Data transformers
+
+**Q: What is a Data Transformer in Symfony Forms and when do you need one?**
+**A:** Converts between the **form representation** (what the user enters, e.g., a comma-separated string) and the **data representation** (what the PHP object expects, e.g., an array). Needed when the form's raw input format doesn't match the model.
+**Code Snippet:**
+```php
+class TagsToStringTransformer implements DataTransformerInterface {
+    public function transform(mixed $tags): string {
+        return implode(',', $tags ?? []);
+    }
+    public function reverseTransform(mixed $value): array {
+        return array_filter(array_map('trim', explode(',', $value ?? '')));
+    }
+}
+```
+
+---
+
+**Q: How do you attach a Data Transformer to a form field?**
+**A:** Call `-&gt;addModelTransformer()` or `-&gt;addViewTransformer()` on the `FormBuilderInterface`.
+**Code Snippet:**
+```php
+$builder-&gt;get('tags')
+    -&gt;addModelTransformer(new TagsToStringTransformer());
+```
+
+---
+
+**Q: What is the difference between `addModelTransformer()` and `addViewTransformer()`?**
+**A:**
+- `ModelTransformer` — converts between **model** (PHP object property) ↔ **norm** (normalized data, usually array/scalar).
+- `ViewTransformer` — converts between **norm** ↔ **view** (what is displayed in the HTML widget).
+Both are rarely needed at the same time; model transformers are more common.
+**Code Snippet:** N/A
+
+---
+
+### Form events
+
+**Q: What are the four main Form events and when does each fire?**
+**A:**
+1. `PRE_SET_DATA` — before data is bound to the form (on form creation)
+2. `POST_SET_DATA` — after data is bound (form created, data accessible)
+3. `PRE_SUBMIT` — before submitted data is bound (raw request data accessible)
+4. `POST_SUBMIT` — after submitted data is bound (validation runs after this)
+**Code Snippet:**
+```php
+$builder-&gt;addEventListener(FormEvents::PRE_SET_DATA, function(FormEvent $event) {
+    $data = $event-&gt;getData();
+    $form = $event-&gt;getForm();
+    if ($data && $data-&gt;isEditing()) {
+        $form-&gt;remove('password'); // Remove password field on edit
+    }
+});
+```
+
+---
+
+**Q: When would you use `PRE_SUBMIT` event versus `POST_SET_DATA`?**
+**A:** `PRE_SUBMIT` — modify the form structure **based on submitted raw data** (before normalization). `POST_SET_DATA` — modify the form structure **based on the bound data model** (e.g., add/remove fields depending on the existing object's state).
+**Code Snippet:**
+```php
+// PRE_SUBMIT: only add a field if the submitted 'type' checkbox is checked
+$builder-&gt;addEventListener(FormEvents::PRE_SUBMIT, function(FormEvent $event) {
+    $data = $event-&gt;getData();
+    if (!empty($data['isPremium'])) {
+        $event-&gt;getForm()-&gt;add('premiumCode', TextType::class);
+    }
+});
+```
+
+---
+
+**Q: How do you add a dynamic field to a form type based on a custom option?**
+**A:** Read the option in `buildForm()` and conditionally add the field.
+**Code Snippet:**
+```php
+public function buildForm(FormBuilderInterface $builder, array $options): void {
+    $builder-&gt;add('name', TextType::class);
+    if ($options['show_address']) {
+        $builder-&gt;add('address', AddressType::class);
+    }
+}
+public function configureOptions(OptionsResolver $resolver): void {
+    $resolver-&gt;setDefaults(['data_class' =&gt; User::class, 'show_address' =&gt; false]);
+    $resolver-&gt;setAllowedTypes('show_address', 'bool');
+}
+```
+
+---
+
+### Form type extensions
+
+**Q: What is a Form Type Extension (`AbstractTypeExtension`) and what can it do?**
+**A:** Adds new behavior or options to **existing** form types without subclassing them. Alters the build process for all fields of a given type (or all types via `FormType::class`).
+**Code Snippet:**
+```php
+class HelpTextExtension extends AbstractTypeExtension {
+    public function buildView(FormView $view, FormInterface $form, array $options): void {
+        $view-&gt;vars['help'] = $options['help_text'];
+    }
+    public function configureOptions(OptionsResolver $resolver): void {
+        $resolver-&gt;setDefined('help_text');
+        $resolver-&gt;setDefault('help_text', null);
+    }
+    public static function getExtendedTypes(): iterable {
+        return [FormType::class]; // Applies to ALL form types
+    }
+}
+```
+
+---
+
+**Q: How do you target a Type Extension to a specific form type?**
+**A:** Return only that type's FQCN from `getExtendedTypes()`.
+**Code Snippet:**
+```php
+public static function getExtendedTypes(): iterable {
+    return [TextType::class]; // Only extends text inputs
+}
+```
+
+---
+
+**Q: What is the difference between `buildForm()` and `buildView()` in a Type Extension?**
+**A:** `buildForm()` — adds/modifies form builder options (fields, data transformers, events). `buildView()` — modifies the `FormView` vars passed to Twig (adds `vars['help']`, etc.) for rendering.
+**Code Snippet:** N/A
+
+---
+
+### OptionsResolver component
+
+**Q: What is `OptionsResolver` used for in form types?**
+**A:** Declares, validates, and normalizes options for form types and custom components. Used in `configureOptions()` to define allowed options, defaults, required options, and type constraints.
+**Code Snippet:**
+```php
+public function configureOptions(OptionsResolver $resolver): void {
+    $resolver-&gt;setDefaults(['data_class' =&gt; Product::class, 'max_price' =&gt; 9999.0]);
+    $resolver-&gt;setRequired('currency');
+    $resolver-&gt;setAllowedTypes('max_price', ['int', 'float']);
+    $resolver-&gt;setAllowedValues('currency', ['EUR', 'USD', 'GBP']);
+}
+```
+
+---
+
+**Q: What exception does `OptionsResolver` throw for an unknown option?**
+**A:** `Symfony\Component\OptionsResolver\Exception\UndefinedOptionsException`.
+**Code Snippet:**
+```php
+$resolver-&gt;setDefined(['extra_classes', 'show_help']); // define optional options
+// If caller passes 'unknown_option' → UndefinedOptionsException
+```
+
+---
+
+**Q: What is `setNormalizer()` in `OptionsResolver`?**
+**A:** Applies a transformation to an option after it is resolved. Used to coerce values (e.g., cast a string to uppercase, transform null to an empty array).
+**Code Snippet:**
+```php
+$resolver-&gt;setNormalizer('currency', function(Options $options, string $value): string {
+    return strtoupper($value);
+});
+```
+
+---
+
+    </template>
+
+    <script src="../assets/app.js"></script>
+</body>
+</html>

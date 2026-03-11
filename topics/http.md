@@ -1,7 +1,7 @@
 ---
 title: HTTP
 ---
-[Back to index](../readme.md#table-of-contents)
+[Back to index](../docs/legacy-readme.md#table-of-contents)
 
 # HTTP
 

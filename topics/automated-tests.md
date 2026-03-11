@@ -1,7 +1,7 @@
 ---
 title: Automated Tests
 ---
-[Back to index](../readme.md#table-of-contents)
+[Back to index](../docs/legacy-readme.md#table-of-contents)
 
 # Automated Tests
  -  [Testing - symfony.com](https://symfony.com/doc/8.0/testing.html)

@@ -1,7 +1,7 @@
 ---
 title: Forms
 ---
-[Back to index](../readme.md#table-of-contents)
+[Back to index](../docs/legacy-readme.md#table-of-contents)
 
 # Forms
 - [Building Forms - symfony.com](https://symfony.com/doc/8.0/forms.html)

@@ -1,7 +1,7 @@
 ---
 title: Controllers
 ---
-[Back to index](../readme.md#table-of-contents)
+[Back to index](../docs/legacy-readme.md#table-of-contents)
 
 # Controllers
 - [Controller - symfony.com](https://symfony.com/doc/8.0/controller.html)

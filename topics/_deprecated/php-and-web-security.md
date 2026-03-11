@@ -3,7 +3,7 @@ title: PHP and Web Security
 ---
 > DEPRECATED (Not in Symfony 8 exam topics): archived for historical reference.
 
-[Back to index](../../readme.md#table-of-contents)
+[Back to index](../../docs/legacy-readme.md#table-of-contents)
 
 # PHP and Web Security
 

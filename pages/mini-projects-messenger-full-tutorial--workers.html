@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <title>Workers - Symfony 8.0 Expert Cockpit</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <link rel="stylesheet" href="../../../assets/style.css">
+</head>
+<body class="bg-[#0f172a] text-gray-100 flex h-screen overflow-hidden selection:bg-blue-500/30 selection:text-white font-sans antialiased">
+    <!-- Injected Navigation Bar -->
+    <nav id="page-top-nav" style="position:sticky;top:0;z-index:100;background:rgba(15,23,42,0.95);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,0.06);padding:0.5rem 1rem;display:flex;align-items:center;justify-content:space-between;gap:0.5rem;">
+        <a href="../index.html" style="display:inline-flex;align-items:center;gap:6px;color:#60a5fa;font-weight:700;font-size:0.85rem;text-decoration:none;transition:all 0.2s;" onmouseover="this.style.color='#93c5fd'" onmouseout="this.style.color='#60a5fa'">
+            <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+            Dashboard
+        </a>
+        <div style="display:flex;align-items:center;gap:6px;">
+            <button id="nav-pomo-btn" onclick="togglePomo()" style="display:inline-flex;align-items:center;gap:4px;padding:4px 10px;border-radius:8px;font-size:0.75rem;font-weight:700;background:rgba(239,68,68,0.1);color:#f87171;border:1px solid rgba(239,68,68,0.2);cursor:pointer;transition:all 0.2s;" title="Pomodoro Timer">
+                ⏱ <span id="nav-pomo-display">25:00</span>
+            </button>
+            <button onclick="if(confirm('⚠️ Reset ALL progress? This cannot be undone.')){localStorage.removeItem('symfony-cockpit');location.href='../index.html'}" style="padding:4px 10px;border-radius:8px;font-size:0.75rem;font-weight:700;background:rgba(239,68,68,0.08);color:#fca5a5;border:1px solid rgba(239,68,68,0.15);cursor:pointer;transition:all 0.2s;" title="Reset Progress">
+                🔄 Reset
+            </button>
+        </div>
+    </nav>
+    <script>
+    (function(){
+        var s=25*60,r=false,iv;
+        window.togglePomo=function(){
+            var d=document.getElementById('nav-pomo-display'),b=document.getElementById('nav-pomo-btn');
+            if(r){clearInterval(iv);r=false;b.style.background='rgba(239,68,68,0.1)';return;}
+            r=true;b.style.background='rgba(16,185,129,0.15)';b.style.color='#34d399';b.style.borderColor='rgba(16,185,129,0.3)';
+            iv=setInterval(function(){
+                s--;if(s<=0){clearInterval(iv);r=false;s=25*60;d.textContent='25:00';alert('🍅 Pomodoro complete!');return;}
+                d.textContent=Math.floor(s/60)+':'+(s%60<10?'0':'')+s%60;
+            },1000);
+        };
+    })();
+    </script>
+
+    
+    <aside class="w-64 bg-slate-900 border-r border-slate-800 p-6 overflow-y-auto hidden md:flex flex-col shadow-2xl z-10">
+        <a href="../../../index.html" class="text-blue-400 hover:text-blue-300 font-bold mb-8 transition-all hover:-translate-x-1 flex items-center gap-2">
+            <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+            <span class="truncate">Back to Dashboard</span>
+        </a>
+        <div class="mt-auto">
+            <div class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Workspace</div>
+            <div class="text-sm font-medium text-slate-300 flex items-center gap-2">
+                <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                Expert Cockpit
+            </div>
+        </div>
+    </aside>
+
+    <main class="flex-1 p-6 md:p-12 overflow-y-auto bg-slate-900 relative shadow-inner" id="content-area">
+        <!-- Markdown content will be parsed and injected here -->
+        <div class="flex justify-center items-center h-full">
+            <div class="animate-pulse text-slate-500 font-medium">Loading pedagogical content...</div>
+        </div>
+    </main>
+
+    <template id="raw-markdown">
+## Workers - Full Tutorial
+
+&gt; **Phase:** Phase 1 (For Initial Learning)
+
+
+```bash
+# Start a worker
+php bin/console messenger:consume async -vv
+
+# With limits (prevent memory leaks)
+php bin/console messenger:consume async --limit=100 --time-limit=3600 --memory-limit=128M
+
+# Process all queued messages then stop
+php bin/console messenger:consume async --limit=10
+```
+
+**Supervisor config** (`/etc/supervisor/conf.d/messenger.conf`):
+```ini
+[program:messenger-worker]
+command=php /path/to/bin/console messenger:consume async --time-limit=3600
+autostart=true
+autorestart=true
+numprocs=2
+process_name=%(program_name)s_%(process_num)02d
+```
+
+
+---
+
+### 📚 Official Certification Resources
+- **Documentation:** [Symfony 8.0 Official Documentation](https://symfony.com/doc/current/index.html)
+- **Video Tutorials:** [Search SymfonyCasts for "Workers"](https://symfonycasts.com/search?q=workers)
+
+    </template>
+
+    <script src="../../../assets/app.js"></script>
+</body>
+</html>
